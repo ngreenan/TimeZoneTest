@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
@@ -21,6 +22,8 @@ public class PieChart extends View {
     private RectF rectOuter = new RectF();
     private RectF rectInner = new RectF();
     private RectF rectClock = new RectF();
+    private RectF rectNumbers = new RectF();
+    private float numbersThickness = 200F;
     private float ringThickness = 170F;
     private float clockThickness = 150F;
 
@@ -33,6 +36,8 @@ public class PieChart extends View {
     private int startCrossOver = 0;
     private int endCrossOver = 0;
 
+    private float rotation = 0;
+    private int size = 0;
 
     public PieChart(Context context) {
         this(context, null);
@@ -72,6 +77,11 @@ public class PieChart extends View {
         invalidate();
     }
 
+    public void setRotation(float rotation) {
+        this.rotation = rotation;
+        invalidate();
+    }
+
     public int getPercentage() {
         return percentage;
     }
@@ -83,10 +93,14 @@ public class PieChart extends View {
             rectOuter.set(0,0,w,w);
             rectClock.set(clockThickness,clockThickness,w-clockThickness,w-clockThickness);
             rectInner.set(ringThickness,ringThickness,w-ringThickness,w-ringThickness);
+            rectNumbers.set(numbersThickness,numbersThickness,w-numbersThickness,w-numbersThickness);
+            size = w;
         } else {
             rectOuter.set(0,0,h,h);
             rectClock.set(clockThickness,clockThickness,h-clockThickness,h-clockThickness);
             rectInner.set(ringThickness,ringThickness,h-ringThickness,h-ringThickness);
+            rectNumbers.set(numbersThickness,numbersThickness,h-numbersThickness,h-numbersThickness);
+            size = h;
         }
     }
 
@@ -147,6 +161,8 @@ public class PieChart extends View {
 
         //canvas.drawColor(Color.WHITE);
 
+        canvas.rotate(rotation,(float)size / 2,(float)size / 2);
+
         //base ring
         paint.setColor(Color.parseColor("#2196F3"));
         canvas.drawArc(rectOuter, 0, 360, true, paint);
@@ -170,12 +186,21 @@ public class PieChart extends View {
         canvas.drawArc(rectClock, 0, 360, true, paint);
 
         paint.setColor(Color.BLACK);
-        for (int x = 0; x <= 360; x += 15) {
+        for (int x = 0; x < 360; x += 15) {
             canvas.drawArc(rectClock, x-0.5F, 1, true, paint);
         }
 
         paint.setColor(Color.parseColor("#E3F2FD"));
         canvas.drawArc(rectInner, 0, 360, true, paint);
 
+        paint.setColor(Color.BLACK);
+        paint.setTextAlign(Paint.Align.CENTER);
+        paint.setTextSize(50);
+        for (int x = 0; x < 24; x++) {
+            Path path = new Path();
+            path.addArc(rectNumbers, (x * 15) - 5F - 90F, 10F);
+            //canvas.drawPath(path, paint);
+            canvas.drawTextOnPath(String.valueOf(x),path,0,20,paint);
+        }
     }
 }
