@@ -19,13 +19,15 @@ public class PieChart extends View {
 
     private int percentage;
     private Paint paint = new Paint();
+    private Path path = new Path();
     private RectF rectOuter = new RectF();
     private RectF rectInner = new RectF();
     private RectF rectClock = new RectF();
     private RectF rectNumbers = new RectF();
+    private float outerThickness = 75F;
     private float numbersThickness = 200F;
     private float ringThickness = 170F;
-    private float clockThickness = 150F;
+    private float clockThickness = 160F;
 
     private int myStartTime = 0;
     private int myEndTime = 0;
@@ -90,7 +92,7 @@ public class PieChart extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         if (w < h) {
-            rectOuter.set(0,0,w,w);
+            rectOuter.set(outerThickness,outerThickness,w-outerThickness,w-outerThickness);
             rectClock.set(clockThickness,clockThickness,w-clockThickness,w-clockThickness);
             rectInner.set(ringThickness,ringThickness,w-ringThickness,w-ringThickness);
             rectNumbers.set(numbersThickness,numbersThickness,w-numbersThickness,w-numbersThickness);
@@ -151,55 +153,70 @@ public class PieChart extends View {
         //calculate the cross over period
         getCrossOver();
 
+        //setup all our values for start/finish angles
         float myTimeStart = (myStartTime * 360 / (24F * 60F));
         float myTimeEnd = (myEndTime * 360 / (24F * 60F));
         float theirTimeStart = (theirStartTime * 360 / (24F * 60F));
         float theirTimeEnd = (theirEndTime * 360 / (24F * 60F));
-
         float crossOverStart = (startCrossOver * 360F) / (24F * 60F);
         float crossOverEnd = (endCrossOver * 360F) / (24F * 60F);
 
-        //canvas.drawColor(Color.WHITE);
-
-        canvas.rotate(rotation,(float)size / 2,(float)size / 2);
+        //rotate the whole canvas depending on the time
+        canvas.rotate(rotation, (float) size / 2, (float) size / 2);
 
         //base ring
         paint.setColor(Color.parseColor("#2196F3"));
-        canvas.drawArc(rectOuter, 0, 360, true, paint);
+        paint.setStrokeWidth(150);
+        paint.setStyle(Paint.Style.STROKE);
+        path.reset();
+        path.addArc(rectOuter, 0, 360);
+        canvas.drawPath(path, paint);
 
         //my time arc - blue
         paint.setColor(Color.parseColor("#0D47A1"));
-        canvas.drawArc(rectOuter, myTimeStart - 90, myTimeEnd - myTimeStart, true, paint);
+        paint.setStrokeWidth(150);
+        paint.setStyle(Paint.Style.STROKE);
+        path.reset();
+        path.addArc(rectOuter, myTimeStart - 90, myTimeEnd - myTimeStart);
+        canvas.drawPath(path, paint);
 
         //their time arc - red
         paint.setColor(Color.parseColor("#F44336"));
-        canvas.drawArc(rectOuter, theirTimeStart - 90, theirTimeEnd - theirTimeStart, true, paint);
+        paint.setStrokeWidth(150);
+        paint.setStyle(Paint.Style.STROKE);
+        path.reset();
+        path.addArc(rectOuter, theirTimeStart - 90, theirTimeEnd - theirTimeStart);
+        canvas.drawPath(path, paint);
 
         //cross over
         if (crossOver) {
             paint.setColor(Color.parseColor("#9C27B0"));
-            canvas.drawArc(rectOuter, crossOverStart - 90, crossOverEnd - crossOverStart, true, paint);
+            paint.setStrokeWidth(150);
+            paint.setStyle(Paint.Style.FILL_AND_STROKE);
+            path.reset();
+            path.addArc(rectOuter, crossOverStart - 90, crossOverEnd - crossOverStart);
+            canvas.drawPath(path, paint);
         }
 
-        //inner circle to make it a ring
-        paint.setColor(Color.parseColor("#E3F2FD"));
-        canvas.drawArc(rectClock, 0, 360, true, paint);
-
+        //clock tick marks
         paint.setColor(Color.BLACK);
+        paint.setStrokeWidth(20);
+        paint.setStyle(Paint.Style.STROKE);
+        path.reset();
         for (int x = 0; x < 360; x += 15) {
-            canvas.drawArc(rectClock, x-0.5F, 1, true, paint);
+            path.addArc(rectClock,x-0.5F, 1);
         }
+        canvas.drawPath(path, paint);
 
-        paint.setColor(Color.parseColor("#E3F2FD"));
-        canvas.drawArc(rectInner, 0, 360, true, paint);
-
+        //numbers on each tick mark
         paint.setColor(Color.BLACK);
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTextSize(50);
+        paint.setStrokeWidth(1);
+        paint.setStyle(Paint.Style.FILL_AND_STROKE);
         for (int x = 0; x < 24; x++) {
-            Path path = new Path();
+            path.reset();
             path.addArc(rectNumbers, (x * 15) - 5F - 90F, 10F);
-            //canvas.drawPath(path, paint);
             canvas.drawTextOnPath(String.valueOf(x),path,0,20,paint);
         }
     }
