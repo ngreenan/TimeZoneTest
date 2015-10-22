@@ -21,12 +21,14 @@ public class PieChart extends View {
     private Paint paint = new Paint();
     private Path path = new Path();
     private RectF rectOuter = new RectF();
-    private RectF rectInner = new RectF();
     private RectF rectClock = new RectF();
     private RectF rectNumbers = new RectF();
+    private RectF rectMe = new RectF();
+    private RectF rectThem = new RectF();
     private float outerThickness = 75F;
+    private float meThickness = 40F;
+    private float themThickness = 110F;
     private float numbersThickness = 200F;
-    private float ringThickness = 170F;
     private float clockThickness = 160F;
 
     private int myStartTime = 0;
@@ -94,14 +96,16 @@ public class PieChart extends View {
         if (w < h) {
             rectOuter.set(outerThickness,outerThickness,w-outerThickness,w-outerThickness);
             rectClock.set(clockThickness,clockThickness,w-clockThickness,w-clockThickness);
-            rectInner.set(ringThickness,ringThickness,w-ringThickness,w-ringThickness);
             rectNumbers.set(numbersThickness,numbersThickness,w-numbersThickness,w-numbersThickness);
+            rectMe.set(meThickness,meThickness,w-meThickness,w-meThickness);
+            rectThem.set(themThickness,themThickness,w-themThickness,w-themThickness);
             size = w;
         } else {
             rectOuter.set(0,0,h,h);
             rectClock.set(clockThickness,clockThickness,h-clockThickness,h-clockThickness);
-            rectInner.set(ringThickness,ringThickness,h-ringThickness,h-ringThickness);
             rectNumbers.set(numbersThickness,numbersThickness,h-numbersThickness,h-numbersThickness);
+            rectMe.set(meThickness,meThickness,h-meThickness,h-meThickness);
+            rectThem.set(themThickness,themThickness,h-themThickness,h-themThickness);
             size = h;
         }
     }
@@ -113,13 +117,13 @@ public class PieChart extends View {
         //six different scenarios that i can think of...
 
         //CASE 1: overlap, my time first
-        if (myStartTime <= theirStartTime && myEndTime <= theirEndTime) {
+        if (myStartTime <= theirStartTime && myEndTime <= theirEndTime && myEndTime >= theirStartTime) {
             crossOver = true;
             startCrossOver = theirStartTime;
             endCrossOver = myEndTime;
         }
         //CASE 2: overlap, their time first
-        else if (theirStartTime <= myStartTime && theirEndTime <= myEndTime) {
+        else if (theirStartTime <= myStartTime && theirEndTime <= myEndTime && theirEndTime >= myStartTime) {
             crossOver = true;
             startCrossOver = myStartTime;
             endCrossOver = theirEndTime;
@@ -165,42 +169,44 @@ public class PieChart extends View {
         canvas.rotate(rotation, (float) size / 2, (float) size / 2);
 
         //base ring
-        paint.setColor(Color.parseColor("#2196F3"));
+        //paint.setColor(Color.parseColor("#90CAF9"));
+        paint.setColor(getResources().getColor(R.color.colorRing));
         paint.setStrokeWidth(150);
         paint.setStyle(Paint.Style.STROKE);
         path.reset();
         path.addArc(rectOuter, 0, 360);
         canvas.drawPath(path, paint);
 
+        //cross over
+//        if (crossOver) {
+//            paint.setColor(Color.parseColor("#9C27B0"));
+//            paint.setStrokeWidth(150);
+//            paint.setStyle(Paint.Style.FILL_AND_STROKE);
+//            path.reset();
+//            path.addArc(rectOuter, crossOverStart - 90, crossOverEnd - crossOverStart);
+//            canvas.drawPath(path, paint);
+//        }
+
         //my time arc - blue
-        paint.setColor(Color.parseColor("#0D47A1"));
-        paint.setStrokeWidth(150);
+        //paint.setColor(Color.parseColor("#0D47A1"));
+        paint.setColor(getResources().getColor(R.color.colorMe));
+        paint.setStrokeWidth(60);
         paint.setStyle(Paint.Style.STROKE);
         path.reset();
-        path.addArc(rectOuter, myTimeStart - 90, myTimeEnd - myTimeStart);
+        path.addArc(rectMe, myTimeStart - 90, myTimeEnd - myTimeStart);
         canvas.drawPath(path, paint);
 
         //their time arc - red
-        paint.setColor(Color.parseColor("#F44336"));
-        paint.setStrokeWidth(150);
+        //paint.setColor(Color.parseColor("#F44336"));
+        paint.setColor(getResources().getColor(R.color.colorThem));
+        paint.setStrokeWidth(60);
         paint.setStyle(Paint.Style.STROKE);
         path.reset();
-        path.addArc(rectOuter, theirTimeStart - 90, theirTimeEnd - theirTimeStart);
+        path.addArc(rectThem, theirTimeStart - 90, theirTimeEnd - theirTimeStart);
         canvas.drawPath(path, paint);
 
-        //cross over
-        if (crossOver) {
-            paint.setColor(Color.parseColor("#9C27B0"));
-            paint.setStrokeWidth(150);
-            paint.setStyle(Paint.Style.FILL_AND_STROKE);
-            path.reset();
-            path.addArc(rectOuter, crossOverStart - 90, crossOverEnd - crossOverStart);
-            canvas.drawPath(path, paint);
-        }
-
-
         //clock tick marks
-        paint.setColor(Color.BLACK);
+        paint.setColor(Color.DKGRAY);
         paint.setStrokeWidth(20);
         paint.setStyle(Paint.Style.STROKE);
         path.reset();
@@ -210,7 +216,7 @@ public class PieChart extends View {
         canvas.drawPath(path, paint);
 
         //numbers on each tick mark
-        paint.setColor(Color.BLACK);
+        paint.setColor(Color.DKGRAY);
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTextSize(50);
         paint.setStrokeWidth(1);

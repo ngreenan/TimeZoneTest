@@ -26,10 +26,161 @@
         android:layout_centerHorizontal="true"
         android:id="@id/triangle"/>
 
-    <!--<Button android:id="@+id/rotateButton"-->
-        <!--android:text="Rotate"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="center_horizontal"-->
-        <!--android:onClick="rotateCanvas"/>-->
+    <View android:id="@+id/centreView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="End"
+        android:gravity="center"
+        android:id="@+id/myEndTextView"
+        android:layout_alignTop="@+id/myEndButton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Start"
+        android:gravity="center"
+        android:id="@+id/myStartTextView"
+        android:layout_above="@id/myEndTextView"
+        android:layout_alignTop="@+id/myStartButton"
+        android:layout_alignBottom="@id/myStartButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@id/myEndButton"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/myStartTextView"
+        android:layout_toEndOf="@id/myStartTextView"
+        android:layout_toLeftOf="@id/centreView"
+        android:layout_toStartOf="@id/centreView"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginEnd="5dp"
+        android:text="00:00"
+        android:onClick="getTime"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@id/myStartButton"
+        android:gravity="center"
+        android:layout_above="@id/myEndButton"
+        android:layout_toRightOf="@id/myStartTextView"
+        android:layout_toEndOf="@id/myStartTextView"
+        android:layout_toLeftOf="@id/centreView"
+        android:layout_toStartOf="@id/centreView"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginEnd="5dp"
+        android:text="00:00"
+        android:onClick="getTime"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="End"
+        android:gravity="center"
+        android:id="@+id/theirEndTextView"
+        android:layout_alignTop="@+id/theirEndButton"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/centreView"
+        android:layout_toEndOf="@id/centreView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Start"
+        android:gravity="center"
+        android:id="@+id/theirStartTextView"
+        android:layout_above="@id/theirEndTextView"
+        android:layout_alignTop="@+id/theirStartButton"
+        android:layout_alignBottom="@id/theirStartButton"
+        android:layout_toRightOf="@id/centreView"
+        android:layout_toEndOf="@id/centreView" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@id/theirEndButton"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/theirStartTextView"
+        android:layout_toEndOf="@id/theirStartTextView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginEnd="5dp"
+        android:text="00:00"
+        android:onClick="getTime"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@id/theirStartButton"
+        android:gravity="center"
+        android:layout_above="@id/myEndButton"
+        android:layout_toRightOf="@id/theirStartTextView"
+        android:layout_toEndOf="@id/theirStartTextView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginEnd="5dp"
+        android:text="00:00"
+        android:onClick="getTime"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="My Time"
+        android:id="@+id/textView2"
+        android:gravity="center"
+        android:layout_above="@+id/myStartTextView"
+        android:layout_alignLeft="@id/myStartButton"
+        android:layout_alignStart="@id/myStartButton"
+        android:layout_alignRight="@id/myStartButton"
+        android:layout_alignEnd="@id/myStartButton"
+        android:textColor="@color/colorMe"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Their Time"
+        android:id="@+id/textView3"
+        android:gravity="center"
+        android:layout_above="@+id/myStartTextView"
+        android:layout_alignRight="@id/theirStartButton"
+        android:layout_alignEnd="@id/theirStartButton"
+        android:layout_alignLeft="@id/theirStartButton"
+        android:layout_alignStart="@id/theirStartButton"
+        android:textColor="@color/colorThem"
+        android:textStyle="bold"/>
+
 </RelativeLayout>
