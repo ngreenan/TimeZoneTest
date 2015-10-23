@@ -1,4 +1,4 @@
-package com.ngreenan.timezonetest;
+package com.ngreenan.mytimechecker;
 
 import android.app.TimePickerDialog;
 import android.support.v7.app.AppCompatActivity;

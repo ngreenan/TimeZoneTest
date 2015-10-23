@@ -1,4 +1,4 @@
-package com.ngreenan.timezonetest;
+package com.ngreenan.mytimechecker;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -9,9 +9,6 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 /**
  * Created by Nick on 17/10/2015.
  */
@@ -20,17 +17,28 @@ public class PieChart extends View {
     private int percentage;
     private Paint paint = new Paint();
     private Path path = new Path();
+
+    //RectFs
     private RectF rectOuter = new RectF();
     private RectF rectClock = new RectF();
     private RectF rectNumbers = new RectF();
     private RectF rectMe = new RectF();
     private RectF rectThem = new RectF();
+
+    //RectF sizes
     private float outerThickness = 75F;
     private float meThickness = 40F;
     private float themThickness = 110F;
     private float numbersThickness = 200F;
     private float clockThickness = 160F;
 
+    //drawing sizes
+    private float ringThickness = 150F;
+    private float arcThickness = 60F;
+    private float tickThickness = 20F;
+    private float textThickness = 50F;
+
+    //time variables
     private int myStartTime = 0;
     private int myEndTime = 0;
     private int theirStartTime = 0;
@@ -94,24 +102,39 @@ public class PieChart extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         if (w < h) {
+            size = w;
+            setThicknesses();
             rectOuter.set(outerThickness,outerThickness,w-outerThickness,w-outerThickness);
             rectClock.set(clockThickness,clockThickness,w-clockThickness,w-clockThickness);
             rectNumbers.set(numbersThickness,numbersThickness,w-numbersThickness,w-numbersThickness);
             rectMe.set(meThickness,meThickness,w-meThickness,w-meThickness);
             rectThem.set(themThickness,themThickness,w-themThickness,w-themThickness);
-            size = w;
         } else {
+            size = h;
+            setThicknesses();
             rectOuter.set(0,0,h,h);
             rectClock.set(clockThickness,clockThickness,h-clockThickness,h-clockThickness);
             rectNumbers.set(numbersThickness,numbersThickness,h-numbersThickness,h-numbersThickness);
             rectMe.set(meThickness,meThickness,h-meThickness,h-meThickness);
             rectThem.set(themThickness,themThickness,h-themThickness,h-themThickness);
-            size = h;
         }
     }
 
-    private void getCrossOver()
-    {
+    private void setThicknesses() {
+        //rather than hard code our thicknesses, we're going to make them a set percentage of the overall width!
+        outerThickness = 0.075F * (float)size;
+        meThickness = 0.040F * (float)size;
+        themThickness = 0.110F * (float)size;
+        numbersThickness = 0.200F * (float)size;
+        clockThickness = 0.160F * (float)size;
+
+        ringThickness = 0.150F * (float)size;
+        arcThickness = 0.060F * (float)size;
+        tickThickness = 0.020F * (float)size;
+        textThickness = 0.050F * (float)size;
+    }
+
+    private void getCrossOver() {
         //we need to work out the crossover between our two time periods
         //if indeed we have one
         //six different scenarios that i can think of...
@@ -171,7 +194,7 @@ public class PieChart extends View {
         //base ring
         //paint.setColor(Color.parseColor("#90CAF9"));
         paint.setColor(getResources().getColor(R.color.colorRing));
-        paint.setStrokeWidth(150);
+        paint.setStrokeWidth(ringThickness);
         paint.setStyle(Paint.Style.STROKE);
         path.reset();
         path.addArc(rectOuter, 0, 360);
@@ -190,7 +213,7 @@ public class PieChart extends View {
         //my time arc - blue
         //paint.setColor(Color.parseColor("#0D47A1"));
         paint.setColor(getResources().getColor(R.color.colorMe));
-        paint.setStrokeWidth(60);
+        paint.setStrokeWidth(arcThickness);
         paint.setStyle(Paint.Style.STROKE);
         path.reset();
         path.addArc(rectMe, myTimeStart - 90, myTimeEnd - myTimeStart);
@@ -199,7 +222,7 @@ public class PieChart extends View {
         //their time arc - red
         //paint.setColor(Color.parseColor("#F44336"));
         paint.setColor(getResources().getColor(R.color.colorThem));
-        paint.setStrokeWidth(60);
+        paint.setStrokeWidth(arcThickness);
         paint.setStyle(Paint.Style.STROKE);
         path.reset();
         path.addArc(rectThem, theirTimeStart - 90, theirTimeEnd - theirTimeStart);
@@ -207,7 +230,7 @@ public class PieChart extends View {
 
         //clock tick marks
         paint.setColor(Color.DKGRAY);
-        paint.setStrokeWidth(20);
+        paint.setStrokeWidth(tickThickness);
         paint.setStyle(Paint.Style.STROKE);
         path.reset();
         for (int x = 0; x < 360; x += 15) {
@@ -218,7 +241,7 @@ public class PieChart extends View {
         //numbers on each tick mark
         paint.setColor(Color.DKGRAY);
         paint.setTextAlign(Paint.Align.CENTER);
-        paint.setTextSize(50);
+        paint.setTextSize(textThickness);
         paint.setStrokeWidth(1);
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
         for (int x = 0; x < 24; x++) {

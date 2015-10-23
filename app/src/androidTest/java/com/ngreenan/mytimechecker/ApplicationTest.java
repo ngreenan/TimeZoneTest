@@ -1,4 +1,4 @@
-package com.ngreenan.timezonetest;
+package com.ngreenan.mytimechecker;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
