@@ -17,6 +17,7 @@ public class PieChart extends View {
     private int percentage;
     private Paint paint = new Paint();
     private Path path = new Path();
+    private int landscapeTop = 20;
 
     //RectFs
     private RectF rectOuter = new RectF();
@@ -112,7 +113,16 @@ public class PieChart extends View {
         } else {
             size = h;
             setThicknesses();
-            rectOuter.set(0,0,h,h);
+
+            float sidePadding = ((float)w - (float)h) / 2;
+
+//            rectOuter.set(outerThickness + sidePadding,outerThickness,w-outerThickness - sidePadding,h-outerThickness);
+//            rectClock.set(clockThickness + sidePadding,clockThickness,w-clockThickness- sidePadding,h-clockThickness);
+//            rectNumbers.set(numbersThickness + sidePadding,numbersThickness,w-numbersThickness- sidePadding,h-numbersThickness);
+//            rectMe.set(meThickness + sidePadding,meThickness,w-meThickness - sidePadding,h-meThickness);
+//            rectThem.set(themThickness + sidePadding,themThickness,w-themThickness - sidePadding,h-themThickness);
+
+            rectOuter.set(outerThickness,outerThickness,h-outerThickness,h-outerThickness);
             rectClock.set(clockThickness,clockThickness,h-clockThickness,h-clockThickness);
             rectNumbers.set(numbersThickness,numbersThickness,h-numbersThickness,h-numbersThickness);
             rectMe.set(meThickness,meThickness,h-meThickness,h-meThickness);
@@ -172,6 +182,19 @@ public class PieChart extends View {
         }
     }
 
+//    @Override
+//    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+//        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+//
+//        int width = getMeasuredWidth();
+//        int height = getMeasuredHeight();
+//
+//        if (width < height) {
+//            setMeasuredDimension(width, width);
+//        } else {
+//            setMeasuredDimension(height, height);
+//        }
+//    }
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -188,11 +211,20 @@ public class PieChart extends View {
         float crossOverStart = (startCrossOver * 360F) / (24F * 60F);
         float crossOverEnd = (endCrossOver * 360F) / (24F * 60F);
 
+        int canvasWidth = canvas.getWidth();
+        int canvasHeight = canvas.getHeight();
+
+        if (canvasWidth > canvasHeight) {
+            float shift = ((float)canvasWidth - (float)canvasHeight) / 2;
+            canvas.translate(shift, 0F);
+        }
+
         //rotate the whole canvas depending on the time
         canvas.rotate(rotation, (float) size / 2, (float) size / 2);
 
         //base ring
         //paint.setColor(Color.parseColor("#90CAF9"));
+        paint.setFlags(Paint.ANTI_ALIAS_FLAG);
         paint.setColor(getResources().getColor(R.color.colorRing));
         paint.setStrokeWidth(ringThickness);
         paint.setStyle(Paint.Style.STROKE);
@@ -216,7 +248,13 @@ public class PieChart extends View {
         paint.setStrokeWidth(arcThickness);
         paint.setStyle(Paint.Style.STROKE);
         path.reset();
-        path.addArc(rectMe, myTimeStart - 90, myTimeEnd - myTimeStart);
+
+        if (myTimeEnd >= myTimeStart) {
+            path.addArc(rectMe, myTimeStart - 90, myTimeEnd - myTimeStart);
+        } else {
+            path.addArc(rectMe, myTimeStart - 90, 360F + myTimeEnd - myTimeStart);
+        }
+
         canvas.drawPath(path, paint);
 
         //their time arc - red
@@ -225,7 +263,13 @@ public class PieChart extends View {
         paint.setStrokeWidth(arcThickness);
         paint.setStyle(Paint.Style.STROKE);
         path.reset();
-        path.addArc(rectThem, theirTimeStart - 90, theirTimeEnd - theirTimeStart);
+
+        if (theirTimeEnd >= theirTimeStart) {
+            path.addArc(rectThem, theirTimeStart - 90, theirTimeEnd - theirTimeStart);
+        } else {
+            path.addArc(rectThem, theirTimeStart - 90, 360F + theirTimeEnd - theirTimeStart);
+        }
+
         canvas.drawPath(path, paint);
 
         //clock tick marks
@@ -249,5 +293,7 @@ public class PieChart extends View {
             path.addArc(rectNumbers, (x * 15) - 5F - 90F, 10F);
             canvas.drawTextOnPath(String.valueOf(x),path,0,20,paint);
         }
+
+
     }
 }

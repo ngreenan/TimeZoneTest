@@ -1,6 +1,7 @@
 package com.ngreenan.mytimechecker;
 
 import android.app.TimePickerDialog;
+import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
 
     private float rotation = 0F;
     private PieChart pieChart;
-    private long startTime = 0;
     private float totalSeconds = (24F * 60F * 60F);
 
     private int myStartHour = 9;
@@ -49,6 +49,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (savedInstanceState != null) {
+            //reload saved variables
+            myStartHour = savedInstanceState.getInt("myStartHour");
+            myStartMin = savedInstanceState.getInt("myStartMin");
+            myEndHour = savedInstanceState.getInt("myEndHour");
+            myEndMin = savedInstanceState.getInt("myEndMin");
+            theirStartHour = savedInstanceState.getInt("theirStartHour");
+            theirStartMin = savedInstanceState.getInt("theirStartMin");
+            theirEndHour = savedInstanceState.getInt("theirEndHour");
+            theirEndMin = savedInstanceState.getInt("theirEndMin");
+        }
+
         setContentView(R.layout.activity_main);
 
         SquareLinearLayout squareLinearLayout = (SquareLinearLayout) findViewById(R.id.squareLayout);
@@ -60,6 +73,20 @@ public class MainActivity extends AppCompatActivity {
         squareLinearLayout.addView(pieChart);
 
         timerHandler.postDelayed(timerRunnable, 0);
+    }
+
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        //save our variables so that if we rotate etc we won't lose what we did
+        outState.putInt("myStartHour", myStartHour);
+        outState.putInt("myStartMin", myStartMin);
+        outState.putInt("myEndHour", myEndHour);
+        outState.putInt("myEndMin", myEndMin);
+        outState.putInt("theirStartHour", theirStartHour);
+        outState.putInt("theirStartMin", theirStartMin);
+        outState.putInt("theirEndHour", theirEndHour);
+        outState.putInt("theirEndMin", theirEndMin);
     }
 
     private void setTimes() {
