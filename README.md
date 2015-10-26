@@ -8,3 +8,5 @@ Current version is very much a proof of concept/work in progress, but it gives y
 [Version 2 - got the clock numbers in, arrow at top and auto rotate so now is at top](http://i.imgur.com/bKClV69.png)
 
 [Version 3 - we can now set the time! also changed my time and their time from being portions of the ring to arcs overlapping the ring](http://i.imgur.com/ZvVb0Fd.png)
+
+[Version 4 - the version that's been published on Google Play! Not much difference visually, but behind the scenes lots of changes to ensure it looks good on all devices, rather than just my test device](http://i.imgur.com/5oAc78w.png)
