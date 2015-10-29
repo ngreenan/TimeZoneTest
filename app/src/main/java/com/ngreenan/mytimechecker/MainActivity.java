@@ -1,6 +1,7 @@
 package com.ngreenan.mytimechecker;
 
 import android.app.TimePickerDialog;
+import android.content.SharedPreferences;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,18 @@ public class MainActivity extends AppCompatActivity {
     private PieChart pieChart;
     private float totalSeconds = (24F * 60F * 60F);
 
+    //constants for XML preferences
+    public static final String MYSTARTHOUR = "pref_myStartHour";
+    public static final String MYSTARTMIN = "pref_myStartMin";
+    public static final String MYENDHOUR = "pref_myEndHour";
+    public static final String MYENDMIN = "pref_myEndMin";
+    public static final String THEIRSTARTHOUR = "pref_theirStartHour";
+    public static final String THEIRSTARTMIN = "pref_theirStartMin";
+    public static final String THEIRENDHOUR = "pref_theirEndHour";
+    public static final String THEIRENDMIN = "pref_theirEndMin";
+    private SharedPreferences settings;
+
+    //int values representing our start and end times
     private int myStartHour = 9;
     private int myStartMin = 0;
     private int myEndHour = 18;
@@ -31,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     Handler timerHandler = new Handler();
     Runnable timerRunnable = new Runnable() {
 
+        //this is what will happen every time the handler runs
         @Override
         public void run() {
             Calendar c = Calendar.getInstance();
@@ -42,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
             pieChart.setRotation(rotation);
 
+            //set the time til the next run - in this case 500ms or half a second
             timerHandler.postDelayed(this, 500);
         }
     };
@@ -50,43 +65,36 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (savedInstanceState != null) {
-            //reload saved variables
-            myStartHour = savedInstanceState.getInt("myStartHour");
-            myStartMin = savedInstanceState.getInt("myStartMin");
-            myEndHour = savedInstanceState.getInt("myEndHour");
-            myEndMin = savedInstanceState.getInt("myEndMin");
-            theirStartHour = savedInstanceState.getInt("theirStartHour");
-            theirStartMin = savedInstanceState.getInt("theirStartMin");
-            theirEndHour = savedInstanceState.getInt("theirEndHour");
-            theirEndMin = savedInstanceState.getInt("theirEndMin");
-        }
+        //load preferences from XML
+        loadXMLPreferences();
 
+        //set the layout file to associate with MainActivity
         setContentView(R.layout.activity_main);
 
+        //get a reference to our SquareLinearLayout, create a PieChart and add it!
         SquareLinearLayout squareLinearLayout = (SquareLinearLayout) findViewById(R.id.squareLayout);
-        RelativeLayout linearLayout = (RelativeLayout) findViewById(R.id.layout);
-
+        //RelativeLayout linearLayout = (RelativeLayout) findViewById(R.id.layout);
         pieChart = new PieChart(this);
         setTimes();
-
         squareLinearLayout.addView(pieChart);
 
+        //kick off the "timer" to update the rotation of the clock every half second
         timerHandler.postDelayed(timerRunnable, 0);
     }
 
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+    private void loadXMLPreferences() {
+        //load values from XML preferences
+        //initialise our SharedPreferences object
+        settings = getPreferences(MODE_PRIVATE);
 
-        //save our variables so that if we rotate etc we won't lose what we did
-        outState.putInt("myStartHour", myStartHour);
-        outState.putInt("myStartMin", myStartMin);
-        outState.putInt("myEndHour", myEndHour);
-        outState.putInt("myEndMin", myEndMin);
-        outState.putInt("theirStartHour", theirStartHour);
-        outState.putInt("theirStartMin", theirStartMin);
-        outState.putInt("theirEndHour", theirEndHour);
-        outState.putInt("theirEndMin", theirEndMin);
+        myStartHour = settings.getInt(MYSTARTHOUR, 9);
+        myStartMin = settings.getInt(MYSTARTMIN, 0);
+        myEndHour = settings.getInt(MYENDHOUR, 18);
+        myEndMin = settings.getInt(MYENDMIN, 0);
+        theirStartHour = settings.getInt(THEIRSTARTHOUR, 0);
+        theirStartMin = settings.getInt(THEIRSTARTMIN, 0);
+        theirEndHour = settings.getInt(THEIRENDHOUR, 12);
+        theirEndMin = settings.getInt(THEIRENDMIN, 0);
     }
 
     private void setTimes() {
@@ -124,10 +132,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getTime(final View view) {
-        //Calendar currentDate = Calendar.getInstance();
+        //load a TimePickerDialog and ask the user for the new time
         int hour = 0;
         int minute = 0;
 
+        //work out which time we're changing from the id of the Button pressed
         switch (view.getId()) {
             case R.id.myStartButton:
                 hour = myStartHour;
@@ -147,26 +156,47 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
 
+        //launch our TimePickerDialog
         TimePickerDialog timePickerDialog;
+        //we need to set a context, an OnTimeSetListener, a start hour, a start minute and whether it's 24 hours or not
         timePickerDialog = new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                //this gets called when we've picked a time - which values do we want to set??
+                //for each we will set the variables to the new value
+                //but also update the XML preferences so that when we reload the app, it'll remember what times we chose
                 switch (view.getId()) {
                     case R.id.myStartButton:
+                        //variables
                         myStartHour = selectedHour;
                         myStartMin = selectedMinute;
+                        //XML preferences
+                        setXMLPreference(MYSTARTHOUR, selectedHour);
+                        setXMLPreference(MYSTARTMIN, selectedMinute);
                         break;
                     case R.id.myEndButton:
+                        //variables
                         myEndHour = selectedHour;
                         myEndMin = selectedMinute;
+                        //XML preferences
+                        setXMLPreference(MYENDHOUR, selectedHour);
+                        setXMLPreference(MYENDMIN, selectedMinute);
                         break;
                     case R.id.theirStartButton:
+                        //variables
                         theirStartHour = selectedHour;
                         theirStartMin = selectedMinute;
+                        //XML preferences
+                        setXMLPreference(THEIRSTARTHOUR, selectedHour);
+                        setXMLPreference(THEIRSTARTMIN, selectedMinute);
                         break;
                     case R.id.theirEndButton:
+                        //variables
                         theirEndHour = selectedHour;
                         theirEndMin = selectedMinute;
+                        //XML preferences
+                        setXMLPreference(THEIRENDHOUR, selectedHour);
+                        setXMLPreference(THEIRENDMIN, selectedMinute);
                         break;
                 }
 
@@ -175,5 +205,11 @@ public class MainActivity extends AppCompatActivity {
         }, hour, minute, true);
         timePickerDialog.setTitle("Select Time");
         timePickerDialog.show();
+    }
+
+    private void setXMLPreference(String key, int value) {
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt(key, value);
+        editor.commit();
     }
 }
