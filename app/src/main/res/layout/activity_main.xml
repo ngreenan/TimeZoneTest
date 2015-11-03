@@ -24,7 +24,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:id="@id/triangle"/>
+        android:id="@+id/triangle"/>
 
     <View android:id="@+id/centreView"
         android:layout_width="0dp"
@@ -43,31 +43,27 @@
     <TextView
         android:text="@string/start_label"
         android:id="@+id/myStartTextView"
-        android:layout_above="@id/myEndTextView"
+        android:layout_above="@+id/myEndTextView"
         android:layout_alignTop="@+id/myStartButton"
-        android:layout_alignBottom="@id/myStartButton"
+        android:layout_alignBottom="@+id/myStartButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         style="@style/textLabel" />
 
     <Button
-        android:id="@id/myEndButton"
+        android:id="@+id/myEndButton"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@id/myStartTextView"
-        android:layout_toEndOf="@id/myStartTextView"
-        android:layout_toLeftOf="@id/centreView"
-        android:layout_toStartOf="@id/centreView"
+        android:layout_toRightOf="@+id/myStartTextView"
+        android:layout_toEndOf="@+id/myStartTextView"
         android:text="00:00"
         android:onClick="getTime"
         style="@style/buttonStyle" />
 
     <Button
-        android:id="@id/myStartButton"
-        android:layout_above="@id/myEndButton"
-        android:layout_toRightOf="@id/myStartTextView"
-        android:layout_toEndOf="@id/myStartTextView"
-        android:layout_toLeftOf="@id/centreView"
-        android:layout_toStartOf="@id/centreView"
+        android:id="@+id/myStartButton"
+        android:layout_above="@+id/myEndButton"
+        android:layout_toRightOf="@+id/myStartTextView"
+        android:layout_toEndOf="@+id/myStartTextView"
         android:text="00:00"
         android:onClick="getTime"
         style="@style/buttonStyle" />
@@ -77,38 +73,34 @@
         android:id="@+id/theirEndTextView"
         android:layout_alignTop="@+id/theirEndButton"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@id/centreView"
-        android:layout_toEndOf="@id/centreView"
+        android:layout_toRightOf="@+id/centreView"
+        android:layout_toEndOf="@+id/centreView"
         style="@style/textLabel" />
 
     <TextView
         android:text="@string/start_label"
         android:id="@+id/theirStartTextView"
-        android:layout_above="@id/theirEndTextView"
+        android:layout_above="@+id/theirEndTextView"
         android:layout_alignTop="@+id/theirStartButton"
-        android:layout_alignBottom="@id/theirStartButton"
-        android:layout_toRightOf="@id/centreView"
-        android:layout_toEndOf="@id/centreView"
+        android:layout_alignBottom="@+id/theirStartButton"
+        android:layout_toRightOf="@+id/centreView"
+        android:layout_toEndOf="@+id/centreView"
         style="@style/textLabel" />
 
     <Button
-        android:id="@id/theirEndButton"
+        android:id="@+id/theirEndButton"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@id/theirStartTextView"
-        android:layout_toEndOf="@id/theirStartTextView"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/theirStartTextView"
+        android:layout_toEndOf="@+id/theirStartTextView"
         android:text="00:00"
         android:onClick="getTime"
         style="@style/buttonStyle" />
 
     <Button
-        android:id="@id/theirStartButton"
-        android:layout_above="@id/myEndButton"
-        android:layout_toRightOf="@id/theirStartTextView"
-        android:layout_toEndOf="@id/theirStartTextView"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
+        android:id="@+id/theirStartButton"
+        android:layout_above="@+id/myEndButton"
+        android:layout_toRightOf="@+id/theirStartTextView"
+        android:layout_toEndOf="@+id/theirStartTextView"
         android:text="00:00"
         android:onClick="getTime"
         style="@style/buttonStyle" />
@@ -117,10 +109,10 @@
         android:text="My Time"
         android:id="@+id/textView2"
         android:layout_above="@+id/myStartTextView"
-        android:layout_alignLeft="@id/myStartButton"
-        android:layout_alignStart="@id/myStartButton"
-        android:layout_alignRight="@id/myStartButton"
-        android:layout_alignEnd="@id/myStartButton"
+        android:layout_alignLeft="@+id/myStartButton"
+        android:layout_alignStart="@+id/myStartButton"
+        android:layout_alignRight="@+id/myPlus"
+        android:layout_alignEnd="@+id/myPlus"
         android:textColor="@color/colorMe"
         style="@style/textHeader" />
 
@@ -128,11 +120,117 @@
         android:text="Their Time"
         android:id="@+id/textView3"
         android:layout_above="@+id/myStartTextView"
-        android:layout_alignRight="@id/theirStartButton"
-        android:layout_alignEnd="@id/theirStartButton"
-        android:layout_alignLeft="@id/theirStartButton"
-        android:layout_alignStart="@id/theirStartButton"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignLeft="@+id/theirStartButton"
+        android:layout_alignStart="@+id/theirStartButton"
         android:textColor="@color/colorThem"
         style="@style/textHeader"/>
+
+    <Button
+        android:text="+"
+        android:id="@+id/myPlus"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignTop="@+id/myStartButton"
+        android:layout_toLeftOf="@+id/centreView"
+        android:layout_toStartOf="@+id/centreView"
+        android:layout_toRightOf="@+id/myEndButton"
+        android:layout_toEndOf="@+id/myEndButton"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="-5dp"
+        android:layout_marginStart="-5dp"/>
+
+    <TextView
+        android:id="@+id/myTimeZone"
+        android:text="+0"
+        android:gravity="center"
+        android:layout_below="@+id/myPlus"
+        android:layout_above="@+id/myMinus"
+        android:layout_alignLeft="@+id/myPlus"
+        android:layout_alignStart="@+id/myPlus"
+        android:layout_alignRight="@+id/myPlus"
+        android:layout_alignEnd="@+id/myPlus"
+        android:textAlignment="center"
+        android:background="#FFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginTop="-10dp"
+        android:layout_marginBottom="-10dp"
+        android:textSize="13sp"
+        android:textColor="#000000" />
+
+    <Button
+        android:text="-"
+        android:id="@+id/myMinus"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/centreView"
+        android:layout_toStartOf="@+id/centreView"
+        android:layout_toRightOf="@+id/myEndButton"
+        android:layout_toEndOf="@+id/myEndButton"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="-5dp"
+        android:layout_marginStart="-5dp"/>
+
+    <Button
+        android:text="+"
+        android:id="@+id/theirPlus"
+        android:layout_width="fill_parent"
+        android:layout_height="35dp"
+        android:layout_alignTop="@+id/theirStartButton"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/theirEndButton"
+        android:layout_toEndOf="@+id/theirEndButton"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="-5dp"
+        android:layout_marginStart="-5dp"/>
+
+    <TextView
+        android:text="+11"
+        android:id="@+id/theirTimeZone"
+        android:gravity="center"
+        android:layout_below="@+id/theirPlus"
+        android:layout_above="@+id/theirMinus"
+        android:layout_alignLeft="@+id/theirPlus"
+        android:layout_alignStart="@+id/theirPlus"
+        android:layout_alignRight="@+id/theirPlus"
+        android:layout_alignEnd="@+id/theirPlus"
+        android:textAlignment="center"
+        android:background="#FFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginTop="-10dp"
+        android:layout_marginBottom="-10dp"
+        android:textSize="13sp"
+        android:textColor="#000000"/>
+
+    <Button
+        android:text="-"
+        android:id="@+id/theirMinus"
+        android:layout_width="fill_parent"
+        android:layout_height="35dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/theirEndButton"
+        android:layout_toEndOf="@+id/theirEndButton"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="-5dp"
+        android:layout_marginStart="-5dp"/>
 
 </RelativeLayout>

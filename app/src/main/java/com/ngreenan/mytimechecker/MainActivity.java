@@ -31,14 +31,14 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences settings;
 
     //int values representing our start and end times
-    private int myStartHour = 9;
-    private int myStartMin = 0;
-    private int myEndHour = 18;
-    private int myEndMin = 0;
-    private int theirStartHour = 0;
-    private int theirStartMin = 0;
-    private int theirEndHour = 12;
-    private int theirEndMin = 0;
+    private int myStartHour;
+    private int myStartMin;
+    private int myEndHour;
+    private int myEndMin;
+    private int theirStartHour;
+    private int theirStartMin;
+    private int theirEndHour;
+    private int theirEndMin;
 
     //runs without a timer by reposting this handler at the end of the runnable
     Handler timerHandler = new Handler();
@@ -87,13 +87,13 @@ public class MainActivity extends AppCompatActivity {
         //initialise our SharedPreferences object
         settings = getPreferences(MODE_PRIVATE);
 
-        myStartHour = settings.getInt(MYSTARTHOUR, 9);
+        myStartHour = settings.getInt(MYSTARTHOUR, 8);
         myStartMin = settings.getInt(MYSTARTMIN, 0);
-        myEndHour = settings.getInt(MYENDHOUR, 18);
+        myEndHour = settings.getInt(MYENDHOUR, 22);
         myEndMin = settings.getInt(MYENDMIN, 0);
-        theirStartHour = settings.getInt(THEIRSTARTHOUR, 0);
+        theirStartHour = settings.getInt(THEIRSTARTHOUR, 8);
         theirStartMin = settings.getInt(THEIRSTARTMIN, 0);
-        theirEndHour = settings.getInt(THEIRENDHOUR, 12);
+        theirEndHour = settings.getInt(THEIRENDHOUR, 22);
         theirEndMin = settings.getInt(THEIRENDMIN, 0);
     }
 
