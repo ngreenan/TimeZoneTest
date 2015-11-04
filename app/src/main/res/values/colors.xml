@@ -6,4 +6,6 @@
     <color name="colorMe">#0D47A1</color>
     <color name="colorThem">#F44336</color>
     <color name="colorRing">#90CAF9</color>
+    <color name="offsetBackground">#FFFFFF</color>
+    <color name="offsetForeground">#000000</color>
 </resources>

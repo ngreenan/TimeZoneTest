@@ -9,6 +9,7 @@ import android.view.View;
 import android.os.Handler;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     public static final String THEIRSTARTMIN = "pref_theirStartMin";
     public static final String THEIRENDHOUR = "pref_theirEndHour";
     public static final String THEIRENDMIN = "pref_theirEndMin";
+    public static final String MYOFFSET = "pref_myOffset";
+    public static final String THEIROFFSET = "pref_theirOffset";
     private SharedPreferences settings;
 
     //int values representing our start and end times
@@ -39,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
     private int theirStartMin;
     private int theirEndHour;
     private int theirEndMin;
+
+    private int myOffset;
+    private int theirOffset;
 
     //runs without a timer by reposting this handler at the end of the runnable
     Handler timerHandler = new Handler();
@@ -95,16 +101,19 @@ public class MainActivity extends AppCompatActivity {
         theirStartMin = settings.getInt(THEIRSTARTMIN, 0);
         theirEndHour = settings.getInt(THEIRENDHOUR, 22);
         theirEndMin = settings.getInt(THEIRENDMIN, 0);
+
+        myOffset = settings.getInt(MYOFFSET,0);
+        theirOffset = settings.getInt(THEIROFFSET, 0);
     }
 
     private void setTimes() {
         //set my times
-        pieChart.setMyStartTime(myStartHour, myStartMin);
-        pieChart.setMyEndTime(myEndHour, myEndMin);
+        pieChart.setMyStartTime(myStartHour + myOffset, myStartMin);
+        pieChart.setMyEndTime(myEndHour + myOffset, myEndMin);
 
         //set their times
-        pieChart.setTheirStartTime(theirStartHour, theirStartMin);
-        pieChart.setTheirEndTime(theirEndHour, theirEndMin);
+        pieChart.setTheirStartTime(theirStartHour + theirOffset, theirStartMin);
+        pieChart.setTheirEndTime(theirEndHour + theirOffset, theirEndMin);
 
         //set button text
         Button button = (Button) findViewById(R.id.myStartButton);
@@ -118,6 +127,22 @@ public class MainActivity extends AppCompatActivity {
 
         button = (Button) findViewById(R.id.theirEndButton);
         button.setText(String.format("%02d", theirEndHour) + ":" + String.format("%02d", theirEndMin));
+
+        TextView textView = (TextView) findViewById(R.id.myTimeZone);
+        textView.setText(deriveTimeZone(myOffset));
+
+        textView = (TextView) findViewById(R.id.theirTimeZone);
+        textView.setText(deriveTimeZone(theirOffset));
+    }
+
+    private String deriveTimeZone(int offset) {
+        if (offset == 0) {
+            return "0";
+        } else if (offset > 0) {
+            return "+" + String.valueOf(offset);
+        } else {
+            return String.valueOf(offset);
+        }
     }
 
     public void rotateCanvas(View view) {
@@ -211,5 +236,48 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = settings.edit();
         editor.putInt(key, value);
         editor.commit();
+    }
+
+    public void changeOffset(View view) {
+        //which button did we press?
+        switch (view.getId()) {
+            case R.id.myPlus:
+                myOffset++;
+                setXMLPreference(MYOFFSET, myOffset);
+                break;
+            case R.id.myMinus:
+                myOffset--;
+                setXMLPreference(MYOFFSET, myOffset);
+                break;
+            case R.id.theirPlus:
+                theirOffset++;
+                setXMLPreference(THEIROFFSET, theirOffset);
+                break;
+            case R.id.theirMinus:
+                theirOffset--;
+                setXMLPreference(THEIROFFSET, theirOffset);
+                break;
+        }
+
+        //do we need to disable anything?
+        Button button;
+
+        //myPlus
+        button = (Button) findViewById(R.id.myPlus);
+        button.setEnabled(myOffset < 14);
+
+        //myMinus
+        button = (Button) findViewById(R.id.myMinus);
+        button.setEnabled(myOffset > -12);
+
+        //theirPlus
+        button = (Button) findViewById(R.id.theirPlus);
+        button.setEnabled(theirOffset < 14);
+
+        //theirMinus
+        button = (Button) findViewById(R.id.theirMinus);
+        button.setEnabled(theirOffset > -12);
+
+        setTimes();
     }
 }

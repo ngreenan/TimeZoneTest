@@ -65,9 +65,9 @@
     android:layout_alignParentBottom="true"
     android:layout_toRightOf="@+id/theirStartTextView"
     android:layout_toEndOf="@id/theirStartTextView"
-    android:layout_alignParentRight="true"
-    android:layout_alignParentEnd="true"
-    android:text="00:00"
+    android:layout_toLeftOf="@+id/myPlus"
+    android:layout_toStartOf="@id/myPlus"
+    android:text=""
     android:onClick="getTime"
     style="@style/buttonStyle" />
 
@@ -85,9 +85,9 @@
     android:layout_above="@id/theirEndButton"
     android:layout_toRightOf="@+id/theirStartTextView"
     android:layout_toEndOf="@id/theirStartTextView"
-    android:layout_alignParentRight="true"
-    android:layout_alignParentEnd="true"
-    android:text="00:00"
+    android:layout_toLeftOf="@+id/myPlus"
+    android:layout_toStartOf="@id/myPlus"
+    android:text=""
     android:onClick="getTime"
     style="@style/buttonStyle" />
 
@@ -106,8 +106,8 @@
     android:text="Their Time"
     android:id="@+id/textView3"
     android:layout_above="@id/theirStartTextView"
-    android:layout_alignRight="@id/theirStartButton"
-    android:layout_alignEnd="@id/theirStartButton"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="true"
     android:layout_alignLeft="@id/theirStartButton"
     android:layout_alignStart="@id/theirStartButton"
     android:layout_below="@id/centreView2"
@@ -119,9 +119,9 @@
     android:layout_above="@id/textView3"
     android:layout_toRightOf="@+id/theirStartTextView"
     android:layout_toEndOf="@id/theirStartTextView"
-    android:layout_alignParentRight="true"
-    android:layout_alignParentEnd="true"
-    android:text="00:00"
+    android:layout_toLeftOf="@+id/myPlus"
+    android:layout_toStartOf="@id/myPlus"
+    android:text=""
     android:onClick="getTime"
     style="@style/buttonStyle" />
 
@@ -140,9 +140,9 @@
     android:layout_above="@id/myEndButton"
     android:layout_toRightOf="@+id/theirStartTextView"
     android:layout_toEndOf="@id/theirStartTextView"
-    android:layout_alignParentRight="true"
-    android:layout_alignParentEnd="true"
-    android:text="00:00"
+    android:layout_toLeftOf="@+id/myPlus"
+    android:layout_toStartOf="@id/myPlus"
+    android:text=""
     android:onClick="getTime"
     style="@style/buttonStyle" />
 
@@ -162,11 +162,77 @@
     android:layout_above="@+id/myStartTextView"
     android:layout_alignLeft="@id/myStartButton"
     android:layout_alignStart="@id/myStartButton"
-    android:layout_alignRight="@id/myStartButton"
-    android:layout_alignEnd="@id/myStartButton"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="true"
     android:layout_alignParentTop="true"
     android:textColor="@color/colorMe"
     style="@style/textHeader" />
+
+    <!--time zone selectors-->
+    <TextView
+        android:id="@+id/myTimeZone"
+        android:text=""
+        android:layout_below="@+id/myPlus"
+        android:layout_above="@+id/myMinus"
+        android:layout_alignLeft="@+id/myPlus"
+        android:layout_alignStart="@+id/myPlus"
+        android:layout_alignRight="@+id/myPlus"
+        android:layout_alignEnd="@+id/myPlus"
+        style="@style/offsetTextViewLandscape"
+        />
+
+    <Button
+        android:text="@string/plus"
+        android:id="@+id/myPlus"
+        android:layout_alignTop="@+id/myStartButton"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="changeOffset"
+        style="@style/offsetButtonLandscape"
+         />
+
+    <Button
+        android:text="@string/minus"
+        android:id="@+id/myMinus"
+        android:layout_alignBottom="@id/myEndButton"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="changeOffset"
+        style="@style/offsetButtonLandscape"
+         />
+
+    <TextView
+        android:text=""
+        android:id="@+id/theirTimeZone"
+        android:layout_below="@+id/theirPlus"
+        android:layout_above="@+id/theirMinus"
+        android:layout_alignLeft="@+id/theirPlus"
+        android:layout_alignStart="@+id/theirPlus"
+        android:layout_alignRight="@+id/theirPlus"
+        android:layout_alignEnd="@+id/theirPlus"
+        style="@style/offsetTextViewLandscape"
+         />
+
+    <Button
+        android:text="@string/plus"
+        android:id="@+id/theirPlus"
+        android:layout_alignTop="@+id/theirStartButton"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="changeOffset"
+        style="@style/offsetButtonLandscape"
+        />
+
+    <Button
+        android:text="@string/minus"
+        android:id="@+id/theirMinus"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="changeOffset"
+        style="@style/offsetButtonLandscape"
+        />
+
 
 </RelativeLayout>
 </RelativeLayout>
