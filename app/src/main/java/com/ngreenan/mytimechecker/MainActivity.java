@@ -108,12 +108,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void setTimes() {
         //set my times
-        pieChart.setMyStartTime(myStartHour + myOffset, myStartMin);
-        pieChart.setMyEndTime(myEndHour + myOffset, myEndMin);
+        pieChart.setMyStartTime(myStartHour - myOffset, myStartMin);
+        pieChart.setMyEndTime(myEndHour - myOffset, myEndMin);
 
         //set their times
-        pieChart.setTheirStartTime(theirStartHour + theirOffset, theirStartMin);
-        pieChart.setTheirEndTime(theirEndHour + theirOffset, theirEndMin);
+        pieChart.setTheirStartTime(theirStartHour - theirOffset, theirStartMin);
+        pieChart.setTheirEndTime(theirEndHour - theirOffset, theirEndMin);
 
         //set button text
         Button button = (Button) findViewById(R.id.myStartButton);

@@ -55,6 +55,8 @@
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/myStartTextView"
         android:layout_toEndOf="@+id/myStartTextView"
+        android:layout_toLeftOf="@+id/myPlus"
+        android:layout_toStartOf="@+id/myPlus"
         android:text=""
         android:onClick="getTime"
         style="@style/buttonStyle" />
@@ -64,6 +66,8 @@
         android:layout_above="@+id/myEndButton"
         android:layout_toRightOf="@+id/myStartTextView"
         android:layout_toEndOf="@+id/myStartTextView"
+        android:layout_toLeftOf="@+id/myPlus"
+        android:layout_toStartOf="@id/myPlus"
         android:text=""
         android:onClick="getTime"
         style="@style/buttonStyle" />
@@ -92,6 +96,8 @@
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/theirStartTextView"
         android:layout_toEndOf="@+id/theirStartTextView"
+        android:layout_toLeftOf="@+id/theirPlus"
+        android:layout_toStartOf="@id/theirPlus"
         android:text=""
         android:onClick="getTime"
         style="@style/buttonStyle" />
@@ -101,6 +107,8 @@
         android:layout_above="@+id/myEndButton"
         android:layout_toRightOf="@+id/theirStartTextView"
         android:layout_toEndOf="@+id/theirStartTextView"
+        android:layout_toLeftOf="@+id/theirPlus"
+        android:layout_toStartOf="@id/theirPlus"
         android:text=""
         android:onClick="getTime"
         style="@style/buttonStyle" />
@@ -145,8 +153,6 @@
         android:layout_alignTop="@+id/myStartButton"
         android:layout_toLeftOf="@+id/centreView"
         android:layout_toStartOf="@+id/centreView"
-        android:layout_toRightOf="@+id/myEndButton"
-        android:layout_toEndOf="@+id/myEndButton"
         android:onClick="changeOffset"
         style="@style/offsetButton" />
 
@@ -156,8 +162,6 @@
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/centreView"
         android:layout_toStartOf="@+id/centreView"
-        android:layout_toRightOf="@+id/myEndButton"
-        android:layout_toEndOf="@+id/myEndButton"
         android:onClick="changeOffset"
         style="@style/offsetButton" />
 
@@ -178,8 +182,6 @@
         android:layout_alignTop="@+id/theirStartButton"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@+id/theirEndButton"
-        android:layout_toEndOf="@+id/theirEndButton"
         android:onClick="changeOffset"
         style="@style/offsetButton"/>
 
@@ -189,8 +191,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@+id/theirEndButton"
-        android:layout_toEndOf="@+id/theirEndButton"
         android:onClick="changeOffset"
         style="@style/offsetButton"/>
 
