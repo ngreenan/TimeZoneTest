@@ -45,10 +45,6 @@ public class PieChart extends View {
     private int theirStartTime = 0;
     private int theirEndTime = 0;
 
-    private Boolean crossOver = false;
-    private int startCrossOver = 0;
-    private int endCrossOver = 0;
-
     private float rotation = 0;
     private int size = 0;
 
@@ -99,6 +95,22 @@ public class PieChart extends View {
         return percentage;
     }
 
+    public int getMyStartTime() {
+        return myStartTime;
+    }
+
+    public int getMyEndTime() {
+        return myEndTime;
+    }
+
+    public int getTheirStartTime() {
+        return theirStartTime;
+    }
+
+    public int getTheirEndTime() {
+        return theirEndTime;
+    }
+
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
@@ -144,72 +156,20 @@ public class PieChart extends View {
         textThickness = 0.050F * (float)size;
     }
 
-    private void getCrossOver() {
-        //we need to work out the crossover between our two time periods
-        //if indeed we have one
-        //six different scenarios that i can think of...
-
-        //CASE 1: overlap, my time first
-        if (myStartTime <= theirStartTime && myEndTime <= theirEndTime && myEndTime >= theirStartTime) {
-            crossOver = true;
-            startCrossOver = theirStartTime;
-            endCrossOver = myEndTime;
-        }
-        //CASE 2: overlap, their time first
-        else if (theirStartTime <= myStartTime && theirEndTime <= myEndTime && theirEndTime >= myStartTime) {
-            crossOver = true;
-            startCrossOver = myStartTime;
-            endCrossOver = theirEndTime;
-        }
-        //CASE 3: their time completely within my time
-        else if (theirStartTime >= myStartTime && theirEndTime <= myEndTime) {
-            crossOver = true;
-            startCrossOver = theirStartTime;
-            endCrossOver = theirEndTime;
-        }
-        //CASE 4: my time completely within their time
-        else if (myStartTime >= theirStartTime && myEndTime <= theirEndTime) {
-            crossOver = true;
-            startCrossOver = myStartTime;
-            endCrossOver = myEndTime;
-        }
-        //CASE 5: no crossover, my time earlier
-        //CASE 6: no crossover, their time earlier
-        else {
-            crossOver = false;
-            startCrossOver = 0;
-            endCrossOver = 0;
-        }
-    }
-
-//    @Override
-//    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-//        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-//
-//        int width = getMeasuredWidth();
-//        int height = getMeasuredHeight();
-//
-//        if (width < height) {
-//            setMeasuredDimension(width, width);
-//        } else {
-//            setMeasuredDimension(height, height);
-//        }
-//    }
-
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
         //calculate the cross over period
-        getCrossOver();
+        //getCrossOver();
 
         //setup all our values for start/finish angles
         float myTimeStart = (myStartTime * 360 / (24F * 60F));
         float myTimeEnd = (myEndTime * 360 / (24F * 60F));
         float theirTimeStart = (theirStartTime * 360 / (24F * 60F));
         float theirTimeEnd = (theirEndTime * 360 / (24F * 60F));
-        float crossOverStart = (startCrossOver * 360F) / (24F * 60F);
-        float crossOverEnd = (endCrossOver * 360F) / (24F * 60F);
+        //float crossOverStart = (startCrossOver * 360F) / (24F * 60F);
+        //float crossOverEnd = (endCrossOver * 360F) / (24F * 60F);
 
         int canvasWidth = canvas.getWidth();
         int canvasHeight = canvas.getHeight();
@@ -231,16 +191,6 @@ public class PieChart extends View {
         path.reset();
         path.addArc(rectOuter, 0, 360);
         canvas.drawPath(path, paint);
-
-        //cross over
-//        if (crossOver) {
-//            paint.setColor(Color.parseColor("#9C27B0"));
-//            paint.setStrokeWidth(150);
-//            paint.setStyle(Paint.Style.FILL_AND_STROKE);
-//            path.reset();
-//            path.addArc(rectOuter, crossOverStart - 90, crossOverEnd - crossOverStart);
-//            canvas.drawPath(path, paint);
-//        }
 
         //my time arc - blue
         //paint.setColor(Color.parseColor("#0D47A1"));
@@ -293,7 +243,5 @@ public class PieChart extends View {
             path.addArc(rectNumbers, (x * 15) - 5F - 90F, 10F);
             canvas.drawTextOnPath(String.valueOf(x),path,0,20,paint);
         }
-
-
     }
 }

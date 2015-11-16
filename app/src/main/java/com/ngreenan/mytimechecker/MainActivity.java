@@ -2,15 +2,14 @@ package com.ngreenan.mytimechecker;
 
 import android.app.TimePickerDialog;
 import android.content.SharedPreferences;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.os.Handler;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -46,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
     private int myOffset;
     private int theirOffset;
 
+    private boolean suppressNotification = false;
+    private boolean isCrossOver = false;
+
     //runs without a timer by reposting this handler at the end of the runnable
     Handler timerHandler = new Handler();
     Runnable timerRunnable = new Runnable() {
@@ -62,10 +64,32 @@ public class MainActivity extends AppCompatActivity {
 
             pieChart.setRotation(rotation);
 
+            //do we need to send out a notification?
+            checkCrossOver(c);
+
+            if (isCrossOver) {
+                //we're in a crossover period - have we already seen a notification?
+                if (!suppressNotification) {
+                    //show a notification
+                    displayNotification();
+                }
+            } else {
+                //reset - if a notification is due display it from now on
+                suppressNotification = false;
+            }
+
             //set the time til the next run - in this case 500ms or half a second
             timerHandler.postDelayed(this, 500);
         }
     };
+
+    private void displayNotification() {
+        //TODO: replace this bit with a notification instead of this toast
+        Toast.makeText(MainActivity.this, "Now entering cross over period!!!", Toast.LENGTH_LONG).show();
+
+        //suppress future notifications for this crossover period
+        suppressNotification = true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -279,5 +303,44 @@ public class MainActivity extends AppCompatActivity {
         button.setEnabled(theirOffset > -12);
 
         setTimes();
+    }
+
+    private void checkCrossOver(Calendar c) {
+        //we need to know if the current time is after both start times and before both end times
+
+        //get the current minutes
+        int timeNow = (c.get(Calendar.HOUR_OF_DAY) * 60)
+                + c.get(Calendar.MINUTE);
+
+        //get my start/end and their start/end in minutes, allowing for time differences
+        int myStart = (myStartHour - myOffset) * 60 + myStartMin;
+        int myEnd = (myEndHour - myOffset) * 60 + myEndMin;
+        int theirStart = (theirStartHour - theirOffset) * 60 + theirStartMin;
+        int theirEnd = (theirEndHour - theirOffset) * 60 + theirEndMin;
+
+        int minutes = 24 * 60;
+
+        //if start times go into previous day, add a day's worth of minutes to allow for this
+        //otherwise the comparison won't work properly
+        if (myStart < 0) {
+            myStart += minutes;
+            myEnd += minutes;
+        }
+
+        if (theirStart < 0) {
+            theirStart += minutes;
+            theirEnd += minutes;
+        }
+
+        //now check if we're in a cross over period
+        //return true if we are, false if we're not
+        if (myStart <= timeNow
+                && theirStart <= timeNow % minutes
+                && myEnd >= timeNow
+                && theirEnd >= timeNow) {
+            isCrossOver = true;
+        } else {
+            isCrossOver = false;
+        }
     }
 }
