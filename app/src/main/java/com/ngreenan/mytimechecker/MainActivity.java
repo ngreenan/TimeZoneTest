@@ -1,7 +1,14 @@
 package com.ngreenan.mytimechecker;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +16,6 @@ import android.os.Handler;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -18,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private float rotation = 0F;
     private PieChart pieChart;
     private float totalSeconds = (24F * 60F * 60F);
+
+    public static final int NOTIFICATIONID = 1;
 
     //constants for XML preferences
     public static final String MYSTARTHOUR = "pref_myStartHour";
@@ -30,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String THEIRENDMIN = "pref_theirEndMin";
     public static final String MYOFFSET = "pref_myOffset";
     public static final String THEIROFFSET = "pref_theirOffset";
+    public static final String SUPPRESSNOTIFICATION = "pref_suppressNotification";
     private SharedPreferences settings;
 
     //int values representing our start and end times
@@ -62,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
 
             rotation = ((0 - seconds) / totalSeconds) * 360;
 
+            displayTimes(c);
+
             pieChart.setRotation(rotation);
 
             //do we need to send out a notification?
@@ -76,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 //reset - if a notification is due display it from now on
                 suppressNotification = false;
+                setXMLPreference(SUPPRESSNOTIFICATION, suppressNotification);
             }
 
             //set the time til the next run - in this case 500ms or half a second
@@ -83,12 +95,50 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    private void displayNotification() {
-        //TODO: replace this bit with a notification instead of this toast
-        Toast.makeText(MainActivity.this, "Now entering cross over period!!!", Toast.LENGTH_LONG).show();
+//    private void displayNotification() {
+//        //TODO: replace this bit with a notification instead of this toast
+//        Toast.makeText(MainActivity.this, "Now entering cross over period!!!", Toast.LENGTH_LONG).show();
+//
+//        //suppress future notifications for this crossover period
+//        suppressNotification = true;
+//    }
 
-        //suppress future notifications for this crossover period
+    private void displayNotification(){
+
+        //build the notification itself
+        Notification.Builder mBuilder =
+                new Notification.Builder(this)
+                .setSmallIcon(R.drawable.ic_stat_notification)
+                .setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.mipmap.ic_launcher))
+                .setContentTitle("My Time Checker")
+                .setContentText("Your friend is now contactable!")
+                .setPriority(Notification.PRIORITY_DEFAULT)
+                .setAutoCancel(true);
+
+        //build the intent
+        Intent resultIntent = new Intent(this, MainActivity.class);
+
+        //the stack builder object will contain an artificial back stack for the started activity
+        //this ensures that navigating backwards works properly
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+
+        //adds the back stack for the Intent
+        stackBuilder.addParentStack(MainActivity.class);
+
+        //adds the Intent
+        stackBuilder.addNextIntent(resultIntent);
+        PendingIntent pendingIntent =
+                stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        mBuilder.setContentIntent(pendingIntent);
+
+        //get the NotificationManager and add notification to it
+        NotificationManager mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        mNotificationManager.notify(NOTIFICATIONID, mBuilder.build());
+
         suppressNotification = true;
+        setXMLPreference(SUPPRESSNOTIFICATION, suppressNotification);
     }
 
     @Override
@@ -128,6 +178,8 @@ public class MainActivity extends AppCompatActivity {
 
         myOffset = settings.getInt(MYOFFSET,0);
         theirOffset = settings.getInt(THEIROFFSET, 0);
+
+        suppressNotification = settings.getBoolean(SUPPRESSNOTIFICATION, false);
     }
 
     private void setTimes() {
@@ -157,6 +209,31 @@ public class MainActivity extends AppCompatActivity {
 
         textView = (TextView) findViewById(R.id.theirTimeZone);
         textView.setText(deriveTimeZone(theirOffset));
+
+        displayTimes(Calendar.getInstance());
+    }
+
+    private void displayTimes(Calendar c) {
+        TextView textView;
+
+        int myHour = (c.get(Calendar.HOUR_OF_DAY) + myOffset) % 24;
+        int theirHour = (c.get(Calendar.HOUR_OF_DAY) + theirOffset) % 24;
+
+        if (myHour < 0) {
+            myHour += 24;
+        }
+
+        if (theirHour < 0) {
+            theirHour += 24;
+        }
+
+        //display my current time
+        textView = (TextView) findViewById(R.id.myActualTime);
+        textView.setText(String.format("%02d", myHour) + ":" + String.format("%02d", c.get(Calendar.MINUTE)));
+
+        //display their current time
+        textView = (TextView) findViewById(R.id.theirActualTime);
+        textView.setText(String.format("%02d", theirHour) + ":" + String.format("%02d", c.get(Calendar.MINUTE)));
     }
 
     private String deriveTimeZone(int offset) {
@@ -259,6 +336,12 @@ public class MainActivity extends AppCompatActivity {
     private void setXMLPreference(String key, int value) {
         SharedPreferences.Editor editor = settings.edit();
         editor.putInt(key, value);
+        editor.commit();
+    }
+
+    private void setXMLPreference(String key, boolean value) {
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean(key, value);
         editor.commit();
     }
 

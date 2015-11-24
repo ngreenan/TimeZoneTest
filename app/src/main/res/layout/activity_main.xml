@@ -1,197 +1,233 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E3F2FD"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
-    android:background="#E3F2FD"
-    android:orientation="vertical">
+    tools:context=".MainActivity">
 
     <com.ngreenan.mytimechecker.SquareLinearLayout
         android:id="@+id/squareLayout"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="#E3F2FD"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/triangle"
-        android:layout_marginTop="00dp"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="00dp"
+        android:background="#E3F2FD" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignBottom="@id/squareLayout"
+        android:layout_alignTop="@id/squareLayout"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/myActualTime"
+            style="@style/textTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:text=""
+            android:textColor="@color/colorMe" />
+
+        <TextView
+            android:id="@+id/theirActualTime"
+            style="@style/textTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:text=""
+            android:textColor="@color/colorThem" />
+    </LinearLayout>
 
     <com.ngreenan.mytimechecker.Triangle
+        android:id="@+id/triangle"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_gravity="center_horizontal"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/triangle"/>
+        android:layout_gravity="center_horizontal" />
 
-    <View android:id="@+id/centreView"
+    <View
+        android:id="@+id/centreView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_centerInParent="true" />
 
     <TextView
-        android:text="@string/end_label"
         android:id="@+id/myEndTextView"
-        android:layout_alignTop="@+id/myEndButton"
+        style="@style/textLabel"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        style="@style/textLabel" />
+        android:layout_alignTop="@+id/myEndButton"
+        android:text="@string/end_label" />
 
     <TextView
-        android:text="@string/start_label"
         android:id="@+id/myStartTextView"
+        style="@style/textLabel"
         android:layout_above="@+id/myEndTextView"
-        android:layout_alignTop="@+id/myStartButton"
         android:layout_alignBottom="@+id/myStartButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        style="@style/textLabel" />
+        android:layout_alignTop="@+id/myStartButton"
+        android:text="@string/start_label" />
 
     <Button
         android:id="@+id/myEndButton"
+        style="@style/buttonStyle"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/myStartTextView"
         android:layout_toEndOf="@+id/myStartTextView"
         android:layout_toLeftOf="@+id/myPlus"
+        android:layout_toRightOf="@+id/myStartTextView"
         android:layout_toStartOf="@+id/myPlus"
-        android:text=""
         android:onClick="getTime"
-        style="@style/buttonStyle" />
+        android:text="" />
 
     <Button
         android:id="@+id/myStartButton"
+        style="@style/buttonStyle"
         android:layout_above="@+id/myEndButton"
-        android:layout_toRightOf="@+id/myStartTextView"
         android:layout_toEndOf="@+id/myStartTextView"
         android:layout_toLeftOf="@+id/myPlus"
+        android:layout_toRightOf="@+id/myStartTextView"
         android:layout_toStartOf="@id/myPlus"
-        android:text=""
         android:onClick="getTime"
-        style="@style/buttonStyle" />
+        android:text="" />
 
     <TextView
-        android:text="@string/end_label"
         android:id="@+id/theirEndTextView"
-        android:layout_alignTop="@+id/theirEndButton"
+        style="@style/textLabel"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/centreView"
+        android:layout_alignTop="@+id/theirEndButton"
         android:layout_toEndOf="@+id/centreView"
-        style="@style/textLabel" />
+        android:layout_toRightOf="@+id/centreView"
+        android:text="@string/end_label" />
 
     <TextView
-        android:text="@string/start_label"
         android:id="@+id/theirStartTextView"
+        style="@style/textLabel"
         android:layout_above="@+id/theirEndTextView"
-        android:layout_alignTop="@+id/theirStartButton"
         android:layout_alignBottom="@+id/theirStartButton"
-        android:layout_toRightOf="@+id/centreView"
+        android:layout_alignTop="@+id/theirStartButton"
         android:layout_toEndOf="@+id/centreView"
-        style="@style/textLabel" />
+        android:layout_toRightOf="@+id/centreView"
+        android:text="@string/start_label" />
 
     <Button
         android:id="@+id/theirEndButton"
+        style="@style/buttonStyle"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/theirStartTextView"
         android:layout_toEndOf="@+id/theirStartTextView"
         android:layout_toLeftOf="@+id/theirPlus"
+        android:layout_toRightOf="@+id/theirStartTextView"
         android:layout_toStartOf="@id/theirPlus"
-        android:text=""
         android:onClick="getTime"
-        style="@style/buttonStyle" />
+        android:text="" />
 
     <Button
         android:id="@+id/theirStartButton"
+        style="@style/buttonStyle"
         android:layout_above="@+id/myEndButton"
-        android:layout_toRightOf="@+id/theirStartTextView"
         android:layout_toEndOf="@+id/theirStartTextView"
         android:layout_toLeftOf="@+id/theirPlus"
+        android:layout_toRightOf="@+id/theirStartTextView"
         android:layout_toStartOf="@id/theirPlus"
-        android:text=""
         android:onClick="getTime"
-        style="@style/buttonStyle" />
+        android:text="" />
 
     <TextView
-        android:text="@string/myTimeText"
         android:id="@+id/textView2"
+        style="@style/textHeader"
         android:layout_above="@+id/myStartTextView"
-        android:layout_alignLeft="@+id/myStartButton"
-        android:layout_alignStart="@+id/myStartButton"
-        android:layout_alignRight="@+id/myPlus"
         android:layout_alignEnd="@+id/myPlus"
-        android:textColor="@color/colorMe"
-        style="@style/textHeader" />
+        android:layout_alignLeft="@+id/myStartButton"
+        android:layout_alignRight="@+id/myPlus"
+        android:layout_alignStart="@+id/myStartButton"
+        android:text="@string/myTimeText"
+        android:textColor="@color/colorMe" />
 
     <TextView
-        android:text="@string/theirTimeText"
         android:id="@+id/textView3"
+        style="@style/textHeader"
         android:layout_above="@+id/myStartTextView"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:layout_alignLeft="@+id/theirStartButton"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_alignStart="@+id/theirStartButton"
-        android:textColor="@color/colorThem"
-        style="@style/textHeader"/>
+        android:text="@string/theirTimeText"
+        android:textColor="@color/colorThem" />
 
     <!--time zone selectors-->
     <TextView
         android:id="@+id/myTimeZone"
-        android:text=""
-        android:layout_below="@+id/myPlus"
+        style="@style/offsetTextView"
         android:layout_above="@+id/myMinus"
-        android:layout_alignLeft="@+id/myPlus"
-        android:layout_alignStart="@+id/myPlus"
-        android:layout_alignRight="@+id/myPlus"
         android:layout_alignEnd="@+id/myPlus"
-        style="@style/offsetTextView"/>
+        android:layout_alignLeft="@+id/myPlus"
+        android:layout_alignRight="@+id/myPlus"
+        android:layout_alignStart="@+id/myPlus"
+        android:layout_below="@+id/myPlus"
+        android:text="" />
 
     <Button
-        android:text="@string/plus"
         android:id="@+id/myPlus"
+        style="@style/offsetButton"
         android:layout_alignTop="@+id/myStartButton"
         android:layout_toLeftOf="@+id/centreView"
         android:layout_toStartOf="@+id/centreView"
         android:onClick="changeOffset"
-        style="@style/offsetButton" />
+        android:text="@string/plus" />
 
     <Button
-        android:text="@string/minus"
         android:id="@+id/myMinus"
+        style="@style/offsetButton"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/centreView"
         android:layout_toStartOf="@+id/centreView"
         android:onClick="changeOffset"
-        style="@style/offsetButton" />
+        android:text="@string/minus" />
 
     <TextView
-        android:text=""
         android:id="@+id/theirTimeZone"
-        android:layout_below="@+id/theirPlus"
+        style="@style/offsetTextView"
         android:layout_above="@+id/theirMinus"
-        android:layout_alignLeft="@+id/theirPlus"
-        android:layout_alignStart="@+id/theirPlus"
-        android:layout_alignRight="@+id/theirPlus"
         android:layout_alignEnd="@+id/theirPlus"
-        style="@style/offsetTextView" />
+        android:layout_alignLeft="@+id/theirPlus"
+        android:layout_alignRight="@+id/theirPlus"
+        android:layout_alignStart="@+id/theirPlus"
+        android:layout_below="@+id/theirPlus"
+        android:text="" />
 
     <Button
-        android:text="@string/plus"
         android:id="@+id/theirPlus"
-        android:layout_alignTop="@+id/theirStartButton"
-        android:layout_alignParentRight="true"
+        style="@style/offsetButton"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/theirStartButton"
         android:onClick="changeOffset"
-        style="@style/offsetButton"/>
+        android:text="@string/plus" />
 
     <Button
-        android:text="@string/minus"
         android:id="@+id/theirMinus"
+        style="@style/offsetButton"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:onClick="changeOffset"
-        style="@style/offsetButton"/>
+        android:text="@string/minus" />
 
 </RelativeLayout>
