@@ -114,8 +114,8 @@
     android:layout_alignParentBottom="true"
     android:layout_toRightOf="@+id/theirStartTextView"
     android:layout_toEndOf="@id/theirStartTextView"
-    android:layout_toLeftOf="@+id/myPlus"
-    android:layout_toStartOf="@id/myPlus"
+    android:layout_toLeftOf="@+id/theirPlus"
+    android:layout_toStartOf="@id/theirPlus"
     android:text=""
     android:onClick="getTime"
     style="@style/buttonStyle" />
@@ -134,8 +134,8 @@
     android:layout_above="@id/theirEndButton"
     android:layout_toRightOf="@+id/theirStartTextView"
     android:layout_toEndOf="@id/theirStartTextView"
-    android:layout_toLeftOf="@+id/myPlus"
-    android:layout_toStartOf="@id/myPlus"
+    android:layout_toLeftOf="@+id/theirPlus"
+    android:layout_toStartOf="@id/theirPlus"
     android:text=""
     android:onClick="getTime"
     style="@style/buttonStyle" />
@@ -168,8 +168,8 @@
     android:layout_above="@id/textView3"
     android:layout_toRightOf="@+id/theirStartTextView"
     android:layout_toEndOf="@id/theirStartTextView"
-    android:layout_toLeftOf="@+id/myPlus"
-    android:layout_toStartOf="@id/myPlus"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="true"
     android:text=""
     android:onClick="getTime"
     style="@style/buttonStyle" />
@@ -189,8 +189,8 @@
     android:layout_above="@id/myEndButton"
     android:layout_toRightOf="@+id/theirStartTextView"
     android:layout_toEndOf="@id/theirStartTextView"
-    android:layout_toLeftOf="@+id/myPlus"
-    android:layout_toStartOf="@id/myPlus"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="true"
     android:text=""
     android:onClick="getTime"
     style="@style/buttonStyle" />
@@ -218,37 +218,37 @@
     style="@style/textHeader" />
 
     <!--time zone selectors-->
-    <TextView
-        android:id="@+id/myTimeZone"
-        android:text=""
-        android:layout_below="@+id/myPlus"
-        android:layout_above="@+id/myMinus"
-        android:layout_alignLeft="@+id/myPlus"
-        android:layout_alignStart="@+id/myPlus"
-        android:layout_alignRight="@+id/myPlus"
-        android:layout_alignEnd="@+id/myPlus"
-        style="@style/offsetTextViewLandscape"
-        />
+    <!--<TextView-->
+        <!--android:id="@+id/myTimeZone"-->
+        <!--android:text=""-->
+        <!--android:layout_below="@+id/myPlus"-->
+        <!--android:layout_above="@+id/myMinus"-->
+        <!--android:layout_alignLeft="@+id/myPlus"-->
+        <!--android:layout_alignStart="@+id/myPlus"-->
+        <!--android:layout_alignRight="@+id/myPlus"-->
+        <!--android:layout_alignEnd="@+id/myPlus"-->
+        <!--style="@style/offsetTextViewLandscape"-->
+        <!--/>-->
 
-    <Button
-        android:text="@string/plus"
-        android:id="@+id/myPlus"
-        android:layout_alignTop="@+id/myStartButton"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:onClick="changeOffset"
-        style="@style/offsetButtonLandscape"
-         />
+    <!--<Button-->
+        <!--android:text="@string/plus"-->
+        <!--android:id="@+id/myPlus"-->
+        <!--android:layout_alignTop="@+id/myStartButton"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:onClick="changeOffset"-->
+        <!--style="@style/offsetButtonLandscape"-->
+         <!--/>-->
 
-    <Button
-        android:text="@string/minus"
-        android:id="@+id/myMinus"
-        android:layout_alignBottom="@id/myEndButton"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:onClick="changeOffset"
-        style="@style/offsetButtonLandscape"
-         />
+    <!--<Button-->
+        <!--android:text="@string/minus"-->
+        <!--android:id="@+id/myMinus"-->
+        <!--android:layout_alignBottom="@id/myEndButton"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:onClick="changeOffset"-->
+        <!--style="@style/offsetButtonLandscape"-->
+         <!--/>-->
 
     <TextView
         android:text=""

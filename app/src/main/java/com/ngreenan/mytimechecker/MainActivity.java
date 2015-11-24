@@ -16,6 +16,7 @@ import android.os.Handler;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String THEIRSTARTMIN = "pref_theirStartMin";
     public static final String THEIRENDHOUR = "pref_theirEndHour";
     public static final String THEIRENDMIN = "pref_theirEndMin";
-    public static final String MYOFFSET = "pref_myOffset";
+    //public static final String MYOFFSET = "pref_myOffset";
     public static final String THEIROFFSET = "pref_theirOffset";
     public static final String SUPPRESSNOTIFICATION = "pref_suppressNotification";
     private SharedPreferences settings;
@@ -88,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 //reset - if a notification is due display it from now on
                 suppressNotification = false;
                 setXMLPreference(SUPPRESSNOTIFICATION, suppressNotification);
+//                Toast.makeText(MainActivity.this, "suppressNotification set to false", Toast.LENGTH_LONG).show();
             }
 
             //set the time til the next run - in this case 500ms or half a second
@@ -139,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
 
         suppressNotification = true;
         setXMLPreference(SUPPRESSNOTIFICATION, suppressNotification);
+        //Toast.makeText(MainActivity.this, "suppressNotification set to true", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -176,10 +179,12 @@ public class MainActivity extends AppCompatActivity {
         theirEndHour = settings.getInt(THEIRENDHOUR, 22);
         theirEndMin = settings.getInt(THEIRENDMIN, 0);
 
-        myOffset = settings.getInt(MYOFFSET,0);
+        //myOffset = settings.getInt(MYOFFSET,0);
+        myOffset = 0;
         theirOffset = settings.getInt(THEIROFFSET, 0);
 
         suppressNotification = settings.getBoolean(SUPPRESSNOTIFICATION, false);
+        //Toast.makeText(MainActivity.this, "suppressNotification set to " + String.valueOf(suppressNotification), Toast.LENGTH_LONG).show();
     }
 
     private void setTimes() {
@@ -204,8 +209,8 @@ public class MainActivity extends AppCompatActivity {
         button = (Button) findViewById(R.id.theirEndButton);
         button.setText(String.format("%02d", theirEndHour) + ":" + String.format("%02d", theirEndMin));
 
-        TextView textView = (TextView) findViewById(R.id.myTimeZone);
-        textView.setText(deriveTimeZone(myOffset));
+        TextView textView;// = (TextView) findViewById(R.id.myTimeZone);
+        //textView.setText(deriveTimeZone(myOffset));
 
         textView = (TextView) findViewById(R.id.theirTimeZone);
         textView.setText(deriveTimeZone(theirOffset));
@@ -348,14 +353,14 @@ public class MainActivity extends AppCompatActivity {
     public void changeOffset(View view) {
         //which button did we press?
         switch (view.getId()) {
-            case R.id.myPlus:
-                myOffset++;
-                setXMLPreference(MYOFFSET, myOffset);
-                break;
-            case R.id.myMinus:
-                myOffset--;
-                setXMLPreference(MYOFFSET, myOffset);
-                break;
+//            case R.id.myPlus:
+//                myOffset++;
+//                setXMLPreference(MYOFFSET, myOffset);
+//                break;
+//            case R.id.myMinus:
+//                myOffset--;
+//                setXMLPreference(MYOFFSET, myOffset);
+//                break;
             case R.id.theirPlus:
                 theirOffset++;
                 setXMLPreference(THEIROFFSET, theirOffset);
@@ -370,12 +375,12 @@ public class MainActivity extends AppCompatActivity {
         Button button;
 
         //myPlus
-        button = (Button) findViewById(R.id.myPlus);
-        button.setEnabled(myOffset < 14);
+        //button = (Button) findViewById(R.id.myPlus);
+        //button.setEnabled(myOffset < 14);
 
         //myMinus
-        button = (Button) findViewById(R.id.myMinus);
-        button.setEnabled(myOffset > -12);
+        //button = (Button) findViewById(R.id.myMinus);
+        //button.setEnabled(myOffset > -12);
 
         //theirPlus
         button = (Button) findViewById(R.id.theirPlus);
@@ -400,6 +405,8 @@ public class MainActivity extends AppCompatActivity {
         int myEnd = (myEndHour - myOffset) * 60 + myEndMin;
         int theirStart = (theirStartHour - theirOffset) * 60 + theirStartMin;
         int theirEnd = (theirEndHour - theirOffset) * 60 + theirEndMin;
+
+        //Toast.makeText(MainActivity.this, myStart + "," + myEnd + "," + theirStart + "," + theirEnd + "," + timeNow, Toast.LENGTH_LONG).show();
 
         int minutes = 24 * 60;
 

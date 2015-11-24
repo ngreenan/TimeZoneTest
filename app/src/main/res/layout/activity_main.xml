@@ -65,7 +65,8 @@
         android:id="@+id/centreView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_centerInParent="true" />
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="5dp"/>
 
     <TextView
         android:id="@+id/myEndTextView"
@@ -91,9 +92,9 @@
         style="@style/buttonStyle"
         android:layout_alignParentBottom="true"
         android:layout_toEndOf="@+id/myStartTextView"
-        android:layout_toLeftOf="@+id/myPlus"
+        android:layout_toLeftOf="@+id/centreView"
         android:layout_toRightOf="@+id/myStartTextView"
-        android:layout_toStartOf="@+id/myPlus"
+        android:layout_toStartOf="@+id/centreView"
         android:onClick="getTime"
         android:text="" />
 
@@ -102,9 +103,9 @@
         style="@style/buttonStyle"
         android:layout_above="@+id/myEndButton"
         android:layout_toEndOf="@+id/myStartTextView"
-        android:layout_toLeftOf="@+id/myPlus"
+        android:layout_toLeftOf="@+id/centreView"
         android:layout_toRightOf="@+id/myStartTextView"
-        android:layout_toStartOf="@id/myPlus"
+        android:layout_toStartOf="@id/centreView"
         android:onClick="getTime"
         android:text="" />
 
@@ -153,9 +154,9 @@
         android:id="@+id/textView2"
         style="@style/textHeader"
         android:layout_above="@+id/myStartTextView"
-        android:layout_alignEnd="@+id/myPlus"
+        android:layout_alignEnd="@+id/myStartButton"
         android:layout_alignLeft="@+id/myStartButton"
-        android:layout_alignRight="@+id/myPlus"
+        android:layout_alignRight="@+id/myStartButton"
         android:layout_alignStart="@+id/myStartButton"
         android:text="@string/myTimeText"
         android:textColor="@color/colorMe" />
@@ -172,34 +173,34 @@
         android:textColor="@color/colorThem" />
 
     <!--time zone selectors-->
-    <TextView
-        android:id="@+id/myTimeZone"
-        style="@style/offsetTextView"
-        android:layout_above="@+id/myMinus"
-        android:layout_alignEnd="@+id/myPlus"
-        android:layout_alignLeft="@+id/myPlus"
-        android:layout_alignRight="@+id/myPlus"
-        android:layout_alignStart="@+id/myPlus"
-        android:layout_below="@+id/myPlus"
-        android:text="" />
+    <!--<TextView-->
+        <!--android:id="@+id/myTimeZone"-->
+        <!--style="@style/offsetTextView"-->
+        <!--android:layout_above="@+id/myMinus"-->
+        <!--android:layout_alignEnd="@+id/myPlus"-->
+        <!--android:layout_alignLeft="@+id/myPlus"-->
+        <!--android:layout_alignRight="@+id/myPlus"-->
+        <!--android:layout_alignStart="@+id/myPlus"-->
+        <!--android:layout_below="@+id/myPlus"-->
+        <!--android:text="" />-->
 
-    <Button
-        android:id="@+id/myPlus"
-        style="@style/offsetButton"
-        android:layout_alignTop="@+id/myStartButton"
-        android:layout_toLeftOf="@+id/centreView"
-        android:layout_toStartOf="@+id/centreView"
-        android:onClick="changeOffset"
-        android:text="@string/plus" />
+    <!--<Button-->
+        <!--android:id="@+id/myPlus"-->
+        <!--style="@style/offsetButton"-->
+        <!--android:layout_alignTop="@+id/myStartButton"-->
+        <!--android:layout_toLeftOf="@+id/centreView"-->
+        <!--android:layout_toStartOf="@+id/centreView"-->
+        <!--android:onClick="changeOffset"-->
+        <!--android:text="@string/plus" />-->
 
-    <Button
-        android:id="@+id/myMinus"
-        style="@style/offsetButton"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/centreView"
-        android:layout_toStartOf="@+id/centreView"
-        android:onClick="changeOffset"
-        android:text="@string/minus" />
+    <!--<Button-->
+        <!--android:id="@+id/myMinus"-->
+        <!--style="@style/offsetButton"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_toLeftOf="@+id/centreView"-->
+        <!--android:layout_toStartOf="@+id/centreView"-->
+        <!--android:onClick="changeOffset"-->
+        <!--android:text="@string/minus" />-->
 
     <TextView
         android:id="@+id/theirTimeZone"
