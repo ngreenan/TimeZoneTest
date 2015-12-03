@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<continents>
+	<continent>
+		<continentID>1</continentID>
+		<continentName>Africa</continentName>
+	</continent>
+	<continent>
+		<continentID>2</continentID>
+		<continentName>Antarctica</continentName>
+	</continent>
+	<continent>
+		<continentID>3</continentID>
+		<continentName>Asia</continentName>
+	</continent>
+	<continent>
+		<continentID>4</continentID>
+		<continentName>Europe</continentName>
+	</continent>
+	<continent>
+		<continentID>5</continentID>
+		<continentName>North America</continentName>
+	</continent>
+	<continent>
+		<continentID>6</continentID>
+		<continentName>Oceania</continentName>
+	</continent>
+	<continent>
+		<continentID>7</continentID>
+		<continentName>South America</continentName>
+	</continent>
+</continents>
