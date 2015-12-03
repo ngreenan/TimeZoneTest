@@ -18,7 +18,16 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.ngreenan.mytimechecker.db.DBDataSource;
+import com.ngreenan.mytimechecker.model.City;
+import com.ngreenan.mytimechecker.model.Continent;
+import com.ngreenan.mytimechecker.model.Country;
+import com.ngreenan.mytimechecker.model.Person;
+import com.ngreenan.mytimechecker.model.Region;
+import com.ngreenan.mytimechecker.model.TimeZone;
+
 import java.util.Calendar;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,6 +66,86 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean suppressNotification = false;
     private boolean isCrossOver = false;
+
+    //database
+    DBDataSource datasource;
+    private List<Continent> continents;
+    private List<Country> countries;
+    private List<Region> regions;
+    private List<City> cities;
+    private List<TimeZone> timeZones;
+    private List<Person> persons;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        //load preferences from XML
+        loadXMLPreferences();
+
+        //set the layout file to associate with MainActivity
+        setContentView(R.layout.activity_main);
+
+        //get a reference to our SquareLinearLayout, create a PieChart and add it!
+        SquareLinearLayout squareLinearLayout = (SquareLinearLayout) findViewById(R.id.squareLayout);
+        //RelativeLayout linearLayout = (RelativeLayout) findViewById(R.id.layout);
+        pieChart = new PieChart(this);
+        setTimes();
+        squareLinearLayout.addView(pieChart);
+
+        //load data from database
+        loadDataFromDatabase();
+
+        //kick off the "timer" to update the rotation of the clock every half second
+        timerHandler.postDelayed(timerRunnable, 0);
+    }
+
+    private void loadDataFromDatabase() {
+        datasource = new DBDataSource(this);
+        datasource.open();
+
+        //continents
+        continents = datasource.getAllContinents();
+        if (continents.size() == 0) {
+            datasource.createContinentsData(this);
+            continents = datasource.getAllContinents();
+        }
+
+        //countries
+        countries = datasource.getAllCountries();
+        if (countries.size() == 0) {
+            datasource.createCountriesData(this);
+            countries = datasource.getAllCountries();
+        }
+
+        //regions
+        regions = datasource.getAllRegions();
+        if (regions.size() == 0) {
+            datasource.createRegionsData(this);
+            regions = datasource.getAllRegions();
+        }
+
+        //timezones
+        timeZones = datasource.getAllTimeZones();
+        if (timeZones.size() == 0) {
+            datasource.createTimeZonesData(this);
+            timeZones = datasource.getAllTimeZones();
+        }
+
+        //cities
+        cities = datasource.getAllCities();
+        if (cities.size() == 0) {
+            datasource.createCitiesData(this);
+            cities = datasource.getAllCities();
+        }
+
+        //persons
+        persons = datasource.getAllPersons();
+        if (persons.size() == 0) {
+            datasource.createPersonsData();
+            persons = datasource.getAllPersons();
+        }
+    }
 
     //runs without a timer by reposting this handler at the end of the runnable
     Handler timerHandler = new Handler();
@@ -142,27 +231,6 @@ public class MainActivity extends AppCompatActivity {
         suppressNotification = true;
         setXMLPreference(SUPPRESSNOTIFICATION, suppressNotification);
         //Toast.makeText(MainActivity.this, "suppressNotification set to true", Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        //load preferences from XML
-        loadXMLPreferences();
-
-        //set the layout file to associate with MainActivity
-        setContentView(R.layout.activity_main);
-
-        //get a reference to our SquareLinearLayout, create a PieChart and add it!
-        SquareLinearLayout squareLinearLayout = (SquareLinearLayout) findViewById(R.id.squareLayout);
-        //RelativeLayout linearLayout = (RelativeLayout) findViewById(R.id.layout);
-        pieChart = new PieChart(this);
-        setTimes();
-        squareLinearLayout.addView(pieChart);
-
-        //kick off the "timer" to update the rotation of the clock every half second
-        timerHandler.postDelayed(timerRunnable, 0);
     }
 
     private void loadXMLPreferences() {
