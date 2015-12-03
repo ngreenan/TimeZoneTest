@@ -1,6 +1,10 @@
 <?xml version="1.0"?>
 <regions>
 	<region>
+		<regionID>66</regionID>
+		<regionName>N/A</regionName>
+	</region>
+	<region>
 		<regionID>1</regionID>
 		<regionName>Alberta</regionName>
 	</region>

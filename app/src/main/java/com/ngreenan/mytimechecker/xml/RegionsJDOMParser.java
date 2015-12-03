@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class RegionsJDOMParser {
 
-    private static final String LOGTAG = "My Time Checker - RegionsParser";
+    private static final String LOGTAG = "My Time Checker - XML";
 
     private static final String REGION_TAG = "region";
 

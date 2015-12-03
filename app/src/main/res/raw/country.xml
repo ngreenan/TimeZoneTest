@@ -3,1477 +3,1477 @@
 	<country>
 		<countryID>1</countryID>
 		<countryName>Afghanistan</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>afghanistan.png</flagPath>
 	</country>
 	<country>
 		<countryID>2</countryID>
 		<countryName>Aland Islands</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>aland.png</flagPath>
 	</country>
 	<country>
 		<countryID>3</countryID>
 		<countryName>Albania</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>albania.png</flagPath>
 	</country>
 	<country>
 		<countryID>4</countryID>
 		<countryName>Algeria</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>algeria.png</flagPath>
 	</country>
 	<country>
 		<countryID>5</countryID>
 		<countryName>American Samoa</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>american_samoa.png</flagPath>
 	</country>
 	<country>
 		<countryID>6</countryID>
 		<countryName>Andorra</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>andorra.png</flagPath>
 	</country>
 	<country>
 		<countryID>7</countryID>
 		<countryName>Angola</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>angola.png</flagPath>
 	</country>
 	<country>
 		<countryID>8</countryID>
 		<countryName>Anguilla</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>anguilla.png</flagPath>
 	</country>
 	<country>
 		<countryID>9</countryID>
 		<countryName>Antarctica</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>antarctica.png</flagPath>
 	</country>
 	<country>
 		<countryID>10</countryID>
 		<countryName>Antigua and Barbuda</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>antigua_and_barbuda.png</flagPath>
 	</country>
 	<country>
 		<countryID>11</countryID>
 		<countryName>Argentina</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>argentina.png</flagPath>
 	</country>
 	<country>
 		<countryID>12</countryID>
 		<countryName>Armenia</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>armenia.png</flagPath>
 	</country>
 	<country>
 		<countryID>13</countryID>
 		<countryName>Aruba</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>aruba.png</flagPath>
 	</country>
 	<country>
 		<countryID>14</countryID>
 		<countryName>Australia</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>australia.png</flagPath>
 	</country>
 	<country>
 		<countryID>15</countryID>
 		<countryName>Austria</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>austria.png</flagPath>
 	</country>
 	<country>
 		<countryID>16</countryID>
 		<countryName>Azerbaijan</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>azerbaijan.png</flagPath>
 	</country>
 	<country>
 		<countryID>17</countryID>
 		<countryName>Bahamas</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>bahamas.png</flagPath>
 	</country>
 	<country>
 		<countryID>18</countryID>
 		<countryName>Bahrain</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>bahrain.png</flagPath>
 	</country>
 	<country>
 		<countryID>19</countryID>
 		<countryName>Bangladesh</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>bangladesh.png</flagPath>
 	</country>
 	<country>
 		<countryID>20</countryID>
 		<countryName>Barbados</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>barbados.png</flagPath>
 	</country>
 	<country>
 		<countryID>21</countryID>
 		<countryName>Belarus</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>belarus.png</flagPath>
 	</country>
 	<country>
 		<countryID>22</countryID>
 		<countryName>Belgium</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>belgium.png</flagPath>
 	</country>
 	<country>
 		<countryID>23</countryID>
 		<countryName>Belize</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>belize.png</flagPath>
 	</country>
 	<country>
 		<countryID>24</countryID>
 		<countryName>Benin</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>benin.png</flagPath>
 	</country>
 	<country>
 		<countryID>25</countryID>
 		<countryName>Bermuda</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>bermuda.png</flagPath>
 	</country>
 	<country>
 		<countryID>26</countryID>
 		<countryName>Bhutan</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>bhutan.png</flagPath>
 	</country>
 	<country>
 		<countryID>27</countryID>
 		<countryName>Bolivia</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>bolivia.png</flagPath>
 	</country>
 	<country>
 		<countryID>28</countryID>
 		<countryName>Bonaire, Saint Eustatius and Saba </countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>france.png</flagPath>
 	</country>
 	<country>
 		<countryID>29</countryID>
 		<countryName>Bosnia and Herzegovina</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>bosnia_and_herzegovina.png</flagPath>
 	</country>
 	<country>
 		<countryID>30</countryID>
 		<countryName>Botswana</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>botswana.png</flagPath>
 	</country>
 	<country>
 		<countryID>31</countryID>
 		<countryName>Brazil</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>brazil.png</flagPath>
 	</country>
 	<country>
 		<countryID>32</countryID>
 		<countryName>British Indian Ocean Territory</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>united_kingdom.png</flagPath>
 	</country>
 	<country>
 		<countryID>33</countryID>
 		<countryName>British Virgin Islands</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>british_virgin_islands.png</flagPath>
 	</country>
 	<country>
 		<countryID>34</countryID>
 		<countryName>Brunei</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>brunei.png</flagPath>
 	</country>
 	<country>
 		<countryID>35</countryID>
 		<countryName>Bulgaria</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>bulgaria.png</flagPath>
 	</country>
 	<country>
 		<countryID>36</countryID>
 		<countryName>Burkina Faso</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>burkina_faso.png</flagPath>
 	</country>
 	<country>
 		<countryID>37</countryID>
 		<countryName>Burundi</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>burundi.png</flagPath>
 	</country>
 	<country>
 		<countryID>38</countryID>
 		<countryName>Cambodia</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>cambodia.png</flagPath>
 	</country>
 	<country>
 		<countryID>39</countryID>
 		<countryName>Cameroon</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>cameroon.png</flagPath>
 	</country>
 	<country>
 		<countryID>40</countryID>
 		<countryName>Canada</countryName>
-		<usesRegions>TRUE</usesRegions>
+		<usesRegions>1</usesRegions>
 		<flagPath>canada.png</flagPath>
 	</country>
 	<country>
 		<countryID>41</countryID>
 		<countryName>Cape Verde</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>cape_verde.png</flagPath>
 	</country>
 	<country>
 		<countryID>42</countryID>
 		<countryName>Cayman Islands</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>cayman_islands.png</flagPath>
 	</country>
 	<country>
 		<countryID>43</countryID>
 		<countryName>Central African Republic</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>central_african_republic.png</flagPath>
 	</country>
 	<country>
 		<countryID>44</countryID>
 		<countryName>Chad</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>chad.png</flagPath>
 	</country>
 	<country>
 		<countryID>45</countryID>
 		<countryName>Chile</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>chile.png</flagPath>
 	</country>
 	<country>
 		<countryID>46</countryID>
 		<countryName>China</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>china.png</flagPath>
 	</country>
 	<country>
 		<countryID>47</countryID>
 		<countryName>Christmas Island</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>christmas_island.png</flagPath>
 	</country>
 	<country>
 		<countryID>48</countryID>
 		<countryName>Cocos Islands</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>cocos_keeling_islands.png</flagPath>
 	</country>
 	<country>
 		<countryID>49</countryID>
 		<countryName>Colombia</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>colombia.png</flagPath>
 	</country>
 	<country>
 		<countryID>50</countryID>
 		<countryName>Comoros</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>comoros.png</flagPath>
 	</country>
 	<country>
 		<countryID>51</countryID>
 		<countryName>Cook Islands</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>cook_islands.png</flagPath>
 	</country>
 	<country>
 		<countryID>52</countryID>
 		<countryName>Costa Rica</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>costa_rica.png</flagPath>
 	</country>
 	<country>
 		<countryID>53</countryID>
 		<countryName>Croatia</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>croatia.png</flagPath>
 	</country>
 	<country>
 		<countryID>54</countryID>
 		<countryName>Cuba</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>cuba.png</flagPath>
 	</country>
 	<country>
 		<countryID>55</countryID>
 		<countryName>Curaçao</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>curacao.png</flagPath>
 	</country>
 	<country>
 		<countryID>56</countryID>
 		<countryName>Cyprus</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>cyprus.png</flagPath>
 	</country>
 	<country>
 		<countryID>57</countryID>
 		<countryName>Czech Republic</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>czech_republic.png</flagPath>
 	</country>
 	<country>
 		<countryID>58</countryID>
 		<countryName>Democratic Republic of the Congo</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>democratic_republic_of_the_congo.png</flagPath>
 	</country>
 	<country>
 		<countryID>59</countryID>
 		<countryName>Denmark</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>denmark.png</flagPath>
 	</country>
 	<country>
 		<countryID>60</countryID>
 		<countryName>Djibouti</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>djibouti.png</flagPath>
 	</country>
 	<country>
 		<countryID>61</countryID>
 		<countryName>Dominica</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>dominica.png</flagPath>
 	</country>
 	<country>
 		<countryID>62</countryID>
 		<countryName>Dominican Republic</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>dominican_republic.png</flagPath>
 	</country>
 	<country>
 		<countryID>63</countryID>
 		<countryName>East Timor</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>east_timor.png</flagPath>
 	</country>
 	<country>
 		<countryID>64</countryID>
 		<countryName>Ecuador</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>ecuador.png</flagPath>
 	</country>
 	<country>
 		<countryID>65</countryID>
 		<countryName>Egypt</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>egypt.png</flagPath>
 	</country>
 	<country>
 		<countryID>66</countryID>
 		<countryName>El Salvador</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>el_salvador.png</flagPath>
 	</country>
 	<country>
 		<countryID>67</countryID>
 		<countryName>Equatorial Guinea</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>equatorial_guinea.png</flagPath>
 	</country>
 	<country>
 		<countryID>68</countryID>
 		<countryName>Eritrea</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>eritrea.png</flagPath>
 	</country>
 	<country>
 		<countryID>69</countryID>
 		<countryName>Estonia</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>estonia.png</flagPath>
 	</country>
 	<country>
 		<countryID>70</countryID>
 		<countryName>Ethiopia</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>ethiopia.png</flagPath>
 	</country>
 	<country>
 		<countryID>71</countryID>
 		<countryName>Falkland Islands</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>falkland_islands.png</flagPath>
 	</country>
 	<country>
 		<countryID>72</countryID>
 		<countryName>Faroe Islands</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>faroes.png</flagPath>
 	</country>
 	<country>
 		<countryID>73</countryID>
 		<countryName>Fiji</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>fiji.png</flagPath>
 	</country>
 	<country>
 		<countryID>74</countryID>
 		<countryName>Finland</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>finland.png</flagPath>
 	</country>
 	<country>
 		<countryID>75</countryID>
 		<countryName>France</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>france.png</flagPath>
 	</country>
 	<country>
 		<countryID>76</countryID>
 		<countryName>French Guiana</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>france.png</flagPath>
 	</country>
 	<country>
 		<countryID>77</countryID>
 		<countryName>French Polynesia</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>french_polynesia.png</flagPath>
 	</country>
 	<country>
 		<countryID>78</countryID>
 		<countryName>French Southern Territories</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>french_southern_territories.png</flagPath>
 	</country>
 	<country>
 		<countryID>79</countryID>
 		<countryName>Gabon</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>gabon.png</flagPath>
 	</country>
 	<country>
 		<countryID>80</countryID>
 		<countryName>Gambia</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>gambia.png</flagPath>
 	</country>
 	<country>
 		<countryID>81</countryID>
 		<countryName>Georgia</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>georgia.png</flagPath>
 	</country>
 	<country>
 		<countryID>82</countryID>
 		<countryName>Germany</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>germany.png</flagPath>
 	</country>
 	<country>
 		<countryID>83</countryID>
 		<countryName>Ghana</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>ghana.png</flagPath>
 	</country>
 	<country>
 		<countryID>84</countryID>
 		<countryName>Gibraltar</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>gibraltar.png</flagPath>
 	</country>
 	<country>
 		<countryID>85</countryID>
 		<countryName>Greece</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>greece.png</flagPath>
 	</country>
 	<country>
 		<countryID>86</countryID>
 		<countryName>Greenland</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>greenland.png</flagPath>
 	</country>
 	<country>
 		<countryID>87</countryID>
 		<countryName>Grenada</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>grenada.png</flagPath>
 	</country>
 	<country>
 		<countryID>88</countryID>
 		<countryName>Guadeloupe</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>france.png</flagPath>
 	</country>
 	<country>
 		<countryID>89</countryID>
 		<countryName>Guam</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>guam.png</flagPath>
 	</country>
 	<country>
 		<countryID>90</countryID>
 		<countryName>Guatemala</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>guatemala.png</flagPath>
 	</country>
 	<country>
 		<countryID>91</countryID>
 		<countryName>Guernsey</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>guernsey.png</flagPath>
 	</country>
 	<country>
 		<countryID>92</countryID>
 		<countryName>Guinea</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>guinea.png</flagPath>
 	</country>
 	<country>
 		<countryID>93</countryID>
 		<countryName>Guinea-Bissau</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>guinea_bissau.png</flagPath>
 	</country>
 	<country>
 		<countryID>94</countryID>
 		<countryName>Guyana</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>guyana.png</flagPath>
 	</country>
 	<country>
 		<countryID>95</countryID>
 		<countryName>Haiti</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>haiti.png</flagPath>
 	</country>
 	<country>
 		<countryID>96</countryID>
 		<countryName>Honduras</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>honduras.png</flagPath>
 	</country>
 	<country>
 		<countryID>97</countryID>
 		<countryName>Hong Kong</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>hong_kong.png</flagPath>
 	</country>
 	<country>
 		<countryID>98</countryID>
 		<countryName>Hungary</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>hungary.png</flagPath>
 	</country>
 	<country>
 		<countryID>99</countryID>
 		<countryName>Iceland</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>iceland.png</flagPath>
 	</country>
 	<country>
 		<countryID>100</countryID>
 		<countryName>India</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>india.png</flagPath>
 	</country>
 	<country>
 		<countryID>101</countryID>
 		<countryName>Indonesia</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>indonesia.png</flagPath>
 	</country>
 	<country>
 		<countryID>102</countryID>
 		<countryName>Iran</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>iran.png</flagPath>
 	</country>
 	<country>
 		<countryID>103</countryID>
 		<countryName>Iraq</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>iraq.png</flagPath>
 	</country>
 	<country>
 		<countryID>104</countryID>
 		<countryName>Ireland</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>ireland.png</flagPath>
 	</country>
 	<country>
 		<countryID>105</countryID>
 		<countryName>Isle of Man</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>isle_of_man.png</flagPath>
 	</country>
 	<country>
 		<countryID>106</countryID>
 		<countryName>Israel</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>israel.png</flagPath>
 	</country>
 	<country>
 		<countryID>107</countryID>
 		<countryName>Italy</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>italy.png</flagPath>
 	</country>
 	<country>
 		<countryID>108</countryID>
 		<countryName>Ivory Coast</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>cote_divoire.png</flagPath>
 	</country>
 	<country>
 		<countryID>109</countryID>
 		<countryName>Jamaica</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>jamaica.png</flagPath>
 	</country>
 	<country>
 		<countryID>110</countryID>
 		<countryName>Japan</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>japan.png</flagPath>
 	</country>
 	<country>
 		<countryID>111</countryID>
 		<countryName>Jersey</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>jersey.png</flagPath>
 	</country>
 	<country>
 		<countryID>112</countryID>
 		<countryName>Jordan</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>jordan.png</flagPath>
 	</country>
 	<country>
 		<countryID>113</countryID>
 		<countryName>Kazakhstan</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>kazakhstan.png</flagPath>
 	</country>
 	<country>
 		<countryID>114</countryID>
 		<countryName>Kenya</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>kenya.png</flagPath>
 	</country>
 	<country>
 		<countryID>115</countryID>
 		<countryName>Kiribati</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>kiribati.png</flagPath>
 	</country>
 	<country>
 		<countryID>116</countryID>
 		<countryName>Kuwait</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>kuwait.png</flagPath>
 	</country>
 	<country>
 		<countryID>117</countryID>
 		<countryName>Kyrgyzstan</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>kyrgyzstan.png</flagPath>
 	</country>
 	<country>
 		<countryID>118</countryID>
 		<countryName>Laos</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>laos.png</flagPath>
 	</country>
 	<country>
 		<countryID>119</countryID>
 		<countryName>Latvia</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>latvia.png</flagPath>
 	</country>
 	<country>
 		<countryID>120</countryID>
 		<countryName>Lebanon</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>lebanon.png</flagPath>
 	</country>
 	<country>
 		<countryID>121</countryID>
 		<countryName>Lesotho</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>lesotho.png</flagPath>
 	</country>
 	<country>
 		<countryID>122</countryID>
 		<countryName>Liberia</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>liberia.png</flagPath>
 	</country>
 	<country>
 		<countryID>123</countryID>
 		<countryName>Libya</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>libya.png</flagPath>
 	</country>
 	<country>
 		<countryID>124</countryID>
 		<countryName>Liechtenstein</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>liechtenstein.png</flagPath>
 	</country>
 	<country>
 		<countryID>125</countryID>
 		<countryName>Lithuania</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>lithuania.png</flagPath>
 	</country>
 	<country>
 		<countryID>126</countryID>
 		<countryName>Luxembourg</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>luxembourg.png</flagPath>
 	</country>
 	<country>
 		<countryID>127</countryID>
 		<countryName>Macao</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>macao.png</flagPath>
 	</country>
 	<country>
 		<countryID>128</countryID>
 		<countryName>Macedonia</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>macedonia.png</flagPath>
 	</country>
 	<country>
 		<countryID>129</countryID>
 		<countryName>Madagascar</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>madagascar.png</flagPath>
 	</country>
 	<country>
 		<countryID>130</countryID>
 		<countryName>Malawi</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>malawi.png</flagPath>
 	</country>
 	<country>
 		<countryID>131</countryID>
 		<countryName>Malaysia</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>malaysia.png</flagPath>
 	</country>
 	<country>
 		<countryID>132</countryID>
 		<countryName>Maldives</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>maldives.png</flagPath>
 	</country>
 	<country>
 		<countryID>133</countryID>
 		<countryName>Mali</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>mali.png</flagPath>
 	</country>
 	<country>
 		<countryID>134</countryID>
 		<countryName>Malta</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>malta.png</flagPath>
 	</country>
 	<country>
 		<countryID>135</countryID>
 		<countryName>Marshall Islands</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>marshall_islands.png</flagPath>
 	</country>
 	<country>
 		<countryID>136</countryID>
 		<countryName>Martinique</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>martinique.png</flagPath>
 	</country>
 	<country>
 		<countryID>137</countryID>
 		<countryName>Mauritania</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>mauritania.png</flagPath>
 	</country>
 	<country>
 		<countryID>138</countryID>
 		<countryName>Mauritius</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>mauritius.png</flagPath>
 	</country>
 	<country>
 		<countryID>139</countryID>
 		<countryName>Mayotte</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>mayotte.png</flagPath>
 	</country>
 	<country>
 		<countryID>140</countryID>
 		<countryName>Mexico</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>mexico.png</flagPath>
 	</country>
 	<country>
 		<countryID>141</countryID>
 		<countryName>Micronesia</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>micronesia.png</flagPath>
 	</country>
 	<country>
 		<countryID>142</countryID>
 		<countryName>Moldova</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>moldova.png</flagPath>
 	</country>
 	<country>
 		<countryID>143</countryID>
 		<countryName>Monaco</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>monaco.png</flagPath>
 	</country>
 	<country>
 		<countryID>144</countryID>
 		<countryName>Mongolia</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>mongolia.png</flagPath>
 	</country>
 	<country>
 		<countryID>145</countryID>
 		<countryName>Montenegro</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>montenegro.png</flagPath>
 	</country>
 	<country>
 		<countryID>146</countryID>
 		<countryName>Montserrat</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>montserrat.png</flagPath>
 	</country>
 	<country>
 		<countryID>147</countryID>
 		<countryName>Morocco</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>morocco.png</flagPath>
 	</country>
 	<country>
 		<countryID>148</countryID>
 		<countryName>Mozambique</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>mozambique.png</flagPath>
 	</country>
 	<country>
 		<countryID>149</countryID>
 		<countryName>Myanmar</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>myanmar.png</flagPath>
 	</country>
 	<country>
 		<countryID>150</countryID>
 		<countryName>Namibia</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>namibia.png</flagPath>
 	</country>
 	<country>
 		<countryID>151</countryID>
 		<countryName>Nauru</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>nauru.png</flagPath>
 	</country>
 	<country>
 		<countryID>152</countryID>
 		<countryName>Nepal</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>nepal.png</flagPath>
 	</country>
 	<country>
 		<countryID>153</countryID>
 		<countryName>Netherlands</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>netherlands.png</flagPath>
 	</country>
 	<country>
 		<countryID>154</countryID>
 		<countryName>New Caledonia</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>new_caledonia.png</flagPath>
 	</country>
 	<country>
 		<countryID>155</countryID>
 		<countryName>New Zealand</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>new_zealand.png</flagPath>
 	</country>
 	<country>
 		<countryID>156</countryID>
 		<countryName>Nicaragua</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>nicaragua.png</flagPath>
 	</country>
 	<country>
 		<countryID>157</countryID>
 		<countryName>Niger</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>niger.png</flagPath>
 	</country>
 	<country>
 		<countryID>158</countryID>
 		<countryName>Nigeria</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>nigeria.png</flagPath>
 	</country>
 	<country>
 		<countryID>159</countryID>
 		<countryName>Niue</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>niue.png</flagPath>
 	</country>
 	<country>
 		<countryID>160</countryID>
 		<countryName>Norfolk Island</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>norfolk_island.png</flagPath>
 	</country>
 	<country>
 		<countryID>161</countryID>
 		<countryName>North Korea</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>north_korea.png</flagPath>
 	</country>
 	<country>
 		<countryID>162</countryID>
 		<countryName>Northern Mariana Islands</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>northern_mariana_islands.png</flagPath>
 	</country>
 	<country>
 		<countryID>163</countryID>
 		<countryName>Norway</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>norway.png</flagPath>
 	</country>
 	<country>
 		<countryID>164</countryID>
 		<countryName>Oman</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>oman.png</flagPath>
 	</country>
 	<country>
 		<countryID>165</countryID>
 		<countryName>Pakistan</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>pakistan.png</flagPath>
 	</country>
 	<country>
 		<countryID>166</countryID>
 		<countryName>Palau</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>palau.png</flagPath>
 	</country>
 	<country>
 		<countryID>167</countryID>
 		<countryName>Palestinian Territory</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>palestine.png</flagPath>
 	</country>
 	<country>
 		<countryID>168</countryID>
 		<countryName>Panama</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>panama.png</flagPath>
 	</country>
 	<country>
 		<countryID>169</countryID>
 		<countryName>Papua New Guinea</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>papua_new_guinea.png</flagPath>
 	</country>
 	<country>
 		<countryID>170</countryID>
 		<countryName>Paraguay</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>paraguay.png</flagPath>
 	</country>
 	<country>
 		<countryID>171</countryID>
 		<countryName>Peru</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>peru.png</flagPath>
 	</country>
 	<country>
 		<countryID>172</countryID>
 		<countryName>Philippines</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>philippines.png</flagPath>
 	</country>
 	<country>
 		<countryID>173</countryID>
 		<countryName>Pitcairn</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>pitcairn_islands.png</flagPath>
 	</country>
 	<country>
 		<countryID>174</countryID>
 		<countryName>Poland</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>poland.png</flagPath>
 	</country>
 	<country>
 		<countryID>175</countryID>
 		<countryName>Portugal</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>portugal.png</flagPath>
 	</country>
 	<country>
 		<countryID>176</countryID>
 		<countryName>Puerto Rico</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>puerto_rico.png</flagPath>
 	</country>
 	<country>
 		<countryID>177</countryID>
 		<countryName>Qatar</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>qatar.png</flagPath>
 	</country>
 	<country>
 		<countryID>178</countryID>
 		<countryName>Republic of the Congo</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>republic_of_the_congo.png</flagPath>
 	</country>
 	<country>
 		<countryID>179</countryID>
 		<countryName>Reunion</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>france.png</flagPath>
 	</country>
 	<country>
 		<countryID>180</countryID>
 		<countryName>Romania</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>romania.png</flagPath>
 	</country>
 	<country>
 		<countryID>181</countryID>
 		<countryName>Russia</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>russia.png</flagPath>
 	</country>
 	<country>
 		<countryID>182</countryID>
 		<countryName>Rwanda</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>rwanda.png</flagPath>
 	</country>
 	<country>
 		<countryID>183</countryID>
 		<countryName>Saint Barthélemy</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>saint_barthelemy.png</flagPath>
 	</country>
 	<country>
 		<countryID>184</countryID>
 		<countryName>Saint Helena</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>saint_helena.png</flagPath>
 	</country>
 	<country>
 		<countryID>185</countryID>
 		<countryName>Saint Kitts and Nevis</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>saint_kitts_and_nevis.png</flagPath>
 	</country>
 	<country>
 		<countryID>186</countryID>
 		<countryName>Saint Lucia</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>saint_lucia.png</flagPath>
 	</country>
 	<country>
 		<countryID>187</countryID>
 		<countryName>Saint Martin</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>saint_martin.png</flagPath>
 	</country>
 	<country>
 		<countryID>188</countryID>
 		<countryName>Saint Pierre and Miquelon</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>france.png</flagPath>
 	</country>
 	<country>
 		<countryID>189</countryID>
 		<countryName>Saint Vincent and the Grenadines</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>saint_vincent_and_the_grenadines.png</flagPath>
 	</country>
 	<country>
 		<countryID>190</countryID>
 		<countryName>Samoa</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>samoa.png</flagPath>
 	</country>
 	<country>
 		<countryID>191</countryID>
 		<countryName>San Marino</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>san_marino.png</flagPath>
 	</country>
 	<country>
 		<countryID>192</countryID>
 		<countryName>Sao Tome and Principe</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>sao_tome_and_principe.png</flagPath>
 	</country>
 	<country>
 		<countryID>193</countryID>
 		<countryName>Saudi Arabia</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>saudi_arabia.png</flagPath>
 	</country>
 	<country>
 		<countryID>194</countryID>
 		<countryName>Senegal</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>senegal.png</flagPath>
 	</country>
 	<country>
 		<countryID>195</countryID>
 		<countryName>Serbia</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>serbia.png</flagPath>
 	</country>
 	<country>
 		<countryID>196</countryID>
 		<countryName>Seychelles</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>seychelles.png</flagPath>
 	</country>
 	<country>
 		<countryID>197</countryID>
 		<countryName>Sierra Leone</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>sierra_leone.png</flagPath>
 	</country>
 	<country>
 		<countryID>198</countryID>
 		<countryName>Singapore</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>singapore.png</flagPath>
 	</country>
 	<country>
 		<countryID>199</countryID>
 		<countryName>Sint Maarten</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>netherlands.png</flagPath>
 	</country>
 	<country>
 		<countryID>200</countryID>
 		<countryName>Slovakia</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>slovakia.png</flagPath>
 	</country>
 	<country>
 		<countryID>201</countryID>
 		<countryName>Slovenia</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>slovenia.png</flagPath>
 	</country>
 	<country>
 		<countryID>202</countryID>
 		<countryName>Solomon Islands</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>solomon_islands.png</flagPath>
 	</country>
 	<country>
 		<countryID>203</countryID>
 		<countryName>Somalia</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>somalia.png</flagPath>
 	</country>
 	<country>
 		<countryID>204</countryID>
 		<countryName>South Africa</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>south_africa.png</flagPath>
 	</country>
 	<country>
 		<countryID>205</countryID>
 		<countryName>South Georgia and the South Sandwich Islands</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>south_georgia_and_the_south_sandwich_islands.png</flagPath>
 	</country>
 	<country>
 		<countryID>206</countryID>
 		<countryName>South Korea</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>south_korea.png</flagPath>
 	</country>
 	<country>
 		<countryID>207</countryID>
 		<countryName>South Sudan</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>south_sudan.png</flagPath>
 	</country>
 	<country>
 		<countryID>208</countryID>
 		<countryName>Spain</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>spain.png</flagPath>
 	</country>
 	<country>
 		<countryID>209</countryID>
 		<countryName>Sri Lanka</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>sri_lanka.png</flagPath>
 	</country>
 	<country>
 		<countryID>210</countryID>
 		<countryName>Sudan</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>sudan.png</flagPath>
 	</country>
 	<country>
 		<countryID>211</countryID>
 		<countryName>Suriname</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>suriname.png</flagPath>
 	</country>
 	<country>
 		<countryID>212</countryID>
 		<countryName>Svalbard and Jan Mayen</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>norway.png</flagPath>
 	</country>
 	<country>
 		<countryID>213</countryID>
 		<countryName>Swaziland</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>swaziland.png</flagPath>
 	</country>
 	<country>
 		<countryID>214</countryID>
 		<countryName>Sweden</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>sweden.png</flagPath>
 	</country>
 	<country>
 		<countryID>215</countryID>
 		<countryName>Switzerland</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>switzerland.png</flagPath>
 	</country>
 	<country>
 		<countryID>216</countryID>
 		<countryName>Syria</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>syria.png</flagPath>
 	</country>
 	<country>
 		<countryID>217</countryID>
 		<countryName>Taiwan</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>taiwan.png</flagPath>
 	</country>
 	<country>
 		<countryID>218</countryID>
 		<countryName>Tajikistan</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>tajikistan.png</flagPath>
 	</country>
 	<country>
 		<countryID>219</countryID>
 		<countryName>Tanzania</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>tanzania.png</flagPath>
 	</country>
 	<country>
 		<countryID>220</countryID>
 		<countryName>Thailand</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>thailand.png</flagPath>
 	</country>
 	<country>
 		<countryID>221</countryID>
 		<countryName>Togo</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>togo.png</flagPath>
 	</country>
 	<country>
 		<countryID>222</countryID>
 		<countryName>Tokelau</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>tokelau.png</flagPath>
 	</country>
 	<country>
 		<countryID>223</countryID>
 		<countryName>Tonga</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>tonga.png</flagPath>
 	</country>
 	<country>
 		<countryID>224</countryID>
 		<countryName>Trinidad and Tobago</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>trinidad_and_tobago.png</flagPath>
 	</country>
 	<country>
 		<countryID>225</countryID>
 		<countryName>Tunisia</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>tunisia.png</flagPath>
 	</country>
 	<country>
 		<countryID>226</countryID>
 		<countryName>Turkey</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>turkey.png</flagPath>
 	</country>
 	<country>
 		<countryID>227</countryID>
 		<countryName>Turkmenistan</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>turkmenistan.png</flagPath>
 	</country>
 	<country>
 		<countryID>228</countryID>
 		<countryName>Turks and Caicos Islands</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>turks_and_caicos_islands.png</flagPath>
 	</country>
 	<country>
 		<countryID>229</countryID>
 		<countryName>Tuvalu</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>tuvalu.png</flagPath>
 	</country>
 	<country>
 		<countryID>230</countryID>
 		<countryName>U.S. Virgin Islands</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>us_virgin_islands.png</flagPath>
 	</country>
 	<country>
 		<countryID>231</countryID>
 		<countryName>Uganda</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>uganda.png</flagPath>
 	</country>
 	<country>
 		<countryID>232</countryID>
 		<countryName>Ukraine</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>ukraine.png</flagPath>
 	</country>
 	<country>
 		<countryID>233</countryID>
 		<countryName>United Arab Emirates</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>united_arab_emirates.png</flagPath>
 	</country>
 	<country>
 		<countryID>234</countryID>
 		<countryName>United Kingdom</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>united_kingdom.png</flagPath>
 	</country>
 	<country>
 		<countryID>235</countryID>
 		<countryName>United States</countryName>
-		<usesRegions>TRUE</usesRegions>
+		<usesRegions>1</usesRegions>
 		<flagPath>united_states.png</flagPath>
 	</country>
 	<country>
 		<countryID>236</countryID>
 		<countryName>Uruguay</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>uruguay.png</flagPath>
 	</country>
 	<country>
 		<countryID>237</countryID>
 		<countryName>Uzbekistan</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>uzbekistan.png</flagPath>
 	</country>
 	<country>
 		<countryID>238</countryID>
 		<countryName>Vanuatu</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>vanuatu.png</flagPath>
 	</country>
 	<country>
 		<countryID>239</countryID>
 		<countryName>Vatican</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>vatican_city.png</flagPath>
 	</country>
 	<country>
 		<countryID>240</countryID>
 		<countryName>Venezuela</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>venezuela.png</flagPath>
 	</country>
 	<country>
 		<countryID>241</countryID>
 		<countryName>Vietnam</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>vietnam.png</flagPath>
 	</country>
 	<country>
 		<countryID>242</countryID>
 		<countryName>Wallis and Futuna</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>wallis_and_futuna.png</flagPath>
 	</country>
 	<country>
 		<countryID>243</countryID>
 		<countryName>Western Sahara</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>western_sahara.png</flagPath>
 	</country>
 	<country>
 		<countryID>244</countryID>
 		<countryName>Yemen</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>yemen.png</flagPath>
 	</country>
 	<country>
 		<countryID>245</countryID>
 		<countryName>Zambia</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>zambia.png</flagPath>
 	</country>
 	<country>
 		<countryID>246</countryID>
 		<countryName>Zimbabwe</countryName>
-		<usesRegions>FALSE</usesRegions>
+		<usesRegions>0</usesRegions>
 		<flagPath>zimbabwe.png</flagPath>
 	</country>
 </countries>

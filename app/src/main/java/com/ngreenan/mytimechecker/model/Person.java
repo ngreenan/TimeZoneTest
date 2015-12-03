@@ -14,6 +14,7 @@ public class Person {
     private boolean displayNotifications;
     private boolean active;
     private int colorID;
+    private boolean me;
 
     public long getPersonID() {
         return personID;
@@ -93,5 +94,13 @@ public class Person {
 
     public void setColorID(int colorID) {
         this.colorID = colorID;
+    }
+
+    public boolean isMe() {
+        return me;
+    }
+
+    public void setMe(boolean me) {
+        this.me = me;
     }
 }

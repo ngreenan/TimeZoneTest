@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class ContinentsJDOMParser {
 
-    private static final String LOGTAG = "My Time Checker - ContinentsParser";
+    private static final String LOGTAG = "My Time Checker - XML";
     
     private static final String CONTINENT_TAG = "continent";
     

@@ -117,6 +117,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     public static final String COLUMN_DISPLAYNOTIFICATIONS = "displayNotifications";
     public static final String COLUMN_ACTIVE = "active";
     public static final String COLUMN_COLORID = "colorID";
+    public static final String COLUMN_ME = "me";
 
     private static final String TABLE_PERSONS_CREATE = "CREATE TABLE " + TABLE_PERSONS + " ("
             + COLUMN_PERSONID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -128,7 +129,8 @@ public class DBOpenHelper extends SQLiteOpenHelper {
             + COLUMN_ENDMIN + " INTEGER, "
             + COLUMN_DISPLAYNOTIFICATIONS + " INTEGER, "
             + COLUMN_ACTIVE + " INTEGER, "
-            + COLUMN_COLORID + " INTEGER)";
+            + COLUMN_COLORID + " INTEGER,"
+            + COLUMN_ME + " INTEGER)";
 
     public static final String[] TABLE_PERSONS_COLUMNS = {
             COLUMN_PERSONID,
@@ -140,7 +142,8 @@ public class DBOpenHelper extends SQLiteOpenHelper {
             COLUMN_ENDMIN,
             COLUMN_DISPLAYNOTIFICATIONS,
             COLUMN_ACTIVE,
-            COLUMN_COLORID
+            COLUMN_COLORID,
+            COLUMN_ME
     };
 
 

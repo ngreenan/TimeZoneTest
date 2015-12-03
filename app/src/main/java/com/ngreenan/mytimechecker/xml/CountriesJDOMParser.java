@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class CountriesJDOMParser {
 
-    private static final String LOGTAG = "My Time Checker - CountriesParser";
+    private static final String LOGTAG = "My Time Checker - XML";
 
     private static final String COUNTRY_TAG = "country";
 
@@ -42,9 +42,21 @@ public class CountriesJDOMParser {
                 Country country = new Country();
                 country.setCountryID(Long.parseLong(node.getChildText(DBOpenHelper.COLUMN_COUNTRYID)));
                 country.setCountryName(node.getChildText(DBOpenHelper.COLUMN_COUNTRYNAME));
+
+                //for reasons i don't quite understand, node.getChildText(DBOpenHelper.COLUMN_USESREGIONS)) will give you "1" or "0"
+                //BUT if you test to see if it equals "1" then it always returns false
+                //if you convert to an Integer and test if it equals 1, it's fine
+                //makes no sense to me, but there you go
+
+                if (Integer.parseInt(node.getChildText(DBOpenHelper.COLUMN_USESREGIONS)) == 1) {
+                    country.setUsesRegions(true);
+                } else {
+                    country.setUsesRegions(false);
+                }
+
+                country.setFlagPath(node.getChildText(DBOpenHelper.COLUMN_FLAGPATH));
                 countries.add(country);
             }
-            
             
         } catch (JDOMException e) {
             Log.i(LOGTAG, e.getMessage());

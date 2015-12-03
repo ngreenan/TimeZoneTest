@@ -23,9 +23,9 @@ import java.util.List;
  */
 public class TimeZonesJDOMParser {
 
-    private static final String LOGTAG = "My Time Checker - TimeZoneParser";
+    private static final String LOGTAG = "My Time Checker - XML";
 
-    private static final String TIMEZONE_TAG = "continent";
+    private static final String TIMEZONE_TAG = "timeZone";
 
     public List<TimeZone> parseXML(Context context) {
         //open the XML file
@@ -44,8 +44,6 @@ public class TimeZonesJDOMParser {
                 timeZone.setTimeZoneName(node.getChildText(DBOpenHelper.COLUMN_TIMEZONENAME));
                 timeZones.add(timeZone);
             }
-            
-            
         } catch (JDOMException e) {
             Log.i(LOGTAG, e.getMessage());
         } catch (IOException e) {

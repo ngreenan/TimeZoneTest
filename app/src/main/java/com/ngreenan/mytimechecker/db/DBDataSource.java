@@ -256,7 +256,7 @@ public class DBDataSource {
     //person
     public Person create(Person person){
         ContentValues values = new ContentValues();
-        values.put(DBOpenHelper.COLUMN_PERSONID, person.getCityID());
+        //values.put(DBOpenHelper.COLUMN_PERSONID, person.getCityID()); //this will autoincrement so leave it blank
         values.put(DBOpenHelper.COLUMN_PERSONNAME, person.getPersonName());
         values.put(DBOpenHelper.COLUMN_CITYID, person.getCityID());
         values.put(DBOpenHelper.COLUMN_STARTHOUR, person.getStartHour());
@@ -266,8 +266,9 @@ public class DBDataSource {
         values.put(DBOpenHelper.COLUMN_DISPLAYNOTIFICATIONS, person.isDisplayNotifications());
         values.put(DBOpenHelper.COLUMN_ACTIVE, person.isActive());
         values.put(DBOpenHelper.COLUMN_COLORID, person.getColorID());
+        values.put(DBOpenHelper.COLUMN_ME, person.isMe());
 
-        long insertID = database.insert(DBOpenHelper.TABLE_CITIES, null, values);
+        long insertID = database.insert(DBOpenHelper.TABLE_PERSONS, null, values);
         person.setPersonID(insertID);
         return person;
     }
@@ -310,6 +311,12 @@ public class DBDataSource {
                 }
 
                 person.setColorID(cursor.getInt(cursor.getColumnIndex(DBOpenHelper.COLUMN_COLORID)));
+
+                if (cursor.getInt(cursor.getColumnIndex(DBOpenHelper.COLUMN_ME)) == 1) {
+                    person.setMe(true);
+                } else {
+                    person.setMe(false);
+                }
 
                 //add our object to the list
                 persons.add(person);
@@ -369,29 +376,31 @@ public class DBDataSource {
         //this one is different as we're not seeding from XML
 
         //me
-        Person person = new Person();
-        person.setPersonName("Me");
-        person.setCityID(215);
-        person.setStartHour(8);
-        person.setStartMin(0);
-        person.setEndHour(22);
-        person.setEndMin(0);
-        person.setDisplayNotifications(true);
-        person.setActive(true);
-        person.setColorID(1);
-        create(person);
+        Person personMe = new Person();
+        personMe.setPersonName("Me");
+        personMe.setCityID(215);
+        personMe.setStartHour(8);
+        personMe.setStartMin(0);
+        personMe.setEndHour(22);
+        personMe.setEndMin(0);
+        personMe.setDisplayNotifications(true);
+        personMe.setActive(true);
+        personMe.setColorID(1);
+        personMe.setMe(true);
+        create(personMe);
 
         //them
-        person = new Person();
-        person.setPersonName("Them");
-        person.setCityID(215);
-        person.setStartHour(8);
-        person.setStartMin(0);
-        person.setEndHour(22);
-        person.setEndMin(0);
-        person.setDisplayNotifications(true);
-        person.setActive(true);
-        person.setColorID(2);
-        create(person);
+        Person personThem = new Person();
+        personThem.setPersonName("Them");
+        personThem.setCityID(215);
+        personThem.setStartHour(8);
+        personThem.setStartMin(0);
+        personThem.setEndHour(22);
+        personThem.setEndMin(0);
+        personThem.setDisplayNotifications(true);
+        personThem.setActive(true);
+        personThem.setColorID(2);
+        personThem.setMe(false);
+        create(personThem);
     }
 }
