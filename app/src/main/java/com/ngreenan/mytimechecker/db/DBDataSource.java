@@ -12,6 +12,7 @@ import com.ngreenan.mytimechecker.model.City;
 import com.ngreenan.mytimechecker.model.Continent;
 import com.ngreenan.mytimechecker.model.Country;
 import com.ngreenan.mytimechecker.model.Person;
+import com.ngreenan.mytimechecker.model.PersonDetail;
 import com.ngreenan.mytimechecker.model.Region;
 import com.ngreenan.mytimechecker.model.TimeZone;
 import com.ngreenan.mytimechecker.xml.CitiesJDOMParser;
@@ -64,12 +65,12 @@ public class DBDataSource {
                 null, null, null, null, null);
 
         Log.i(LOGTAG, "Returned " + cursor.getCount() + " continents");
-        List<Continent> continents = getContinentList(cursor);
-        return continents;
+
+        return getContinentList(cursor);
     }
 
     private List<Continent> getContinentList(Cursor cursor) {
-        List<Continent> continents = new ArrayList<Continent>();
+        List<Continent> continents = new ArrayList<>();
 
         if (cursor.getCount() > 0) {
             //we have some items in our cursor!
@@ -282,6 +283,26 @@ public class DBDataSource {
         return persons;
     }
 
+    public List<Person> getMyPersons() {
+        //returns all rows from Persons table where Me = 1
+        Cursor cursor = database.query(DBOpenHelper.TABLE_PERSONS, DBOpenHelper.TABLE_PERSONS_COLUMNS,
+                DBOpenHelper.COLUMN_ME + " = 1", null, null, null, null);
+
+        Log.i(LOGTAG, "Returned " + cursor.getCount() + " persons");
+        List<Person> persons = getPersonList(cursor);
+        return persons;
+    }
+
+    public List<Person> getMyFriendPersons() {
+        //returns all rows from Persons table where Me = 0
+        Cursor cursor = database.query(DBOpenHelper.TABLE_PERSONS, DBOpenHelper.TABLE_PERSONS_COLUMNS,
+                DBOpenHelper.COLUMN_ME + " = 0", null, null, null, null);
+
+        Log.i(LOGTAG, "Returned " + cursor.getCount() + " persons");
+        List<Person> persons = getPersonList(cursor);
+        return persons;
+    }
+
     private List<Person> getPersonList(Cursor cursor) {
         List<Person> persons = new ArrayList<Person>();
 
@@ -327,6 +348,114 @@ public class DBDataSource {
         return persons;
     }
 
+    //PersonDetails
+    public List<PersonDetail> getAllPersonDetails() {
+        Cursor cursor = database.query(DBOpenHelper.VIEW_PERSONDETAILS, DBOpenHelper. VIEW_PERSONDETAILS_COLUMNS,
+                null, null, null, null, null);
+
+        Log.i(LOGTAG, "Returned " + cursor.getCount() + " personDetails");
+        List<PersonDetail> personDetails = getPersonDetailsList(cursor);
+        return personDetails;
+    }
+
+    public List<PersonDetail> getMyPersonDetails() {
+        //returns all rows from Persons table where Me = 1
+        Cursor cursor = database.query(DBOpenHelper.VIEW_PERSONDETAILS, DBOpenHelper.VIEW_PERSONDETAILS_COLUMNS,
+                DBOpenHelper.COLUMN_ME + " = 1", null, null, null, null);
+
+        Log.i(LOGTAG, "Returned " + cursor.getCount() + " personDetails");
+        List<PersonDetail> personDetails = getPersonDetailsList(cursor);
+        return personDetails;
+    }
+
+    public List<PersonDetail> getMyFriendPersonDetails() {
+        //returns all rows from Persons table where Me = 0
+        Cursor cursor = database.query(DBOpenHelper.VIEW_PERSONDETAILS, DBOpenHelper.VIEW_PERSONDETAILS_COLUMNS,
+                DBOpenHelper.COLUMN_ME + " = 0", null, null, null, null);
+
+        Log.i(LOGTAG, "Returned " + cursor.getCount() + " personDetails");
+        List<PersonDetail> personDetails = getPersonDetailsList(cursor);
+        return personDetails;
+    }
+
+
+
+    private List<PersonDetail> getPersonDetailsList(Cursor cursor) {
+        List<PersonDetail> personDetails = new ArrayList<>();
+
+        if (cursor.getCount() > 0) {
+            //we have some items in our cursor!
+            while (cursor.moveToNext()) {
+                //loop round cursor, pull out each value and build our new object
+                PersonDetail person = new PersonDetail();
+
+                //person
+                person.setPersonID(cursor.getLong(cursor.getColumnIndex(DBOpenHelper.COLUMN_PERSONID)));
+                person.setPersonName(cursor.getString(cursor.getColumnIndex(DBOpenHelper.COLUMN_PERSONNAME)));
+                person.setCityID(cursor.getLong(cursor.getColumnIndex(DBOpenHelper.COLUMN_CITYID)));
+                person.setStartHour(cursor.getInt(cursor.getColumnIndex(DBOpenHelper.COLUMN_STARTHOUR)));
+                person.setStartMin(cursor.getInt(cursor.getColumnIndex(DBOpenHelper.COLUMN_STARTMIN)));
+                person.setEndHour(cursor.getInt(cursor.getColumnIndex(DBOpenHelper.COLUMN_ENDHOUR)));
+                person.setEndMin(cursor.getInt(cursor.getColumnIndex(DBOpenHelper.COLUMN_ENDMIN)));
+
+                if (cursor.getInt(cursor.getColumnIndex(DBOpenHelper.COLUMN_DISPLAYNOTIFICATIONS)) == 1) {
+                    person.setDisplayNotifications(true);
+                } else {
+                    person.setDisplayNotifications(false);
+                }
+
+                if (cursor.getInt(cursor.getColumnIndex(DBOpenHelper.COLUMN_ACTIVE)) == 1) {
+                    person.setActive(true);
+                } else {
+                    person.setActive(false);
+                }
+
+                person.setColorID(cursor.getInt(cursor.getColumnIndex(DBOpenHelper.COLUMN_COLORID)));
+
+                if (cursor.getInt(cursor.getColumnIndex(DBOpenHelper.COLUMN_ME)) == 1) {
+                    person.setMe(true);
+                } else {
+                    person.setMe(false);
+                }
+
+                person.setCityName(cursor.getString(cursor.getColumnIndex(DBOpenHelper.COLUMN_CITYNAME)));
+
+                //continent
+                person.setContinentID(cursor.getLong(cursor.getColumnIndex(DBOpenHelper.COLUMN_CONTINENTID)));
+                person.setContinentName(cursor.getString(cursor.getColumnIndex(DBOpenHelper.COLUMN_CONTINENTNAME)));
+
+                //country
+                person.setCountryID(cursor.getLong(cursor.getColumnIndex(DBOpenHelper.COLUMN_COUNTRYID)));
+                person.setCountryName(cursor.getString(cursor.getColumnIndex(DBOpenHelper.COLUMN_COUNTRYNAME)));
+
+                if (cursor.getInt(cursor.getColumnIndex(DBOpenHelper.COLUMN_USESREGIONS)) == 1) {
+                    person.setUsesRegions(true);
+                } else {
+                    person.setUsesRegions(false);
+                }
+
+                person.setFlagPath(cursor.getString(cursor.getColumnIndex(DBOpenHelper.COLUMN_FLAGPATH)));
+
+                //region
+                person.setRegionID(cursor.getLong(cursor.getColumnIndex(DBOpenHelper.COLUMN_REGIONID)));
+                person.setRegionName(cursor.getString(cursor.getColumnIndex(DBOpenHelper.COLUMN_REGIONNAME)));
+
+                //timezone
+                person.setTimeZoneID(cursor.getLong(cursor.getColumnIndex(DBOpenHelper.COLUMN_TIMEZONEID)));
+                person.setTimeZoneName(cursor.getString(cursor.getColumnIndex(DBOpenHelper.COLUMN_TIMEZONENAME)));
+
+                //add our object to the list
+                personDetails.add(person);
+            }
+        }
+
+        //return the populated list!
+        return personDetails;
+    }
+
+
+
+    //create data
     public void createContinentsData(Context context) {
         ContinentsJDOMParser parser = new ContinentsJDOMParser();
         List<Continent> continents = parser.parseXML(context);
@@ -378,7 +507,7 @@ public class DBDataSource {
         //me
         Person personMe = new Person();
         personMe.setPersonName("Me");
-        personMe.setCityID(215);
+        personMe.setCityID(215); //london
         personMe.setStartHour(8);
         personMe.setStartMin(0);
         personMe.setEndHour(22);
@@ -389,18 +518,86 @@ public class DBDataSource {
         personMe.setMe(true);
         create(personMe);
 
-        //them
-        Person personThem = new Person();
-        personThem.setPersonName("Them");
-        personThem.setCityID(215);
-        personThem.setStartHour(8);
-        personThem.setStartMin(0);
-        personThem.setEndHour(22);
-        personThem.setEndMin(0);
-        personThem.setDisplayNotifications(true);
-        personThem.setActive(true);
-        personThem.setColorID(2);
-        personThem.setMe(false);
-        create(personThem);
+        //them 1
+        Person personThem1 = new Person();
+        personThem1.setPersonName("Them 1");
+        personThem1.setCityID(380); //melbourne
+        personThem1.setStartHour(8);
+        personThem1.setStartMin(0);
+        personThem1.setEndHour(22);
+        personThem1.setEndMin(0);
+        personThem1.setDisplayNotifications(true);
+        personThem1.setActive(true);
+        personThem1.setColorID(2);
+        personThem1.setMe(false);
+        create(personThem1);
+
+        //them 2
+        Person personThem2 = new Person();
+        personThem2.setPersonName("Them 2");
+        personThem2.setCityID(346); //new york
+        personThem2.setStartHour(8);
+        personThem2.setStartMin(0);
+        personThem2.setEndHour(22);
+        personThem2.setEndMin(0);
+        personThem2.setDisplayNotifications(true);
+        personThem2.setActive(true);
+        personThem2.setColorID(3);
+        personThem2.setMe(false);
+        create(personThem2);
+
+        //them 1
+        Person personThem3 = new Person();
+        personThem3.setPersonName("Them 3");
+        personThem3.setCityID(210); //zurich
+        personThem3.setStartHour(8);
+        personThem3.setStartMin(0);
+        personThem3.setEndHour(22);
+        personThem3.setEndMin(0);
+        personThem3.setDisplayNotifications(true);
+        personThem3.setActive(true);
+        personThem3.setColorID(4);
+        personThem3.setMe(false);
+        create(personThem3);
+    }
+
+    public City getCityById(long cityID) {
+        Cursor cursor = database.query(DBOpenHelper.TABLE_CITIES, DBOpenHelper.TABLE_CITIES_COLUMNS,
+                DBOpenHelper.COLUMN_CITYID + " = " + cityID, null, null, null, null);
+
+        City city = new City();
+
+        if (cursor.getCount() != 0) {
+            city.setCityID(cursor.getLong(cursor.getColumnIndex(DBOpenHelper.COLUMN_CITYID)));
+            city.setCityName(cursor.getString(cursor.getColumnIndex(DBOpenHelper.COLUMN_CITYNAME)));
+            city.setContinentID(cursor.getLong(cursor.getColumnIndex(DBOpenHelper.COLUMN_CONTINENTID)));
+            city.setCountryID(cursor.getLong(cursor.getColumnIndex(DBOpenHelper.COLUMN_COUNTRYID)));
+            city.setRegionID(cursor.getLong(cursor.getColumnIndex(DBOpenHelper.COLUMN_REGIONID)));
+            city.setTimeZoneID(cursor.getLong(cursor.getColumnIndex(DBOpenHelper.COLUMN_TIMEZONEID)));
+        }
+
+        return city;
+    }
+
+    public Country getCountryById(long countryID) {
+        Cursor cursor = database.query(DBOpenHelper.TABLE_COUNTRIES, DBOpenHelper.TABLE_COUNTRIES_COLUMNS,
+                DBOpenHelper.COLUMN_COUNTRYID + " = " + countryID, null, null, null, null);
+
+        Country country = new Country();
+
+        if (cursor.getCount() != 0) {
+            country.setCountryID(cursor.getLong(cursor.getColumnIndex(DBOpenHelper.COLUMN_COUNTRYID)));
+            country.setCountryName(cursor.getString(cursor.getColumnIndex(DBOpenHelper.COLUMN_COUNTRYNAME)));
+
+            if (cursor.getInt(cursor.getColumnIndex(DBOpenHelper.COLUMN_USESREGIONS)) == 1) {
+                country.setUsesRegions(true);
+            } else {
+                country.setUsesRegions(false);
+            }
+
+            country.setFlagPath(cursor.getString(cursor.getColumnIndex(DBOpenHelper.COLUMN_FLAGPATH)));
+        }
+
+        return country;
     }
 }

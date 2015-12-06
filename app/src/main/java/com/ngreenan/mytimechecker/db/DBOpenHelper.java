@@ -146,6 +146,66 @@ public class DBOpenHelper extends SQLiteOpenHelper {
             COLUMN_ME
     };
 
+    //views
+    public static final String VIEW_PERSONDETAILS = "personDetails";
+    private static final String VIEW_PERSONDETAILS_CREATE =
+            "CREATE VIEW " + VIEW_PERSONDETAILS + " AS SELECT p." + COLUMN_PERSONID
+                    + ", p." + COLUMN_PERSONNAME
+                    + ", p." + COLUMN_STARTHOUR
+                    + ", p." + COLUMN_STARTMIN
+                    + ", p." + COLUMN_ENDHOUR
+                    + ", p." + COLUMN_ENDMIN
+                    + ", p." + COLUMN_DISPLAYNOTIFICATIONS
+                    + ", p." + COLUMN_ACTIVE
+                    + ", p." + COLUMN_COLORID
+                    + ", p." + COLUMN_ME
+                    + ", cn." + COLUMN_CONTINENTID
+                    + ", co." + COLUMN_COUNTRYID
+                    + ", ct." + COLUMN_CITYID
+                    + ", r." + COLUMN_REGIONID
+                    + ", tz." + COLUMN_TIMEZONEID
+                    + ", cn." + COLUMN_CONTINENTNAME
+                    + ", co." + COLUMN_COUNTRYNAME
+                    + ", co." + COLUMN_USESREGIONS
+                    + ", co." + COLUMN_FLAGPATH
+                    + ", r." + COLUMN_REGIONNAME
+                    + ", tz." + COLUMN_TIMEZONENAME
+                    + ", ct." + COLUMN_CITYNAME
+                    + " from " + TABLE_PERSONS
+                    + " p left join " + TABLE_CITIES
+                    + " ct on p." + COLUMN_CITYID + " = ct." + COLUMN_CITYID
+                    + " left join " + TABLE_CONTINENTS
+                    + " cn on ct." + COLUMN_CONTINENTID + " = cn." + COLUMN_CONTINENTID
+                    + " left join " + TABLE_COUNTRIES
+                    + " co on ct." + COLUMN_COUNTRYID + " = co." + COLUMN_COUNTRYID
+                    + " left join " + TABLE_REGIONS
+                    + " r on ct." + COLUMN_REGIONID + " = r." + COLUMN_REGIONID
+                    + " left join " + TABLE_TIMEZONES
+                    + " tz on ct." + COLUMN_TIMEZONEID + " = tz." + COLUMN_TIMEZONEID + ";";
+    public static final String[] VIEW_PERSONDETAILS_COLUMNS = {
+            COLUMN_PERSONID,
+                    COLUMN_PERSONNAME,
+                    COLUMN_STARTHOUR,
+                    COLUMN_STARTMIN,
+                    COLUMN_ENDHOUR,
+                    COLUMN_ENDMIN,
+                    COLUMN_DISPLAYNOTIFICATIONS,
+                    COLUMN_ACTIVE,
+                    COLUMN_COLORID,
+                    COLUMN_ME,
+                    COLUMN_CONTINENTID,
+                    COLUMN_COUNTRYID,
+                    COLUMN_CITYID,
+                    COLUMN_REGIONID,
+                    COLUMN_TIMEZONEID,
+                    COLUMN_CONTINENTNAME,
+                    COLUMN_COUNTRYNAME,
+                    COLUMN_USESREGIONS,
+                    COLUMN_FLAGPATH,
+                    COLUMN_REGIONNAME,
+                    COLUMN_TIMEZONENAME,
+                    COLUMN_CITYNAME
+    };
 
     //default constructor
     public DBOpenHelper(Context context) {
@@ -168,6 +228,10 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         Log.i(LOGTAG, "Created cities table");
         db.execSQL(TABLE_PERSONS_CREATE);
         Log.i(LOGTAG, "Created persons table");
+
+        //create views
+        db.execSQL(VIEW_PERSONDETAILS_CREATE);
+        Log.i(LOGTAG, "Created PersonDetails view");
 
         Log.i(LOGTAG, "Database created");
     }

@@ -34,7 +34,7 @@ public class RegionsJDOMParser {
         List<Region> regions = new ArrayList<>();
 
         try {
-            Document document = (Document) builder.build(stream);
+            Document document = builder.build(stream);
             Element rootNode = document.getRootElement();
             List<Element> list = rootNode.getChildren(REGION_TAG);
 

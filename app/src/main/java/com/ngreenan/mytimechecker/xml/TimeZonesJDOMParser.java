@@ -34,7 +34,7 @@ public class TimeZonesJDOMParser {
         List<TimeZone> timeZones = new ArrayList<>();
 
         try {
-            Document document = (Document) builder.build(stream);
+            Document document = builder.build(stream);
             Element rootNode = document.getRootElement();
             List<Element> list = rootNode.getChildren(TIMEZONE_TAG);
 

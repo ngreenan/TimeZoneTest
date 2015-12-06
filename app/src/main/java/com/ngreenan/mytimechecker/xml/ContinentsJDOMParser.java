@@ -33,7 +33,7 @@ public class ContinentsJDOMParser {
         List<Continent> continents = new ArrayList<>();
         
         try {
-            Document document = (Document) builder.build(stream); 
+            Document document = builder.build(stream);
             org.jdom2.Element rootNode = document.getRootElement();
             List<org.jdom2.Element> list = rootNode.getChildren(CONTINENT_TAG);
 

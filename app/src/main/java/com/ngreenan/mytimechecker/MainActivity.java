@@ -265,23 +265,23 @@ public class MainActivity extends AppCompatActivity {
         pieChart.setTheirEndTime(theirEndHour - theirOffset, theirEndMin);
 
         //set button text
-        Button button = (Button) findViewById(R.id.myStartButton);
-        button.setText(String.format("%02d", myStartHour) + ":" + String.format("%02d", myStartMin));
+        //Button button = (Button) findViewById(R.id.myStartButton);
+        //button.setText(String.format("%02d", myStartHour) + ":" + String.format("%02d", myStartMin));
 
-        button = (Button) findViewById(R.id.myEndButton);
-        button.setText(String.format("%02d", myEndHour) + ":" + String.format("%02d", myEndMin));
+        //button = (Button) findViewById(R.id.myEndButton);
+        //button.setText(String.format("%02d", myEndHour) + ":" + String.format("%02d", myEndMin));
 
-        button = (Button) findViewById(R.id.theirStartButton);
-        button.setText(String.format("%02d", theirStartHour) + ":" + String.format("%02d", theirStartMin));
+        //button = (Button) findViewById(R.id.theirStartButton);
+        //button.setText(String.format("%02d", theirStartHour) + ":" + String.format("%02d", theirStartMin));
 
-        button = (Button) findViewById(R.id.theirEndButton);
-        button.setText(String.format("%02d", theirEndHour) + ":" + String.format("%02d", theirEndMin));
+        //button = (Button) findViewById(R.id.theirEndButton);
+        //button.setText(String.format("%02d", theirEndHour) + ":" + String.format("%02d", theirEndMin));
 
-        TextView textView;// = (TextView) findViewById(R.id.myTimeZone);
+        //TextView textView;// = (TextView) findViewById(R.id.myTimeZone);
         //textView.setText(deriveTimeZone(myOffset));
 
-        textView = (TextView) findViewById(R.id.theirTimeZone);
-        textView.setText(deriveTimeZone(theirOffset));
+        //textView = (TextView) findViewById(R.id.theirTimeZone);
+        //textView.setText(deriveTimeZone(theirOffset));
 
         displayTimes(Calendar.getInstance());
     }
@@ -337,22 +337,22 @@ public class MainActivity extends AppCompatActivity {
 
         //work out which time we're changing from the id of the Button pressed
         switch (view.getId()) {
-            case R.id.myStartButton:
-                hour = myStartHour;
-                minute = myStartMin;
-                break;
-            case R.id.myEndButton:
-                hour = myEndHour;
-                minute = myEndMin;
-                break;
-            case R.id.theirStartButton:
-                hour = theirStartHour;
-                minute = theirStartMin;
-                break;
-            case R.id.theirEndButton:
-                hour = theirEndHour;
-                minute = theirEndMin;
-                break;
+//            case R.id.myStartButton:
+//                hour = myStartHour;
+//                minute = myStartMin;
+//                break;
+//            case R.id.myEndButton:
+//                hour = myEndHour;
+//                minute = myEndMin;
+//                break;
+//            case R.id.theirStartButton:
+//                hour = theirStartHour;
+//                minute = theirStartMin;
+//                break;
+//            case R.id.theirEndButton:
+//                hour = theirEndHour;
+//                minute = theirEndMin;
+//                break;
         }
 
         //launch our TimePickerDialog
@@ -365,38 +365,38 @@ public class MainActivity extends AppCompatActivity {
                 //for each we will set the variables to the new value
                 //but also update the XML preferences so that when we reload the app, it'll remember what times we chose
                 switch (view.getId()) {
-                    case R.id.myStartButton:
-                        //variables
-                        myStartHour = selectedHour;
-                        myStartMin = selectedMinute;
-                        //XML preferences
-                        setXMLPreference(MYSTARTHOUR, selectedHour);
-                        setXMLPreference(MYSTARTMIN, selectedMinute);
-                        break;
-                    case R.id.myEndButton:
-                        //variables
-                        myEndHour = selectedHour;
-                        myEndMin = selectedMinute;
-                        //XML preferences
-                        setXMLPreference(MYENDHOUR, selectedHour);
-                        setXMLPreference(MYENDMIN, selectedMinute);
-                        break;
-                    case R.id.theirStartButton:
-                        //variables
-                        theirStartHour = selectedHour;
-                        theirStartMin = selectedMinute;
-                        //XML preferences
-                        setXMLPreference(THEIRSTARTHOUR, selectedHour);
-                        setXMLPreference(THEIRSTARTMIN, selectedMinute);
-                        break;
-                    case R.id.theirEndButton:
-                        //variables
-                        theirEndHour = selectedHour;
-                        theirEndMin = selectedMinute;
-                        //XML preferences
-                        setXMLPreference(THEIRENDHOUR, selectedHour);
-                        setXMLPreference(THEIRENDMIN, selectedMinute);
-                        break;
+//                    case R.id.myStartButton:
+//                        //variables
+//                        myStartHour = selectedHour;
+//                        myStartMin = selectedMinute;
+//                        //XML preferences
+//                        setXMLPreference(MYSTARTHOUR, selectedHour);
+//                        setXMLPreference(MYSTARTMIN, selectedMinute);
+//                        break;
+//                    case R.id.myEndButton:
+//                        //variables
+//                        myEndHour = selectedHour;
+//                        myEndMin = selectedMinute;
+//                        //XML preferences
+//                        setXMLPreference(MYENDHOUR, selectedHour);
+//                        setXMLPreference(MYENDMIN, selectedMinute);
+//                        break;
+//                    case R.id.theirStartButton:
+//                        //variables
+//                        theirStartHour = selectedHour;
+//                        theirStartMin = selectedMinute;
+//                        //XML preferences
+//                        setXMLPreference(THEIRSTARTHOUR, selectedHour);
+//                        setXMLPreference(THEIRSTARTMIN, selectedMinute);
+//                        break;
+//                    case R.id.theirEndButton:
+//                        //variables
+//                        theirEndHour = selectedHour;
+//                        theirEndMin = selectedMinute;
+//                        //XML preferences
+//                        setXMLPreference(THEIRENDHOUR, selectedHour);
+//                        setXMLPreference(THEIRENDMIN, selectedMinute);
+//                        break;
                 }
 
                 setTimes();
@@ -429,14 +429,14 @@ public class MainActivity extends AppCompatActivity {
 //                myOffset--;
 //                setXMLPreference(MYOFFSET, myOffset);
 //                break;
-            case R.id.theirPlus:
-                theirOffset++;
-                setXMLPreference(THEIROFFSET, theirOffset);
-                break;
-            case R.id.theirMinus:
-                theirOffset--;
-                setXMLPreference(THEIROFFSET, theirOffset);
-                break;
+//            case R.id.theirPlus:
+//                theirOffset++;
+//                setXMLPreference(THEIROFFSET, theirOffset);
+//                break;
+//            case R.id.theirMinus:
+//                theirOffset--;
+//                setXMLPreference(THEIROFFSET, theirOffset);
+//                break;
         }
 
         //do we need to disable anything?
@@ -451,12 +451,12 @@ public class MainActivity extends AppCompatActivity {
         //button.setEnabled(myOffset > -12);
 
         //theirPlus
-        button = (Button) findViewById(R.id.theirPlus);
-        button.setEnabled(theirOffset < 14);
+//        button = (Button) findViewById(R.id.theirPlus);
+//        button.setEnabled(theirOffset < 14);
 
         //theirMinus
-        button = (Button) findViewById(R.id.theirMinus);
-        button.setEnabled(theirOffset > -12);
+//        button = (Button) findViewById(R.id.theirMinus);
+//        button.setEnabled(theirOffset > -12);
 
         setTimes();
     }
@@ -500,5 +500,11 @@ public class MainActivity extends AppCompatActivity {
         } else {
             isCrossOver = false;
         }
+    }
+
+    public void viewDetail(View view) {
+        //this will open a new view - not going to pass anything over, just a simple "load new view" intent
+        Intent detailIntent = new Intent(this, DetailActivity.class);
+        startActivity(detailIntent);
     }
 }

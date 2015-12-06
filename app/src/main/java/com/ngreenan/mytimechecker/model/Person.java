@@ -103,4 +103,9 @@ public class Person {
     public void setMe(boolean me) {
         this.me = me;
     }
+
+    @Override
+    public String toString() {
+        return personName;
+    }
 }
