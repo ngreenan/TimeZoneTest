@@ -1,9 +1,12 @@
 package com.ngreenan.mytimechecker.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Nick on 06/12/2015.
  */
-public class PersonDetail {
+public class PersonDetail implements Parcelable {
     private long personID;
     private String personName;
     private long cityID;
@@ -213,4 +216,89 @@ public class PersonDetail {
         return personName;
     }
 
+    //default constructor
+    public PersonDetail() {
+    }
+
+    //parcel constructor
+    public PersonDetail(Parcel in) {
+        personID = in.readLong();
+        personName = in.readString();
+        cityID = in.readLong();
+        startHour = in.readInt();
+        startMin = in.readInt();
+        endHour = in.readInt();
+        endMin = in.readInt();
+        displayNotifications = in.readByte() != 0;
+        active = in.readByte() != 0;
+        colorID = in.readInt();
+        me = in.readByte() != 0;
+
+        cityName = in.readString();
+        continentID = in.readLong();
+        countryID = in.readLong();
+        regionID = in.readLong();
+        timeZoneID = in.readLong();
+
+        continentName = in.readString();
+
+        countryName = in.readString();
+        usesRegions = in.readByte() != 0;
+        flagPath = in.readString();
+
+        regionName = in.readString();
+
+        timeZoneName = in.readString();
+    }
+
+    //implement Parcelable
+    @Override
+    public int describeContents() {
+        //not a complex item - don't need to describe anything
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(personID);
+        dest.writeString(personName);
+        dest.writeLong(cityID);
+        dest.writeInt(startHour);
+        dest.writeInt(startMin);
+        dest.writeInt(endHour);
+        dest.writeInt(endMin);
+        dest.writeByte((byte) (displayNotifications ? 1 : 0));
+        dest.writeByte((byte) (active ? 1 : 0));
+        dest.writeInt(colorID);
+        dest.writeByte((byte) (me ? 1 : 0));
+
+        dest.writeString(cityName);
+        dest.writeLong(continentID);
+        dest.writeLong(countryID);
+        dest.writeLong(regionID);
+        dest.writeLong(timeZoneID);
+
+        dest.writeString(continentName);
+
+        dest.writeString(countryName);
+        dest.writeByte((byte) (usesRegions ? 1 : 0));
+        dest.writeString(flagPath);
+
+        dest.writeString(regionName);
+
+        dest.writeString(timeZoneName);
+    }
+
+    public static final Parcelable.Creator<PersonDetail> CREATOR = new Parcelable.Creator<PersonDetail>() {
+
+        @Override
+        public PersonDetail createFromParcel(Parcel source) {
+            return new PersonDetail(source);
+        }
+
+        @Override
+        public PersonDetail[] newArray(int size) {
+            return new PersonDetail[size];
+        }
+    };
 }
