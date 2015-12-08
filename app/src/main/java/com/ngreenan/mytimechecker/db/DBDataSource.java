@@ -541,7 +541,7 @@ public class DBDataSource {
         personThem2.setEndHour(22);
         personThem2.setEndMin(0);
         personThem2.setDisplayNotifications(true);
-        personThem2.setActive(true);
+        personThem2.setActive(false);
         personThem2.setColorID(3);
         personThem2.setMe(false);
         create(personThem2);
@@ -599,5 +599,18 @@ public class DBDataSource {
         }
 
         return country;
+    }
+
+    public void setActive(long personID, boolean active) {
+        ContentValues values = new ContentValues();
+        values.put(DBOpenHelper.COLUMN_ACTIVE, active);
+        database.update(DBOpenHelper.TABLE_PERSONS, values, DBOpenHelper.COLUMN_PERSONID + " = " + String.valueOf(personID), null);
+    }
+
+
+    public void updateName(long personID, String personName) {
+        ContentValues values = new ContentValues();
+        values.put(DBOpenHelper.COLUMN_PERSONNAME, personName);
+        database.update(DBOpenHelper.TABLE_PERSONS, values, DBOpenHelper.COLUMN_PERSONID + " = " + String.valueOf(personID), null);
     }
 }

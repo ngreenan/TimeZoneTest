@@ -21,7 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:id="@+id/myDetailsListView"
-        android:layout_below="@+id/myDetailsHeader" />
+        android:layout_below="@+id/myDetailsHeader"
+        tools:listitem="@layout/person_list_item" />
 
     <TextView
         android:layout_width="match_parent"
@@ -35,14 +36,17 @@
         android:layout_height="wrap_content"
         android:id="@+id/theirDetailsListView"
         android:layout_below="@+id/theirDetailsHeader"
-        android:layout_above="@+id/backButton"/>
+        android:layout_above="@+id/helpText"
+        tools:listitem="@layout/person_list_item" />
 
-    <Button
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="back"
         android:onClick="viewMain"
-        android:id="@+id/backButton"/>
+        android:id="@+id/helpText"
+        android:text="Tap to edit, long press to enable/disable"
+        android:gravity="center"
+        android:layout_marginTop="2dp"/>
 
 </RelativeLayout>

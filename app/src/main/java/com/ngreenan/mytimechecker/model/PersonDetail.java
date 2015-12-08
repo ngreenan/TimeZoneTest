@@ -107,6 +107,8 @@ public class PersonDetail implements Parcelable {
         this.active = active;
     }
 
+    public void toggleActive() { this.active = !this.active; }
+
     public int getColorID() {
         return colorID;
     }

@@ -1,17 +1,22 @@
 package com.ngreenan.mytimechecker;
 
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.ngreenan.mytimechecker.db.DBDataSource;
+import com.ngreenan.mytimechecker.model.Continent;
 import com.ngreenan.mytimechecker.model.Person;
 import com.ngreenan.mytimechecker.model.PersonDetail;
 
+import java.lang.reflect.Array;
 import java.util.List;
 
 public class DetailActivity extends AppCompatActivity {
@@ -60,7 +65,9 @@ public class DetailActivity extends AppCompatActivity {
         myDetailsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(DetailActivity.this, "you clicked on " + myDetails.get(position).getPersonName(), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(view.getContext(), PersonActivity.class);
+                intent.putExtra("personDetail", myDetails.get(position));
+                startActivityForResult(intent,0);
             }
         });
 
@@ -70,7 +77,7 @@ public class DetailActivity extends AppCompatActivity {
         myDetailsListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(DetailActivity.this, "you long clicked on " + myDetails.get(position).getPersonName(), Toast.LENGTH_LONG).show();
+                Toast.makeText(DetailActivity.this, "You cannot disable yourself!", Toast.LENGTH_LONG).show();
                 return true;
             }
         });
@@ -79,7 +86,13 @@ public class DetailActivity extends AppCompatActivity {
         theirDetailsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(DetailActivity.this, "you clicked on " + myFriendDetails.get(position).getPersonName(), Toast.LENGTH_LONG).show();
+                try {
+                    Intent intent = new Intent(DetailActivity.this, PersonActivity.class);
+                    intent.putExtra("personDetail", myFriendDetails.get(position));
+                    startActivityForResult(intent, 0);
+                } catch (Exception e) {
+                    Toast.makeText(view.getContext(), "whoa", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -89,10 +102,32 @@ public class DetailActivity extends AppCompatActivity {
         theirDetailsListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(DetailActivity.this, "you long clicked on " + myFriendDetails.get(position).getPersonName(), Toast.LENGTH_LONG).show();
+
+                //get the PersonDetail we clicked on
+                PersonDetail personDetail = myFriendDetails.get(position);
+
+                //toggle Active
+                personDetail.toggleActive();
+
+                //save change to database - async so there's no lag on the front end
+                new SetActiveTask().execute(personDetail);
+
+                //reload the ListView
+                ((BaseAdapter) theirDetailsListView.getAdapter()).notifyDataSetChanged();
+
+                //mark the click as handled
                 return true;
             }
         });
+    }
+
+    private class SetActiveTask extends AsyncTask<PersonDetail, Integer, Long> {
+
+        @Override
+        protected Long doInBackground(PersonDetail... detail) {
+            datasource.setActive(detail[0].getPersonID(), detail[0].isActive());
+            return null;
+        }
     }
 
     public void viewMain(View view) {

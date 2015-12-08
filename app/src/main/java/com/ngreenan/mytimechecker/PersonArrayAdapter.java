@@ -27,6 +27,12 @@ public class PersonArrayAdapter extends ArrayAdapter<PersonDetail> {
     int layoutID;
     DBDataSource database;
 
+    //controls
+    TextView personName;
+    TextView personDetails;
+    TextView personColor;
+    ImageView personFlag;
+
     public PersonArrayAdapter(Context context, int resource, List<PersonDetail> objects) {
         super(context, resource, objects);
 
@@ -53,11 +59,11 @@ public class PersonArrayAdapter extends ArrayAdapter<PersonDetail> {
         //and now we can plug stuff from the Person object we have into our View and its objects
 
         //name
-        TextView personName = (TextView) view.findViewById(R.id.personName);
+        personName = (TextView) view.findViewById(R.id.personName);
         personName.setText(person.getPersonName());
 
         //details
-        TextView personDetails = (TextView) view.findViewById(R.id.personDetails);
+        personDetails = (TextView) view.findViewById(R.id.personDetails);
         String detailsString = String.format("%02d", person.getStartHour());
         detailsString += ":";
         detailsString += String.format("%02d", person.getStartMin());
@@ -78,7 +84,7 @@ public class PersonArrayAdapter extends ArrayAdapter<PersonDetail> {
         personDetails.setText(detailsString);
 
         //color
-        TextView personColor = (TextView) view.findViewById(R.id.personColor);
+        personColor = (TextView) view.findViewById(R.id.personColor);
         int colorID = context.getResources().getIdentifier("color" + person.getColorID(), "color", context.getPackageName());
 
         if (colorID != 0) {
@@ -86,7 +92,7 @@ public class PersonArrayAdapter extends ArrayAdapter<PersonDetail> {
         }
 
         //flag
-        ImageView personFlag = (ImageView) view.findViewById(R.id.personFlag);
+        personFlag = (ImageView) view.findViewById(R.id.personFlag);
         String flagPath = person.getFlagPath();
 
         if (flagPath.contains(".png")) {
@@ -98,6 +104,21 @@ public class PersonArrayAdapter extends ArrayAdapter<PersonDetail> {
             personFlag.setImageResource(imageID);
         }
 
+        //active overlay
+        //TextView personActive = (TextView) view.findViewById(R.id.personActive);
+        if (person.isActive()) {
+            setAlphas(1F);
+        } else {
+            setAlphas(0.3F);
+        }
+
         return view;
+    }
+
+    private void setAlphas(float v) {
+        personName.setAlpha(v);
+        personDetails.setAlpha(v);
+        personColor.setAlpha(v);
+        personFlag.setAlpha(v);
     }
 }
