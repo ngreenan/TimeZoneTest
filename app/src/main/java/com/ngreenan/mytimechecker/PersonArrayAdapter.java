@@ -95,7 +95,7 @@ public class PersonArrayAdapter extends ArrayAdapter<PersonDetail> {
         personFlag = (ImageView) view.findViewById(R.id.personFlag);
         String flagPath = person.getFlagPath();
 
-        if (flagPath.contains(".png")) {
+        if (flagPath != null && flagPath.contains(".png")) {
             flagPath = flagPath.substring(0, flagPath.length() - 4);
         }
 

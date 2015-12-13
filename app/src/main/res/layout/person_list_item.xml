@@ -22,7 +22,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
         android:text="Nick Greenan"
-        android:textSize="25dp"
+        android:textSize="24sp"
         android:textColor="#000000"
         android:id="@+id/personName"
         android:maxLines="1"

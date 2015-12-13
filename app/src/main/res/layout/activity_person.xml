@@ -1,38 +1,309 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.ngreenan.mytimechecker.PersonActivity">
 
-    <TextView android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Name"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignBottom="@+id/nameEditText"
-        android:gravity="center"
-        android:id="@+id/nameTextView"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
 
-    <EditText android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@+id/nameTextView"
-        android:layout_toEndOf="@+id/nameTextView"
-        android:id="@+id/nameEditText"
-        android:layout_marginLeft="5dp"/>
+        <!--dummy button to throw the focus-->
+        <Button android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"/>
 
-    <!--<Button android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="SAVE CHANGES"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:onClick="saveChanges"/>-->
+        <TextView
+            android:id="@+id/nameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:text="Name" />
 
-</RelativeLayout>
+        <EditText
+            android:id="@+id/nameEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/nameTextView" />
+
+
+        <TextView
+            android:id="@+id/startTimeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/nameEditText"
+            android:gravity="center_vertical"
+            android:text="Start Time" />
+
+        <Button
+            android:id="@+id/startTimeButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/startTimeTextView"
+            android:onClick="getTime"
+            android:text="00:00" />
+
+        <TextView
+            android:id="@+id/endTimeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/startTimeButton"
+            android:gravity="center_vertical"
+            android:text="End Time" />
+
+        <Button
+            android:id="@+id/endTimeButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/endTimeTextView"
+            android:onClick="getTime"
+            android:text="00:00" />
+
+        <TextView
+            android:id="@+id/continentTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/endTimeButton"
+            android:gravity="center_vertical"
+            android:text="Continent" />
+
+        <Spinner
+            android:id="@+id/continentSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/continentTextView"
+            android:gravity="center_vertical"
+            android:text="Continent" />
+
+        <TextView
+            android:id="@+id/countryTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/continentSpinner"
+            android:gravity="center_vertical"
+            android:text="Country" />
+
+        <Spinner
+            android:id="@+id/countrySpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/countryTextView"
+            android:gravity="center_vertical"
+            android:text="Continent" />
+
+        <TextView
+            android:id="@+id/regionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/countrySpinner"
+            android:gravity="center_vertical"
+            android:text="Region" />
+
+        <Spinner
+            android:id="@+id/regionSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/regionTextView"
+            android:gravity="center_vertical"
+            android:text="Continent" />
+
+        <TextView
+            android:id="@+id/cityTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/regionSpinner"
+            android:gravity="center_vertical"
+            android:text="City" />
+
+        <Spinner
+            android:id="@+id/citySpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/cityTextView"
+            android:gravity="center_vertical"
+            android:text="Continent" />
+
+        <TextView
+            android:id="@+id/notifyTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/citySpinner"
+            android:gravity="center_vertical"
+            android:text="Display Notifications" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/notifyTextView"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:id="@+id/notifyRadioGroup">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yes"
+                android:id="@+id/notifyRadioYes"
+                android:onClick="onRadioClicked"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="No"
+                android:id="@+id/notifyRadioNo"
+                android:onClick="onRadioClicked"/>
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/activeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/notifyRadioGroup"
+            android:gravity="center_vertical"
+            android:text="Active" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/activeTextView"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:id="@+id/activeRadioGroup">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yes"
+                android:id="@+id/activeRadioYes"
+                android:onClick="onRadioClicked"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="No"
+                android:id="@+id/activeRadioNo"
+                android:onClick="onRadioClicked"/>
+        </RadioGroup>
+
+        <!--colors-->
+        <TextView
+            android:id="@+id/colorTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/activeRadioGroup"
+            android:gravity="center_vertical"
+            android:text="Color" />
+        
+        <com.ngreenan.mytimechecker.picker.LineColorPicker
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:id="@+id/colorPicker"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/colorTextView"
+            android:layout_margin="5dp"
+            app:orientation="horizontal"
+            app:colors="@array/colors"
+            app:selectedColorIndex="0"
+            />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/deleteButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/colorPicker"
+            android:onClick="deletePerson"
+            android:text="delete"
+            style="@style/BrandButtonStyle"
+            />
+
+    </RelativeLayout>
+</ScrollView>

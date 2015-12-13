@@ -303,6 +303,16 @@ public class DBDataSource {
         return persons;
     }
 
+    public List<Person> getActivePersons() {
+        //returns all rows from Persons table where Active = 1
+        Cursor cursor = database.query(DBOpenHelper.TABLE_PERSONS, DBOpenHelper.TABLE_PERSONS_COLUMNS,
+                DBOpenHelper.COLUMN_ACTIVE + " = 1", null, null, null, null);
+
+        Log.i(LOGTAG, "Returned " + cursor.getCount() + " persons");
+        List<Person> persons = getPersonList(cursor);
+        return persons;
+    }
+
     private List<Person> getPersonList(Cursor cursor) {
         List<Person> persons = new ArrayList<Person>();
 
@@ -613,4 +623,67 @@ public class DBDataSource {
         values.put(DBOpenHelper.COLUMN_PERSONNAME, personName);
         database.update(DBOpenHelper.TABLE_PERSONS, values, DBOpenHelper.COLUMN_PERSONID + " = " + String.valueOf(personID), null);
     }
+
+    public List<Country> getCountriesByContinentID(long continentID) {
+        Cursor cursor = database.rawQuery("select * from countries where countryID in (select distinct countryID from cities where continentID = " + String.valueOf(continentID) + ") order by countryName", null);
+
+        Log.i(LOGTAG, "Returned " + cursor.getCount() + " countries");
+        List<Country> countries = getCountryList(cursor);
+        return countries;
+    }
+
+    public List<Region> getRegionsByCountryID(long countryID) {
+        Cursor cursor = database.rawQuery("select * from regions where regionID in (select distinct regionID from cities where countryID = " + String.valueOf(countryID) + ") order by regionName", null);
+
+        Log.i(LOGTAG, "Returned " + cursor.getCount() + " regions");
+        List<Region> regions = getRegionList(cursor);
+        return regions;
+    }
+
+    public List<City> getCitiesByCountryID(long countryID) {
+        Cursor cursor = database.rawQuery("select * from cities where countryID = " + String.valueOf(countryID) + " order by cityName", null);
+
+        Log.i(LOGTAG, "Returned " + cursor.getCount() + " cities");
+        List<City> cities = getCityList(cursor);
+        return cities;
+    }
+
+    public List<City> getCitiesByRegionID(long regionID) {
+        Cursor cursor = database.rawQuery("select * from cities where regionID = " + String.valueOf(regionID) + " order by cityName", null);
+
+        Log.i(LOGTAG, "Returned " + cursor.getCount() + " cities");
+        List<City> cities = getCityList(cursor);
+        return cities;
+    }
+
+    public void updatePersonDetails(PersonDetail personDetail) {
+
+        ContentValues values = new ContentValues();
+        //name
+        values.put(DBOpenHelper.COLUMN_PERSONNAME, personDetail.getPersonName());
+
+        //start time
+        values.put(DBOpenHelper.COLUMN_STARTHOUR, personDetail.getStartHour());
+        values.put(DBOpenHelper.COLUMN_STARTMIN , personDetail.getStartMin());
+
+        //end time
+        values.put(DBOpenHelper.COLUMN_ENDHOUR, personDetail.getEndHour());
+        values.put(DBOpenHelper.COLUMN_ENDMIN, personDetail.getEndMin());
+
+        //city
+        values.put(DBOpenHelper.COLUMN_CITYID, personDetail.getCityID());
+
+        //active
+        values.put(DBOpenHelper.COLUMN_ACTIVE, personDetail.isActive());
+
+        //notify
+        values.put(DBOpenHelper.COLUMN_DISPLAYNOTIFICATIONS, personDetail.isDisplayNotifications());
+
+        //color
+        values.put(DBOpenHelper.COLUMN_COLORID, personDetail.getColorID());
+
+        database.update(DBOpenHelper.TABLE_PERSONS, values, DBOpenHelper.COLUMN_PERSONID + " = " + String.valueOf(personDetail.getPersonID()), null);
+    }
+
+
 }

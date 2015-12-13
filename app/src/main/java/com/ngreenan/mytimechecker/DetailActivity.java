@@ -28,6 +28,8 @@ public class DetailActivity extends AppCompatActivity {
     ListView myDetailsListView;
     ListView theirDetailsListView;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

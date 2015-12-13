@@ -89,12 +89,16 @@ public class MainActivity extends AppCompatActivity {
         //get a reference to our SquareLinearLayout, create a PieChart and add it!
         SquareLinearLayout squareLinearLayout = (SquareLinearLayout) findViewById(R.id.squareLayout);
         //RelativeLayout linearLayout = (RelativeLayout) findViewById(R.id.layout);
-        pieChart = new PieChart(this);
-        setTimes();
-        squareLinearLayout.addView(pieChart);
 
         //load data from database
         loadDataFromDatabase();
+
+        pieChart = new PieChart(this);
+
+        setTimes();
+        squareLinearLayout.addView(pieChart);
+
+
 
         //kick off the "timer" to update the rotation of the clock every half second
         timerHandler.postDelayed(timerRunnable, 0);
@@ -107,44 +111,45 @@ public class MainActivity extends AppCompatActivity {
         //continents
         continents = datasource.getAllContinents();
         if (continents.size() == 0) {
+            //generate data
             datasource.createContinentsData(this);
-            continents = datasource.getAllContinents();
-        }
-
-        //countries
-        countries = datasource.getAllCountries();
-        if (countries.size() == 0) {
             datasource.createCountriesData(this);
-            countries = datasource.getAllCountries();
-        }
-
-        //regions
-        regions = datasource.getAllRegions();
-        if (regions.size() == 0) {
             datasource.createRegionsData(this);
-            regions = datasource.getAllRegions();
-        }
-
-        //timezones
-        timeZones = datasource.getAllTimeZones();
-        if (timeZones.size() == 0) {
             datasource.createTimeZonesData(this);
-            timeZones = datasource.getAllTimeZones();
-        }
-
-        //cities
-        cities = datasource.getAllCities();
-        if (cities.size() == 0) {
             datasource.createCitiesData(this);
-            cities = datasource.getAllCities();
+            datasource.createPersonsData();
         }
 
+//        //countries
+//        countries = datasource.getAllCountries();
+//        if (countries.size() == 0) {
+//            datasource.createCountriesData(this);
+//            countries = datasource.getAllCountries();
+//        }
+//
+//        //regions
+//        regions = datasource.getAllRegions();
+//        if (regions.size() == 0) {
+//            datasource.createRegionsData(this);
+//            regions = datasource.getAllRegions();
+//        }
+//
+//        //timezones
+//        timeZones = datasource.getAllTimeZones();
+//        if (timeZones.size() == 0) {
+//            datasource.createTimeZonesData(this);
+//            timeZones = datasource.getAllTimeZones();
+//        }
+//
+//        //cities
+//        cities = datasource.getAllCities();
+//        if (cities.size() == 0) {
+//            datasource.createCitiesData(this);
+//            cities = datasource.getAllCities();
+//        }
+//
         //persons
-        persons = datasource.getAllPersons();
-        if (persons.size() == 0) {
-            datasource.createPersonsData();
-            persons = datasource.getAllPersons();
-        }
+        persons = datasource.getActivePersons();
     }
 
     //runs without a timer by reposting this handler at the end of the runnable
@@ -257,31 +262,20 @@ public class MainActivity extends AppCompatActivity {
 
     private void setTimes() {
         //set my times
-        pieChart.setMyStartTime(myStartHour - myOffset, myStartMin);
-        pieChart.setMyEndTime(myEndHour - myOffset, myEndMin);
+        //pieChart.setMyStartTime(myStartHour - myOffset, myStartMin);
+        //pieChart.setMyEndTime(myEndHour - myOffset, myEndMin);
 
         //set their times
-        pieChart.setTheirStartTime(theirStartHour - theirOffset, theirStartMin);
-        pieChart.setTheirEndTime(theirEndHour - theirOffset, theirEndMin);
-
-        //set button text
-        //Button button = (Button) findViewById(R.id.myStartButton);
-        //button.setText(String.format("%02d", myStartHour) + ":" + String.format("%02d", myStartMin));
-
-        //button = (Button) findViewById(R.id.myEndButton);
-        //button.setText(String.format("%02d", myEndHour) + ":" + String.format("%02d", myEndMin));
-
-        //button = (Button) findViewById(R.id.theirStartButton);
-        //button.setText(String.format("%02d", theirStartHour) + ":" + String.format("%02d", theirStartMin));
-
-        //button = (Button) findViewById(R.id.theirEndButton);
-        //button.setText(String.format("%02d", theirEndHour) + ":" + String.format("%02d", theirEndMin));
+        //pieChart.setTheirStartTime(theirStartHour - theirOffset, theirStartMin);
+        //pieChart.setTheirEndTime(theirEndHour - theirOffset, theirEndMin);
 
         //TextView textView;// = (TextView) findViewById(R.id.myTimeZone);
         //textView.setText(deriveTimeZone(myOffset));
 
         //textView = (TextView) findViewById(R.id.theirTimeZone);
         //textView.setText(deriveTimeZone(theirOffset));
+
+        pieChart.setPeople(persons);
 
         displayTimes(Calendar.getInstance());
     }
@@ -328,82 +322,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         pieChart.setRotation(rotation);
-    }
-
-    public void getTime(final View view) {
-        //load a TimePickerDialog and ask the user for the new time
-        int hour = 0;
-        int minute = 0;
-
-        //work out which time we're changing from the id of the Button pressed
-        switch (view.getId()) {
-//            case R.id.myStartButton:
-//                hour = myStartHour;
-//                minute = myStartMin;
-//                break;
-//            case R.id.myEndButton:
-//                hour = myEndHour;
-//                minute = myEndMin;
-//                break;
-//            case R.id.theirStartButton:
-//                hour = theirStartHour;
-//                minute = theirStartMin;
-//                break;
-//            case R.id.theirEndButton:
-//                hour = theirEndHour;
-//                minute = theirEndMin;
-//                break;
-        }
-
-        //launch our TimePickerDialog
-        TimePickerDialog timePickerDialog;
-        //we need to set a context, an OnTimeSetListener, a start hour, a start minute and whether it's 24 hours or not
-        timePickerDialog = new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                //this gets called when we've picked a time - which values do we want to set??
-                //for each we will set the variables to the new value
-                //but also update the XML preferences so that when we reload the app, it'll remember what times we chose
-                switch (view.getId()) {
-//                    case R.id.myStartButton:
-//                        //variables
-//                        myStartHour = selectedHour;
-//                        myStartMin = selectedMinute;
-//                        //XML preferences
-//                        setXMLPreference(MYSTARTHOUR, selectedHour);
-//                        setXMLPreference(MYSTARTMIN, selectedMinute);
-//                        break;
-//                    case R.id.myEndButton:
-//                        //variables
-//                        myEndHour = selectedHour;
-//                        myEndMin = selectedMinute;
-//                        //XML preferences
-//                        setXMLPreference(MYENDHOUR, selectedHour);
-//                        setXMLPreference(MYENDMIN, selectedMinute);
-//                        break;
-//                    case R.id.theirStartButton:
-//                        //variables
-//                        theirStartHour = selectedHour;
-//                        theirStartMin = selectedMinute;
-//                        //XML preferences
-//                        setXMLPreference(THEIRSTARTHOUR, selectedHour);
-//                        setXMLPreference(THEIRSTARTMIN, selectedMinute);
-//                        break;
-//                    case R.id.theirEndButton:
-//                        //variables
-//                        theirEndHour = selectedHour;
-//                        theirEndMin = selectedMinute;
-//                        //XML preferences
-//                        setXMLPreference(THEIRENDHOUR, selectedHour);
-//                        setXMLPreference(THEIRENDMIN, selectedMinute);
-//                        break;
-                }
-
-                setTimes();
-            }
-        }, hour, minute, true);
-        timePickerDialog.setTitle("Select Time");
-        timePickerDialog.show();
     }
 
     private void setXMLPreference(String key, int value) {

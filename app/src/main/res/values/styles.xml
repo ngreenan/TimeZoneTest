@@ -111,4 +111,9 @@
         <item name="android:layout_marginStart">-5dp</item>
     </style>
 
+    <style name="BrandButtonStyle" parent="Widget.AppCompat.Button.Colored">
+        <item name="colorButtonNormal">@color/yourButtonColor</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
 </resources>
