@@ -15,6 +15,7 @@ import com.ngreenan.mytimechecker.R;
 
 public class LineColorPicker extends View {
 
+	//from https://github.com/DASAR/ShiftColorPicker
 	public static final int HORIZONTAL = 0;
 	public static final int VERTICAL = 1;
 

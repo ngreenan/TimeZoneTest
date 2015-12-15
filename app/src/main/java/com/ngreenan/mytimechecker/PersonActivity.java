@@ -397,7 +397,9 @@ public class PersonActivity extends AppCompatActivity {
         //launch our TimePickerDialog
         TimePickerDialog timePickerDialog;
         //we need to set a context, an OnTimeSetListener, a start hour, a start minute and whether it's 24 hours or not
-        timePickerDialog = new TimePickerDialog(PersonActivity.this, new TimePickerDialog.OnTimeSetListener() {
+        timePickerDialog = new TimePickerDialog(PersonActivity.this,
+                R.style.AppTheme2,
+                new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                 //this gets called when we've picked a time - which values do we want to set??

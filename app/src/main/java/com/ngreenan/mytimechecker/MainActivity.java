@@ -11,6 +11,9 @@ import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.os.Handler;
 import android.widget.Button;
@@ -424,5 +427,22 @@ public class MainActivity extends AppCompatActivity {
         //this will open a new view - not going to pass anything over, just a simple "load new view" intent
         Intent detailIntent = new Intent(this, DetailActivity.class);
         startActivity(detailIntent);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.setup:
+                viewDetail(null);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

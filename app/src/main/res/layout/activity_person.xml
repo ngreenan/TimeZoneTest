@@ -27,7 +27,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:gravity="center"
-            android:text="Name" />
+            android:text="NAME" />
 
         <EditText
             android:id="@+id/nameEditText"
@@ -50,7 +50,7 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/nameEditText"
             android:gravity="center_vertical"
-            android:text="Start Time" />
+            android:text="START TIME" />
 
         <Button
             android:id="@+id/startTimeButton"
@@ -74,7 +74,7 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/startTimeButton"
             android:gravity="center_vertical"
-            android:text="End Time" />
+            android:text="END TIME" />
 
         <Button
             android:id="@+id/endTimeButton"
@@ -98,7 +98,7 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/endTimeButton"
             android:gravity="center_vertical"
-            android:text="Continent" />
+            android:text="CONTINENT" />
 
         <Spinner
             android:id="@+id/continentSpinner"
@@ -110,7 +110,7 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/continentTextView"
             android:gravity="center_vertical"
-            android:text="Continent" />
+            />
 
         <TextView
             android:id="@+id/countryTextView"
@@ -122,7 +122,7 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/continentSpinner"
             android:gravity="center_vertical"
-            android:text="Country" />
+            android:text="COUNTRY" />
 
         <Spinner
             android:id="@+id/countrySpinner"
@@ -133,8 +133,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/countryTextView"
-            android:gravity="center_vertical"
-            android:text="Continent" />
+            android:gravity="center_vertical"/>
 
         <TextView
             android:id="@+id/regionTextView"
@@ -146,7 +145,7 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/countrySpinner"
             android:gravity="center_vertical"
-            android:text="Region" />
+            android:text="REGION" />
 
         <Spinner
             android:id="@+id/regionSpinner"
@@ -157,8 +156,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/regionTextView"
-            android:gravity="center_vertical"
-            android:text="Continent" />
+            android:gravity="center_vertical" />
 
         <TextView
             android:id="@+id/cityTextView"
@@ -170,7 +168,7 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/regionSpinner"
             android:gravity="center_vertical"
-            android:text="City" />
+            android:text="CITY" />
 
         <Spinner
             android:id="@+id/citySpinner"
@@ -181,8 +179,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/cityTextView"
-            android:gravity="center_vertical"
-            android:text="Continent" />
+            android:gravity="center_vertical" />
 
         <TextView
             android:id="@+id/notifyTextView"
@@ -194,7 +191,7 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/citySpinner"
             android:gravity="center_vertical"
-            android:text="Display Notifications" />
+            android:text="DISPLAY NOTIFICATIONS" />
 
         <RadioGroup
             android:layout_width="match_parent"
@@ -233,7 +230,7 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/notifyRadioGroup"
             android:gravity="center_vertical"
-            android:text="Active" />
+            android:text="ENABLED" />
 
         <RadioGroup
             android:layout_width="match_parent"
@@ -273,7 +270,7 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/activeRadioGroup"
             android:gravity="center_vertical"
-            android:text="Color" />
+            android:text="COLOR" />
         
         <com.ngreenan.mytimechecker.picker.LineColorPicker
             xmlns:app="http://schemas.android.com/apk/res-auto"

@@ -231,11 +231,11 @@
         <!--android:onClick="changeOffset"-->
         <!--android:text="@string/minus" />-->
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="setup"
-        android:onClick="viewDetail"/>
+    <!--<Button-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:text="setup"-->
+        <!--android:onClick="viewDetail"/>-->
 
 </RelativeLayout>
