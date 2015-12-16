@@ -686,4 +686,17 @@ public class DBDataSource {
     }
 
 
+    public PersonDetail getPersonDetailsById(long personID) {
+        Cursor cursor = database.query(DBOpenHelper.VIEW_PERSONDETAILS, DBOpenHelper. VIEW_PERSONDETAILS_COLUMNS,
+                DBOpenHelper.COLUMN_PERSONID + " = " + personID, null, null, null, null);
+
+        Log.i(LOGTAG, "Returned " + cursor.getCount() + " personDetails");
+        List<PersonDetail> personDetails = getPersonDetailsList(cursor);
+        return personDetails.get(0);
+    }
+
+    public void deletePersonById(long personID) {
+        database.delete(DBOpenHelper.TABLE_PERSONS, DBOpenHelper.COLUMN_PERSONID + " = " + String.valueOf(personID), null);
+        Log.i(LOGTAG, "Deleted 1 Person");
+    }
 }

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="?attr/dropdownListPreferredItemHeight"
+    android:padding="5dip">
+
+    <TextView android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="5dp"
+        android:gravity="center_vertical"
+        android:text="blah"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:id="@+id/regionName"
+        android:maxLines="1"
+        android:minLines="1"
+        android:ellipsize="end" />
+
+    <!--this is here to maintain a consistent height with the dropdowns that have flags-->
+    <ImageView android:layout_height="30dp"
+        android:layout_width="30dp"
+        android:layout_marginLeft="5dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/regionFlag"
+        android:src="@drawable/unknown"
+        android:visibility="invisible"/>
+
+    <ImageView android:layout_height="30dp"
+        android:layout_width="30dp"
+        android:layout_marginRight="5dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/regionSelected"
+        android:src="@drawable/ic_done_black_48dp" />
+</RelativeLayout>

@@ -53,6 +53,7 @@ public class PersonActivity extends AppCompatActivity {
     TextView regionTextView;
     TextView activeTextView;
     RadioGroup activeRadioGroup;
+    Button deleteButton;
 
     private List<Continent> continents;
     private List<Country> countries;
@@ -98,15 +99,18 @@ public class PersonActivity extends AppCompatActivity {
         activeRadioYes.setChecked(personDetail.isActive());
         activeRadioNo.setChecked(!personDetail.isActive());
 
-        //if it's you, you can't use active/deactive
+        //if it's you, you can't use active/deactive, can't delete self
         activeRadioGroup = (RadioGroup) findViewById(R.id.activeRadioGroup);
         activeTextView = (TextView) findViewById(R.id.activeTextView);
+        deleteButton = (Button) findViewById(R.id.deleteButton);
         if (personDetail.isMe()) {
             activeRadioGroup.setVisibility(View.GONE);
             activeTextView.setVisibility(View.GONE);
+            deleteButton.setVisibility(View.GONE);
         } else {
             activeRadioGroup.setVisibility(View.VISIBLE);
             activeTextView.setVisibility(View.VISIBLE);
+            deleteButton.setVisibility(View.VISIBLE);
         }
 
 
@@ -142,8 +146,8 @@ public class PersonActivity extends AppCompatActivity {
 
         //plug continents into spinner
         continentSpinner = (Spinner) findViewById(R.id.continentSpinner);
-        ArrayAdapter<Continent> continentArrayAdapter = new ArrayAdapter<Continent>(this, android.R.layout.simple_spinner_item, continents);
-        continentArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ContinentArrayAdapter continentArrayAdapter = new ContinentArrayAdapter(this, R.layout.continent_spinner_item, continents);
+        continentArrayAdapter.setDropDownViewResource(R.layout.continent_spinner_item);
         continentSpinner.setAdapter(continentArrayAdapter);
 
         //set selected continent
@@ -152,11 +156,14 @@ public class PersonActivity extends AppCompatActivity {
             int position = 0;
             for(Continent continent : continents) {
                 if (continent.getContinentID() == personDetail.getContinentID()) {
-                    continentSpinner.setSelection(continentArrayAdapter.getPosition(continent));
+                    int i = continentArrayAdapter.getPosition(continent);
+                    continentSpinner.setSelection(i);
+                    continentArrayAdapter.setSelectedIndex(i);
                 }
             }
         } else {
             continentSpinner.setSelection(0);
+            continentArrayAdapter.setSelectedIndex(0);
         }
 
         //countries
@@ -176,8 +183,8 @@ public class PersonActivity extends AppCompatActivity {
         //countries.set(0,selectCountry);
 
         countrySpinner = (Spinner) findViewById(R.id.countrySpinner);
-        ArrayAdapter<Country> countryArrayAdapter = new ArrayAdapter<Country>(this, android.R.layout.simple_spinner_item, countries);
-        countryArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        CountryArrayAdapter countryArrayAdapter = new CountryArrayAdapter(this, R.layout.country_spinner_item, countries);
+        countryArrayAdapter.setDropDownViewResource(R.layout.country_spinner_item);
         countrySpinner.setAdapter(countryArrayAdapter);
 
         //set selected country
@@ -186,11 +193,14 @@ public class PersonActivity extends AppCompatActivity {
             int position = 0;
             for(Country country : countries) {
                 if (country.getCountryID() == personDetail.getCountryID()) {
-                    countrySpinner.setSelection(countryArrayAdapter.getPosition(country));
+                    int i = countryArrayAdapter.getPosition(country);
+                    countrySpinner.setSelection(i);
+                    countryArrayAdapter.setSelectedIndex(i);
                 }
             }
         } else {
             countrySpinner.setSelection(0);
+            countryArrayAdapter.setSelectedIndex(0);
         }
 
         //regions
@@ -209,8 +219,8 @@ public class PersonActivity extends AppCompatActivity {
 
         regionSpinner = (Spinner) findViewById(R.id.regionSpinner);
         regionTextView = (TextView) findViewById(R.id.regionTextView);
-        ArrayAdapter<Region> regionArrayAdapter = new ArrayAdapter<Region>(this, android.R.layout.simple_spinner_item, regions);
-        regionArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        RegionArrayAdapter regionArrayAdapter = new RegionArrayAdapter(this, R.layout.region_spinner_item, regions);
+        regionArrayAdapter.setDropDownViewResource(R.layout.region_spinner_item);
         regionSpinner.setAdapter(regionArrayAdapter);
 
         //set selected region
@@ -219,11 +229,14 @@ public class PersonActivity extends AppCompatActivity {
             int position = 0;
             for(Region region : regions) {
                 if (region.getRegionID() == personDetail.getRegionID()) {
-                    regionSpinner.setSelection(regionArrayAdapter.getPosition(region));
+                    int i = regionArrayAdapter.getPosition(region);
+                    regionSpinner.setSelection(i);
+                    regionArrayAdapter.setSelectedIndex(i);
                 }
             }
         } else {
             regionSpinner.setSelection(0);
+            regionArrayAdapter.setSelectedIndex(0);
         }
 
         //we also want to hide the region spinner and its textview if the country doesn't use regions
@@ -263,8 +276,8 @@ public class PersonActivity extends AppCompatActivity {
         //cities.set(0,selectCity);
 
         citySpinner = (Spinner) findViewById(R.id.citySpinner);
-        ArrayAdapter<City> cityArrayAdapter = new ArrayAdapter<City>(this, android.R.layout.simple_spinner_item, cities);
-        cityArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        CityArrayAdapter cityArrayAdapter = new CityArrayAdapter(this, R.layout.city_spinner_item, cities);
+        cityArrayAdapter.setDropDownViewResource(R.layout.city_spinner_item);
         citySpinner.setAdapter(cityArrayAdapter);
 
         //set selected region
@@ -273,11 +286,14 @@ public class PersonActivity extends AppCompatActivity {
             int position = 0;
             for(City city : cities) {
                 if (city.getCityID() == personDetail.getCityID()) {
-                    citySpinner.setSelection(cityArrayAdapter.getPosition(city));
+                    int i = cityArrayAdapter.getPosition(city);
+                    citySpinner.setSelection(i);
+                    cityArrayAdapter.setSelectedIndex(i);
                 }
             }
         } else {
             citySpinner.setSelection(0);
+            cityArrayAdapter.setSelectedIndex(0);
         }
 
         //add event handlers to spinners
@@ -490,6 +506,7 @@ public class PersonActivity extends AppCompatActivity {
     }
 
     public void deletePerson(View view) {
-        Toast.makeText(this, "not yet implemented!", Toast.LENGTH_LONG).show();
+        datasource.deletePersonById(personDetail.getPersonID());
+        onBackPressed();
     }
 }

@@ -72,14 +72,19 @@ public class PersonArrayAdapter extends ArrayAdapter<PersonDetail> {
         detailsString += ":";
         detailsString += String.format("%02d", person.getEndMin());
         detailsString += " - ";
-        detailsString += person.getCityName();
-        detailsString += ", ";
-        if (person.isUsesRegions()) {
-            detailsString += person.getRegionName();
-            detailsString += ", ";
-        }
 
-        detailsString += person.getCountryName();
+
+        if (person.getCityID() != 0 ) {
+            detailsString += person.getCityName();
+            detailsString += ", ";
+            if (person.isUsesRegions()) {
+                detailsString += person.getRegionName();
+                detailsString += ", ";
+            }
+            detailsString += person.getCountryName();
+        } else {
+            detailsString += "unknown location";
+        }
 
         personDetails.setText(detailsString);
 
@@ -97,6 +102,8 @@ public class PersonArrayAdapter extends ArrayAdapter<PersonDetail> {
 
         if (flagPath != null && flagPath.contains(".png")) {
             flagPath = flagPath.substring(0, flagPath.length() - 4);
+        } else {
+            flagPath = "unknown";
         }
 
         int imageID = context.getResources().getIdentifier(flagPath, "drawable", context.getPackageName());

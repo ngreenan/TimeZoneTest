@@ -41,16 +41,28 @@ public class DetailActivity extends AppCompatActivity {
         //the top half of this activity will list our details
         //the bottom half will list all our colleagues' details
         //essentially two lists of Person objects then!
+
+        //open up the database
+        datasource = new DBDataSource(this);
+        datasource.open();
         loadData();
 
         setHandlers();
     }
 
-    private void loadData() {
-        //open up the database
-        datasource = new DBDataSource(this);
-        datasource.open();
+    @Override
+    protected void onResume() {
+        loadData();
+        super.onResume();
+    }
 
+//    @Override
+//    protected void onRestart() {
+//        loadData();
+//        super.onRestart();
+//    }
+
+    private void loadData() {
         //get my details and put into ListView
         myDetails = datasource.getMyPersonDetails();
         myDetailsListView = (ListView) findViewById(R.id.myDetailsListView);
@@ -72,7 +84,8 @@ public class DetailActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(view.getContext(), PersonActivity.class);
                 intent.putExtra("personDetail", myDetails.get(position));
-                startActivityForResult(intent,0);
+                //startActivityForResult(intent,0);
+                startActivity(intent);
             }
         });
 
@@ -94,7 +107,8 @@ public class DetailActivity extends AppCompatActivity {
                 try {
                     Intent intent = new Intent(DetailActivity.this, PersonActivity.class);
                     intent.putExtra("personDetail", myFriendDetails.get(position));
-                    startActivityForResult(intent, 0);
+                    //startActivityForResult(intent, 0);
+                    startActivity(intent);
                 } catch (Exception e) {
                     Toast.makeText(view.getContext(), "whoa", Toast.LENGTH_LONG).show();
                 }
@@ -118,12 +132,17 @@ public class DetailActivity extends AppCompatActivity {
                 new SetActiveTask().execute(personDetail);
 
                 //reload the ListView
-                ((BaseAdapter) theirDetailsListView.getAdapter()).notifyDataSetChanged();
+                refreshListViews();
 
                 //mark the click as handled
                 return true;
             }
         });
+    }
+
+    private void refreshListViews() {
+        ((BaseAdapter) myDetailsListView.getAdapter()).notifyDataSetChanged();
+        ((BaseAdapter) theirDetailsListView.getAdapter()).notifyDataSetChanged();
     }
 
     private class SetActiveTask extends AsyncTask<PersonDetail, Integer, Long> {
@@ -156,12 +175,34 @@ public class DetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add:
-                Toast.makeText(this,"Add New to be implemented!", Toast.LENGTH_LONG).show();
+                addNew();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
 
+    private void addNew() {
+        //create a new default Person
+        Person person = new Person();
+        person.setPersonName("New person");
+        person.setColorID(1);
+        person.setActive(true);
+        person.setDisplayNotifications(true);
+        person.setStartHour(8);
+        person.setStartMin(0);
+        person.setEndHour(22);
+        person.setEndMin(0);
+        person.setMe(false);
+        person = datasource.create(person);
 
+        //get PersonDetails for new Person
+        PersonDetail personDetail = datasource.getPersonDetailsById(person.getPersonID());
+
+        //start the activity
+        Intent intent = new Intent(this, PersonActivity.class);
+        intent.putExtra("personDetail", personDetail);
+        //startActivityForResult(intent,0);
+        startActivity(intent);
     }
 }
