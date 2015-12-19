@@ -21,37 +21,37 @@
         android:layout_marginTop="00dp"
         android:background="#E3F2FD" />
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_alignBottom="@id/squareLayout"
-        android:layout_alignTop="@id/squareLayout"
-        android:layout_centerVertical="true"
-        android:gravity="center"
-        android:orientation="vertical">
+    <!--<LinearLayout-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="fill_parent"-->
+        <!--android:layout_alignBottom="@id/squareLayout"-->
+        <!--android:layout_alignTop="@id/squareLayout"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:gravity="center"-->
+        <!--android:orientation="vertical">-->
 
-        <TextView
-            android:id="@+id/myActualTime"
-            style="@style/textTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp"
-            android:text=""
-            android:textColor="@color/colorMe" />
+        <!--<TextView-->
+            <!--android:id="@+id/myActualTime"-->
+            <!--style="@style/textTime"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:paddingBottom="5dp"-->
+            <!--android:paddingTop="5dp"-->
+            <!--android:text=""-->
+            <!--android:textColor="@color/colorMe" />-->
 
-        <TextView
-            android:id="@+id/theirActualTime"
-            style="@style/textTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center_horizontal"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp"
-            android:text=""
-            android:textColor="@color/colorThem" />
-    </LinearLayout>
+        <!--<TextView-->
+            <!--android:id="@+id/theirActualTime"-->
+            <!--style="@style/textTime"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:paddingBottom="5dp"-->
+            <!--android:paddingTop="5dp"-->
+            <!--android:text=""-->
+            <!--android:textColor="@color/colorThem" />-->
+    <!--</LinearLayout>-->
 
     <com.ngreenan.mytimechecker.Triangle
         android:id="@+id/triangle"
@@ -68,174 +68,12 @@
         android:layout_centerInParent="true"
         android:layout_marginLeft="5dp"/>
 
-    <!--<TextView-->
-        <!--android:id="@+id/myEndTextView"-->
-        <!--style="@style/textLabel"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:layout_alignParentStart="true"-->
-        <!--android:layout_alignTop="@+id/myEndButton"-->
-        <!--android:text="@string/end_label" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/myStartTextView"-->
-        <!--style="@style/textLabel"-->
-        <!--android:layout_above="@+id/myEndTextView"-->
-        <!--android:layout_alignBottom="@+id/myStartButton"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:layout_alignParentStart="true"-->
-        <!--android:layout_alignTop="@+id/myStartButton"-->
-        <!--android:text="@string/start_label" />-->
-
-    <!--<Button-->
-        <!--android:id="@+id/myEndButton"-->
-        <!--style="@style/buttonStyle"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_toEndOf="@+id/myStartTextView"-->
-        <!--android:layout_toLeftOf="@+id/centreView"-->
-        <!--android:layout_toRightOf="@+id/myStartTextView"-->
-        <!--android:layout_toStartOf="@+id/centreView"-->
-        <!--android:onClick="getTime"-->
-        <!--android:text="" />-->
-
-    <!--<Button-->
-        <!--android:id="@+id/myStartButton"-->
-        <!--style="@style/buttonStyle"-->
-        <!--android:layout_above="@+id/myEndButton"-->
-        <!--android:layout_toEndOf="@+id/myStartTextView"-->
-        <!--android:layout_toLeftOf="@+id/centreView"-->
-        <!--android:layout_toRightOf="@+id/myStartTextView"-->
-        <!--android:layout_toStartOf="@id/centreView"-->
-        <!--android:onClick="getTime"-->
-        <!--android:text="" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/theirEndTextView"-->
-        <!--style="@style/textLabel"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_alignTop="@+id/theirEndButton"-->
-        <!--android:layout_toEndOf="@+id/centreView"-->
-        <!--android:layout_toRightOf="@+id/centreView"-->
-        <!--android:text="@string/end_label" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/theirStartTextView"-->
-        <!--style="@style/textLabel"-->
-        <!--android:layout_above="@+id/theirEndTextView"-->
-        <!--android:layout_alignBottom="@+id/theirStartButton"-->
-        <!--android:layout_alignTop="@+id/theirStartButton"-->
-        <!--android:layout_toEndOf="@+id/centreView"-->
-        <!--android:layout_toRightOf="@+id/centreView"-->
-        <!--android:text="@string/start_label" />-->
-
-    <!--<Button-->
-        <!--android:id="@+id/theirEndButton"-->
-        <!--style="@style/buttonStyle"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_toEndOf="@+id/theirStartTextView"-->
-        <!--android:layout_toLeftOf="@+id/theirPlus"-->
-        <!--android:layout_toRightOf="@+id/theirStartTextView"-->
-        <!--android:layout_toStartOf="@id/theirPlus"-->
-        <!--android:onClick="getTime"-->
-        <!--android:text="" />-->
-
-    <!--<Button-->
-        <!--android:id="@+id/theirStartButton"-->
-        <!--style="@style/buttonStyle"-->
-        <!--android:layout_above="@+id/myEndButton"-->
-        <!--android:layout_toEndOf="@+id/theirStartTextView"-->
-        <!--android:layout_toLeftOf="@+id/theirPlus"-->
-        <!--android:layout_toRightOf="@+id/theirStartTextView"-->
-        <!--android:layout_toStartOf="@id/theirPlus"-->
-        <!--android:onClick="getTime"-->
-        <!--android:text="" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/textView2"-->
-        <!--style="@style/textHeader"-->
-        <!--android:layout_above="@+id/myStartTextView"-->
-        <!--android:layout_alignEnd="@+id/myStartButton"-->
-        <!--android:layout_alignLeft="@+id/myStartButton"-->
-        <!--android:layout_alignRight="@+id/myStartButton"-->
-        <!--android:layout_alignStart="@+id/myStartButton"-->
-        <!--android:text="@string/myTimeText"-->
-        <!--android:textColor="@color/colorMe" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/textView3"-->
-        <!--style="@style/textHeader"-->
-        <!--android:layout_above="@+id/myStartTextView"-->
-        <!--android:layout_alignLeft="@+id/theirStartButton"-->
-        <!--android:layout_alignParentEnd="true"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_alignStart="@+id/theirStartButton"-->
-        <!--android:text="@string/theirTimeText"-->
-        <!--android:textColor="@color/colorThem" />-->
-
-    <!--&lt;!&ndash;time zone selectors&ndash;&gt;-->
-    <!--&lt;!&ndash;<TextView&ndash;&gt;-->
-        <!--&lt;!&ndash;android:id="@+id/myTimeZone"&ndash;&gt;-->
-        <!--&lt;!&ndash;style="@style/offsetTextView"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_above="@+id/myMinus"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_alignEnd="@+id/myPlus"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_alignLeft="@+id/myPlus"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_alignRight="@+id/myPlus"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_alignStart="@+id/myPlus"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_below="@+id/myPlus"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:text="" />&ndash;&gt;-->
-
-    <!--&lt;!&ndash;<Button&ndash;&gt;-->
-        <!--&lt;!&ndash;android:id="@+id/myPlus"&ndash;&gt;-->
-        <!--&lt;!&ndash;style="@style/offsetButton"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_alignTop="@+id/myStartButton"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_toLeftOf="@+id/centreView"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_toStartOf="@+id/centreView"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:onClick="changeOffset"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:text="@string/plus" />&ndash;&gt;-->
-
-    <!--&lt;!&ndash;<Button&ndash;&gt;-->
-        <!--&lt;!&ndash;android:id="@+id/myMinus"&ndash;&gt;-->
-        <!--&lt;!&ndash;style="@style/offsetButton"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_alignParentBottom="true"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_toLeftOf="@+id/centreView"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_toStartOf="@+id/centreView"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:onClick="changeOffset"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:text="@string/minus" />&ndash;&gt;-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/theirTimeZone"-->
-        <!--style="@style/offsetTextView"-->
-        <!--android:layout_above="@+id/theirMinus"-->
-        <!--android:layout_alignEnd="@+id/theirPlus"-->
-        <!--android:layout_alignLeft="@+id/theirPlus"-->
-        <!--android:layout_alignRight="@+id/theirPlus"-->
-        <!--android:layout_alignStart="@+id/theirPlus"-->
-        <!--android:layout_below="@+id/theirPlus"-->
-        <!--android:text="" />-->
-
-    <!--<Button-->
-        <!--android:id="@+id/theirPlus"-->
-        <!--style="@style/offsetButton"-->
-        <!--android:layout_alignParentEnd="true"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_alignTop="@+id/theirStartButton"-->
-        <!--android:onClick="changeOffset"-->
-        <!--android:text="@string/plus" />-->
-
-    <!--<Button-->
-        <!--android:id="@+id/theirMinus"-->
-        <!--style="@style/offsetButton"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_alignParentEnd="true"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:onClick="changeOffset"-->
-        <!--android:text="@string/minus" />-->
-
-    <!--<Button-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:text="setup"-->
-        <!--android:onClick="viewDetail"/>-->
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/detailsListView"
+        android:layout_below="@+id/squareLayout"
+        tools:listitem="@layout/main_list_item"
+        android:layout_marginTop="5dp"/>
 
 </RelativeLayout>

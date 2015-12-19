@@ -34,6 +34,7 @@ public class DBDataSource {
 
     SQLiteOpenHelper dbhelper;
     SQLiteDatabase database;
+    boolean isOpen = false;
 
     //constructor
     public DBDataSource(Context context) {
@@ -43,12 +44,18 @@ public class DBDataSource {
     //database level methods
     public void open() {
         database = dbhelper.getWritableDatabase();
+        isOpen = true;
         Log.i(LOGTAG, "Database opened");
     }
 
     public void close() {
         dbhelper.close();
+        isOpen = false;
         Log.i(LOGTAG, "Database closed");
+    }
+
+    public boolean isOpen(){
+        return this.isOpen;
     }
 
     //table level methods
@@ -542,33 +549,33 @@ public class DBDataSource {
         personThem1.setMe(false);
         create(personThem1);
 
-        //them 2
-        Person personThem2 = new Person();
-        personThem2.setPersonName("Them 2");
-        personThem2.setCityID(346); //new york
-        personThem2.setStartHour(8);
-        personThem2.setStartMin(0);
-        personThem2.setEndHour(22);
-        personThem2.setEndMin(0);
-        personThem2.setDisplayNotifications(true);
-        personThem2.setActive(false);
-        personThem2.setColorID(3);
-        personThem2.setMe(false);
-        create(personThem2);
-
-        //them 1
-        Person personThem3 = new Person();
-        personThem3.setPersonName("Them 3");
-        personThem3.setCityID(210); //zurich
-        personThem3.setStartHour(8);
-        personThem3.setStartMin(0);
-        personThem3.setEndHour(22);
-        personThem3.setEndMin(0);
-        personThem3.setDisplayNotifications(true);
-        personThem3.setActive(true);
-        personThem3.setColorID(4);
-        personThem3.setMe(false);
-        create(personThem3);
+//        //them 2
+//        Person personThem2 = new Person();
+//        personThem2.setPersonName("Them 2");
+//        personThem2.setCityID(346); //new york
+//        personThem2.setStartHour(8);
+//        personThem2.setStartMin(0);
+//        personThem2.setEndHour(22);
+//        personThem2.setEndMin(0);
+//        personThem2.setDisplayNotifications(true);
+//        personThem2.setActive(false);
+//        personThem2.setColorID(3);
+//        personThem2.setMe(false);
+//        create(personThem2);
+//
+//        //them 1
+//        Person personThem3 = new Person();
+//        personThem3.setPersonName("Them 3");
+//        personThem3.setCityID(210); //zurich
+//        personThem3.setStartHour(8);
+//        personThem3.setStartMin(0);
+//        personThem3.setEndHour(22);
+//        personThem3.setEndMin(0);
+//        personThem3.setDisplayNotifications(true);
+//        personThem3.setActive(true);
+//        personThem3.setColorID(4);
+//        personThem3.setMe(false);
+//        create(personThem3);
     }
 
     public City getCityById(long cityID) {
@@ -698,5 +705,15 @@ public class DBDataSource {
     public void deletePersonById(long personID) {
         database.delete(DBOpenHelper.TABLE_PERSONS, DBOpenHelper.COLUMN_PERSONID + " = " + String.valueOf(personID), null);
         Log.i(LOGTAG, "Deleted 1 Person");
+    }
+
+    public List<PersonDetail> getActivePersonDetails() {
+        //returns all rows from Persons table where Active = 1
+        Cursor cursor = database.query(DBOpenHelper.VIEW_PERSONDETAILS, DBOpenHelper.VIEW_PERSONDETAILS_COLUMNS,
+                DBOpenHelper.COLUMN_ACTIVE + " = 1", null, null, null, null);
+
+        Log.i(LOGTAG, "Returned " + cursor.getCount() + " personDetails");
+        List<PersonDetail> personDetails = getPersonDetailsList(cursor);
+        return personDetails;
     }
 }

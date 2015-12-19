@@ -16,7 +16,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.os.Handler;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -26,6 +29,7 @@ import com.ngreenan.mytimechecker.model.City;
 import com.ngreenan.mytimechecker.model.Continent;
 import com.ngreenan.mytimechecker.model.Country;
 import com.ngreenan.mytimechecker.model.Person;
+import com.ngreenan.mytimechecker.model.PersonDetail;
 import com.ngreenan.mytimechecker.model.Region;
 import com.ngreenan.mytimechecker.model.TimeZone;
 
@@ -72,12 +76,9 @@ public class MainActivity extends AppCompatActivity {
 
     //database
     DBDataSource datasource;
-    private List<Continent> continents;
-    private List<Country> countries;
-    private List<Region> regions;
-    private List<City> cities;
-    private List<TimeZone> timeZones;
-    private List<Person> persons;
+    private List<PersonDetail> personDetails;
+
+    ListView detailsListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,71 +89,62 @@ public class MainActivity extends AppCompatActivity {
 
         //set the layout file to associate with MainActivity
         setContentView(R.layout.activity_main);
+        detailsListView = (ListView) findViewById(R.id.detailsListView);
 
-        //get a reference to our SquareLinearLayout, create a PieChart and add it!
-        SquareLinearLayout squareLinearLayout = (SquareLinearLayout) findViewById(R.id.squareLayout);
-        //RelativeLayout linearLayout = (RelativeLayout) findViewById(R.id.layout);
+        //load and populate data - moved to separate method so it can be called onResume as well as onCreate
+        datasource = new DBDataSource(this);
+        loadAndPopulateData();
+    }
 
+    private void loadAndPopulateData() {
         //load data from database
         loadDataFromDatabase();
 
+        //get a reference to our SquareLinearLayout, create a PieChart and add it!
+        SquareLinearLayout squareLinearLayout = (SquareLinearLayout) findViewById(R.id.squareLayout);
         pieChart = new PieChart(this);
 
+        //remove all views - if we have any
+        squareLinearLayout.removeAllViews();
+
+        //pass over objects, do other stuff
         setTimes();
+
+        //add our new view
         squareLinearLayout.addView(pieChart);
-
-
 
         //kick off the "timer" to update the rotation of the clock every half second
         timerHandler.postDelayed(timerRunnable, 0);
     }
 
-    private void loadDataFromDatabase() {
-        datasource = new DBDataSource(this);
-        datasource.open();
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-        //continents
-        continents = datasource.getAllContinents();
-        if (continents.size() == 0) {
-            //generate data
+        //reload the data, and pass it over to PieChart again
+        loadAndPopulateData();
+    }
+
+    private void loadDataFromDatabase() {
+
+        if (!datasource.isOpen()) {
+            datasource.open();
+        }
+
+        personDetails = datasource.getActivePersonDetails();
+        if (personDetails.size() == 0) {
+
+            //generate default data
             datasource.createContinentsData(this);
             datasource.createCountriesData(this);
             datasource.createRegionsData(this);
             datasource.createTimeZonesData(this);
             datasource.createCitiesData(this);
             datasource.createPersonsData();
-        }
 
-//        //countries
-//        countries = datasource.getAllCountries();
-//        if (countries.size() == 0) {
-//            datasource.createCountriesData(this);
-//            countries = datasource.getAllCountries();
-//        }
-//
-//        //regions
-//        regions = datasource.getAllRegions();
-//        if (regions.size() == 0) {
-//            datasource.createRegionsData(this);
-//            regions = datasource.getAllRegions();
-//        }
-//
-//        //timezones
-//        timeZones = datasource.getAllTimeZones();
-//        if (timeZones.size() == 0) {
-//            datasource.createTimeZonesData(this);
-//            timeZones = datasource.getAllTimeZones();
-//        }
-//
-//        //cities
-//        cities = datasource.getAllCities();
-//        if (cities.size() == 0) {
-//            datasource.createCitiesData(this);
-//            cities = datasource.getAllCities();
-//        }
-//
-        //persons
-        persons = datasource.getActivePersons();
+            //and now load the newly set up persons
+            personDetails = datasource.getActivePersonDetails();
+        }
     }
 
     //runs without a timer by reposting this handler at the end of the runnable
@@ -186,11 +178,12 @@ public class MainActivity extends AppCompatActivity {
                 //reset - if a notification is due display it from now on
                 suppressNotification = false;
                 setXMLPreference(SUPPRESSNOTIFICATION, suppressNotification);
-//                Toast.makeText(MainActivity.this, "suppressNotification set to false", Toast.LENGTH_LONG).show();
             }
 
-            //set the time til the next run - in this case 500ms or half a second
-            timerHandler.postDelayed(this, 500);
+            ((BaseAdapter) detailsListView.getAdapter()).notifyDataSetChanged();
+
+            //set the time til the next run - in this case 1000ms or a second
+            timerHandler.postDelayed(this, 1000);
         }
     };
 
@@ -264,46 +257,36 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setTimes() {
-        //set my times
-        //pieChart.setMyStartTime(myStartHour - myOffset, myStartMin);
-        //pieChart.setMyEndTime(myEndHour - myOffset, myEndMin);
+        //get my details and put into ListView
+        ArrayAdapter<PersonDetail> myArrayAdapter = new MainArrayAdapter(this, R.layout.main_list_item, personDetails);
+        detailsListView.setAdapter(myArrayAdapter);
 
-        //set their times
-        //pieChart.setTheirStartTime(theirStartHour - theirOffset, theirStartMin);
-        //pieChart.setTheirEndTime(theirEndHour - theirOffset, theirEndMin);
+        pieChart.setPersonDetails(personDetails);
 
-        //TextView textView;// = (TextView) findViewById(R.id.myTimeZone);
-        //textView.setText(deriveTimeZone(myOffset));
-
-        //textView = (TextView) findViewById(R.id.theirTimeZone);
-        //textView.setText(deriveTimeZone(theirOffset));
-
-        pieChart.setPeople(persons);
-
-        displayTimes(Calendar.getInstance());
+        //displayTimes(Calendar.getInstance());
     }
 
     private void displayTimes(Calendar c) {
-        TextView textView;
-
-        int myHour = (c.get(Calendar.HOUR_OF_DAY) + myOffset) % 24;
-        int theirHour = (c.get(Calendar.HOUR_OF_DAY) + theirOffset) % 24;
-
-        if (myHour < 0) {
-            myHour += 24;
-        }
-
-        if (theirHour < 0) {
-            theirHour += 24;
-        }
-
-        //display my current time
-        textView = (TextView) findViewById(R.id.myActualTime);
-        textView.setText(String.format("%02d", myHour) + ":" + String.format("%02d", c.get(Calendar.MINUTE)));
-
-        //display their current time
-        textView = (TextView) findViewById(R.id.theirActualTime);
-        textView.setText(String.format("%02d", theirHour) + ":" + String.format("%02d", c.get(Calendar.MINUTE)));
+//        TextView textView;
+//
+//        int myHour = (c.get(Calendar.HOUR_OF_DAY) + myOffset) % 24;
+//        int theirHour = (c.get(Calendar.HOUR_OF_DAY) + theirOffset) % 24;
+//
+//        if (myHour < 0) {
+//            myHour += 24;
+//        }
+//
+//        if (theirHour < 0) {
+//            theirHour += 24;
+//        }
+//
+//        //display my current time
+//        textView = (TextView) findViewById(R.id.myActualTime);
+//        textView.setText(String.format("%02d", myHour) + ":" + String.format("%02d", c.get(Calendar.MINUTE)));
+//
+//        //display their current time
+//        textView = (TextView) findViewById(R.id.theirActualTime);
+//        textView.setText(String.format("%02d", theirHour) + ":" + String.format("%02d", c.get(Calendar.MINUTE)));
     }
 
     private String deriveTimeZone(int offset) {

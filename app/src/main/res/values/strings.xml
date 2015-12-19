@@ -6,4 +6,5 @@
     <string name="plus">+</string>
     <string name="theirTimeText">Their Time</string>
     <string name="myTimeText">My Time</string>
+    <string name="flagDesc">Flag</string>
 </resources>

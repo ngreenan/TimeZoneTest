@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.ngreenan.mytimechecker.model.Person;
+import com.ngreenan.mytimechecker.model.PersonDetail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +57,7 @@ public class PieChart extends View {
     //private int theirStartTime = 0;
     //private int theirEndTime = 0;
 
-    private List<Person> people = new ArrayList<Person>();
+    private List<PersonDetail> personDetails = new ArrayList<PersonDetail>();
 
     private float rotation = 0;
     private int size = 0;
@@ -76,12 +77,12 @@ public class PieChart extends View {
         this.context = context;
     }
 
-    public void setPeople(List<Person> people) {
-        this.people = people;
+    public void setPersonDetails(List<PersonDetail> personDetails) {
+        this.personDetails = personDetails;
     }
 
-    public List<Person> getPeople() {
-        return this.people;
+    public List<PersonDetail> getPersonDetails() {
+        return this.personDetails;
     }
 
     public void setPercentage(int percentage) {
@@ -147,7 +148,7 @@ public class PieChart extends View {
             //rectThem.set(themThickness,themThickness,w-themThickness,w-themThickness);
 
             //now calculate the person RectFs
-            for (int i = 1; i <= people.size(); i++) {
+            for (int i = 1; i <= personDetails.size(); i++) {
                 RectF rect = rectPeople.get(i - 1);
                 float thickness = getThickness(i);
                 rect.set(thickness, thickness, w-thickness, w-thickness);
@@ -172,7 +173,7 @@ public class PieChart extends View {
             //rectThem.set(themThickness,themThickness,h-themThickness,h-themThickness);
 
             //now calculate the person RectFs
-            for (int i = 1; i <= people.size(); i++) {
+            for (int i = 1; i <= personDetails.size(); i++) {
                 RectF rect = rectPeople.get(i - 1);
                 float thickness = getThickness(i);
                 rect.set(thickness, thickness, h-thickness, h-thickness);
@@ -189,7 +190,7 @@ public class PieChart extends View {
         //rather than hard code our thicknesses, we're going to make them a set percentage of the overall width!
 
         //v1 - we also don't have a fixed number of people - we'll declare a list of RectFs instead
-        for (int i = 0; i < people.size(); i++) {
+        for (int i = 0; i < personDetails.size(); i++) {
             rectPeople.add(new RectF());
         }
 
@@ -204,8 +205,8 @@ public class PieChart extends View {
         tickThickness = 0.020F * (float)size;
         textThickness = 0.050F * (float)size;
 
-        spacerThickness = (ringThickness * 0.2F) / (people.size() + 1);
-        personThickness = (ringThickness * 0.8F) / (people.size());
+        spacerThickness = (ringThickness * 0.2F) / (personDetails.size() + 1);
+        personThickness = (ringThickness * 0.8F) / (personDetails.size());
     }
 
     @Override
@@ -262,12 +263,21 @@ public class PieChart extends View {
 //        canvas.drawPath(path, paint);
 
         //plot arc for each person
-        for (int i = 0; i < people.size(); i++) {
-            Person person = people.get(i);
+        for (int i = 0; i < personDetails.size(); i++) {
+            PersonDetail person = personDetails.get(i);
+
+            //check that we have a CityID - if not we don't want to draw anything
+            if (person.getCityID() == 0) {
+                continue;
+            }
+
+            //get offset for this timezone
+            float offset = Util.getHourOffsetFromTimeZone(person.getTimeZoneName());
+            float offsetRotation = offset / 24;
 
             //setup all our values for start/finish angles
-            float timeStart = (((person.getStartHour() * 60) + person.getStartMin()) * 360 / (24F * 60F));
-            float timeEnd = (((person.getEndHour() * 60) + person.getEndMin()) * 360 / (24F * 60F));
+            float timeStart = ((((person.getStartHour() - offset) * 60) + person.getStartMin()) * 360 / (24F * 60F));
+            float timeEnd = ((((person.getEndHour() - offset) * 60) + person.getEndMin()) * 360 / (24F * 60F));
 
             int colorID = context.getResources().getIdentifier("color" + person.getColorID(), "color", context.getPackageName());
 
@@ -288,12 +298,9 @@ public class PieChart extends View {
                 path.addArc(rect, timeStart - 90, 360F + timeEnd - timeStart);
             }
 
+            //draw path
             canvas.drawPath(path, paint);
-
         }
-
-
-
 
         //clock tick marks
         paint.setColor(Color.DKGRAY);
