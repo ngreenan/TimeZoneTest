@@ -3,8 +3,8 @@ package com.ngreenan.mytimechecker;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.app.TaskStackBuilder;
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,18 +20,9 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.ngreenan.mytimechecker.db.DBDataSource;
-import com.ngreenan.mytimechecker.model.City;
-import com.ngreenan.mytimechecker.model.Continent;
-import com.ngreenan.mytimechecker.model.Country;
-import com.ngreenan.mytimechecker.model.Person;
 import com.ngreenan.mytimechecker.model.PersonDetail;
-import com.ngreenan.mytimechecker.model.Region;
-import com.ngreenan.mytimechecker.model.TimeZone;
 
 import java.util.Calendar;
 import java.util.List;
@@ -77,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
     //database
     DBDataSource datasource;
     private List<PersonDetail> personDetails;
+    boolean loadingData = false;
+    boolean reloadData = false;
 
     ListView detailsListView;
 
@@ -132,18 +125,44 @@ public class MainActivity extends AppCompatActivity {
         }
 
         personDetails = datasource.getActivePersonDetails();
-        if (personDetails.size() == 0) {
+        if (personDetails.size() == 0 && !loadingData) {
 
-            //generate default data
-            datasource.createContinentsData(this);
-            datasource.createCountriesData(this);
-            datasource.createRegionsData(this);
-            datasource.createTimeZonesData(this);
-            datasource.createCitiesData(this);
-            datasource.createPersonsData();
+            //initialize our database in the background
+            loadingData = true;
 
-            //and now load the newly set up persons
-            personDetails = datasource.getActivePersonDetails();
+            //show a ProgressDialog so it's not just a blank screen
+            final ProgressDialog dialog = new ProgressDialog(this);
+            dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            dialog.setMessage("Initializing database - please wait...");
+            dialog.setIndeterminate(true);
+            dialog.setCancelable(false);
+            dialog.show();
+
+            //setup a new thread to do our initialization in
+            Thread thread = new Thread() {
+                @Override
+                public void run() {
+                    //generate default data
+                    datasource.createContinentsData(MainActivity.this);
+                    datasource.createCountriesData(MainActivity.this);
+                    datasource.createRegionsData(MainActivity.this);
+                    datasource.createTimeZonesData(MainActivity.this);
+                    datasource.createCitiesData(MainActivity.this);
+                    datasource.createPersonsData();
+
+                    //and now load the newly set up persons
+                    personDetails = datasource.getActivePersonDetails();
+
+                    loadingData = false;
+                    reloadData = true;
+
+                    //dismiss the ProgressDialog now that we're done
+                    dialog.dismiss();
+                }
+            };
+
+            //start the thread
+            thread.start();
         }
     }
 
@@ -154,6 +173,13 @@ public class MainActivity extends AppCompatActivity {
         //this is what will happen every time the handler runs
         @Override
         public void run() {
+
+            //do we need to reload our data?
+            if (reloadData) {
+                loadAndPopulateData();
+                reloadData = false;
+            }
+
             Calendar c = Calendar.getInstance();
             float seconds = (c.get(Calendar.HOUR_OF_DAY) * 60 * 60)
                     + (c.get(Calendar.MINUTE) * 60)
@@ -182,8 +208,8 @@ public class MainActivity extends AppCompatActivity {
 
             ((BaseAdapter) detailsListView.getAdapter()).notifyDataSetChanged();
 
-            //set the time til the next run - in this case 1000ms or a second
-            timerHandler.postDelayed(this, 1000);
+            //set the time til the next run - in this case 500ms or half a second
+            timerHandler.postDelayed(this, 500);
         }
     };
 

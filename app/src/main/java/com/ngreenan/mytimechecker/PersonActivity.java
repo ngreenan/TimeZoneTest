@@ -2,14 +2,17 @@ package com.ngreenan.mytimechecker;
 
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -23,7 +26,6 @@ import com.ngreenan.mytimechecker.db.DBDataSource;
 import com.ngreenan.mytimechecker.model.City;
 import com.ngreenan.mytimechecker.model.Continent;
 import com.ngreenan.mytimechecker.model.Country;
-import com.ngreenan.mytimechecker.model.Person;
 import com.ngreenan.mytimechecker.model.PersonDetail;
 import com.ngreenan.mytimechecker.model.Region;
 import com.ngreenan.mytimechecker.picker.LineColorPicker;
@@ -31,8 +33,6 @@ import com.ngreenan.mytimechecker.picker.OnColorChangedListener;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
 
 public class PersonActivity extends AppCompatActivity {
 
@@ -87,6 +87,24 @@ public class PersonActivity extends AppCompatActivity {
         nameEditText = (EditText) findViewById(R.id.nameEditText);
         nameEditText.setText(personDetail.getPersonName());
 
+        nameEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                new SaveDetailsTask().execute(PersonControl.NAME);
+            }
+        });
+
+
         //start time
         startTimeButton = (Button) findViewById(R.id.startTimeButton);
         //end time
@@ -127,6 +145,7 @@ public class PersonActivity extends AppCompatActivity {
             @Override
             public void onColorChanged(int i) {
                 personDetail.setColorID(colorPicker.getSelectedIndex() + 1);
+                new SaveDetailsTask().execute(PersonControl.COLOR);
             }
         });
 
@@ -311,6 +330,7 @@ public class PersonActivity extends AppCompatActivity {
                     personDetail.setContinentID(continentID);
                     personDetail.setCountryID(0);
                     updateSpinners();
+                    new SaveDetailsTask().execute(PersonControl.CONTINENT);
                 }
             }
 
@@ -338,6 +358,7 @@ public class PersonActivity extends AppCompatActivity {
                     //    personDetail.setCityID(0);
                     //}
                     updateSpinners();
+                    new SaveDetailsTask().execute(PersonControl.COUNTRY);
                 }
             }
 
@@ -361,6 +382,7 @@ public class PersonActivity extends AppCompatActivity {
                     personDetail.setRegionID(regionID);
                     personDetail.setCityID(0);
                     updateSpinners();
+                    new SaveDetailsTask().execute(PersonControl.REGION);
                 }
             }
 
@@ -383,6 +405,7 @@ public class PersonActivity extends AppCompatActivity {
                     //update our record, refresh everything
                     personDetail.setCityID(cityID);
                     updateSpinners();
+                    new SaveDetailsTask().execute(PersonControl.CITY);
                 }
             }
 
@@ -394,6 +417,7 @@ public class PersonActivity extends AppCompatActivity {
     }
 
     public void getTime(final View view) {
+
         //load a TimePickerDialog and ask the user for the new time
         int hour = 0;
         int minute = 0;
@@ -412,31 +436,31 @@ public class PersonActivity extends AppCompatActivity {
 
         //launch our TimePickerDialog
         TimePickerDialog timePickerDialog;
+
         //we need to set a context, an OnTimeSetListener, a start hour, a start minute and whether it's 24 hours or not
         timePickerDialog = new TimePickerDialog(PersonActivity.this,
                 R.style.AppTheme2,
                 new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+
                 //this gets called when we've picked a time - which values do we want to set??
                 //for each we will set the variables to the new value
-                //but also update the XML preferences so that when we reload the app, it'll remember what times we chose
+
                 switch (view.getId()) {
+
                     case R.id.startTimeButton:
                         //variables
                         personDetail.setStartHour(selectedHour);
                         personDetail.setStartMin(selectedMinute);
-//                        //XML preferences
-//                        setXMLPreference(MYSTARTHOUR, selectedHour);
-//                        setXMLPreference(MYSTARTMIN, selectedMinute);
+                        new SaveDetailsTask().execute(PersonControl.START_TIME);
                         break;
+
                     case R.id.endTimeButton:
                         //variables
                         personDetail.setEndHour(selectedHour);
                         personDetail.setEndMin(selectedMinute);
-//                        //XML preferences
-//                        setXMLPreference(MYENDHOUR, selectedHour);
-//                        setXMLPreference(MYENDMIN, selectedMinute);
+                        new SaveDetailsTask().execute(PersonControl.END_TIME);
                         break;
                 }
 
@@ -444,7 +468,6 @@ public class PersonActivity extends AppCompatActivity {
             }
         }, hour, minute, true);
 
-        //timePickerDialog.setTitle("Select Time");
         timePickerDialog.show();
     }
 
@@ -464,22 +487,39 @@ public class PersonActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-
-
-    }
-
-    public void saveChanges(View view) {
-        save();
     }
 
     public void save() {
         personDetail.setPersonName(nameEditText.getText().toString());
-
-
-        datasource.updateName(personDetail.getPersonID(), personDetail.getPersonName());
         datasource.updatePersonDetails(personDetail);
+    }
 
-        Toast.makeText(this,"Changes saved!", Toast.LENGTH_LONG).show();
+    private enum PersonControl {
+        NAME,
+        START_TIME,
+        END_TIME,
+        CONTINENT,
+        COUNTRY,
+        REGION,
+        CITY,
+        ACTIVE,
+        NOTIFICATIONS,
+        COLOR
+    }
+
+    private class SaveDetailsTask extends AsyncTask<PersonControl, Integer, Long> {
+
+        @Override
+        protected Long doInBackground(PersonControl... control) {
+            save();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Long aLong) {
+            super.onPostExecute(aLong);
+            //Toast.makeText(PersonActivity.this, "Saved changes", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -492,15 +532,19 @@ public class PersonActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.notifyRadioYes:
                 personDetail.setDisplayNotifications(true);
+                new SaveDetailsTask().execute(PersonControl.NOTIFICATIONS);
                 break;
             case R.id.notifyRadioNo:
                 personDetail.setDisplayNotifications(false);
+                new SaveDetailsTask().execute(PersonControl.NOTIFICATIONS);
                 break;
             case R.id.activeRadioYes:
                 personDetail.setActive(true);
+                new SaveDetailsTask().execute(PersonControl.ACTIVE);
                 break;
             case R.id.activeRadioNo:
                 personDetail.setActive(false);
+                new SaveDetailsTask().execute(PersonControl.ACTIVE);
                 break;
         }
     }

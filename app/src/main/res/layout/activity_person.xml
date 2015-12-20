@@ -48,7 +48,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/nameEditText"
+            android:layout_below="@+id/citySpinner"
             android:gravity="center_vertical"
             android:text="START TIME" />
 
@@ -96,7 +96,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/endTimeButton"
+            android:layout_below="@+id/nameEditText"
             android:gravity="center_vertical"
             android:text="CONTINENT" />
 
@@ -189,7 +189,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/citySpinner"
+            android:layout_below="@+id/endTimeButton"
             android:gravity="center_vertical"
             android:text="DISPLAY NOTIFICATIONS" />
 
