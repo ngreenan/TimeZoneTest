@@ -2,10 +2,24 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#ff0000</color>
     <color name="colorMe">#0D47A1</color>
     <color name="colorThem">#F44336</color>
     <color name="colorRing">#90CAF9</color>
     <color name="offsetBackground">#FFFFFF</color>
     <color name="offsetForeground">#000000</color>
+
+    <!--color options-->
+    <color name="color1">#0D47A1</color>
+    <color name="color2">#F44336</color>
+    <color name="color3">#9C27B0</color>
+    <color name="color4">#E91E63</color>
+    <color name="color5">#03A9F4</color>
+    <color name="color6">#009688</color>
+    <color name="color7">#8BC34A</color>
+    <color name="color8">#FFEB3B</color>
+    <color name="color9">#FF9800</color>
+
+    <color name="yourButtonColor">#00ff00</color>
+    <color name="yourButtonTextColor">#FFFFFF</color>
 </resources>
