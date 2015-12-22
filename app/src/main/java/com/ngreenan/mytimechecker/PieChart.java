@@ -21,7 +21,7 @@ import java.util.List;
 public class PieChart extends View {
 
     private Context context;
-
+    private float heightCap = 0.5F;
     private int percentage;
     private Paint paint = new Paint();
     private Path path = new Path();
@@ -139,19 +139,35 @@ public class PieChart extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         if (w < h) {
-            size = w;
+            //portrait
+            //what if it's a really square shaped phone?
+            //cap it at 75% of height
+
+            float width = Float.parseFloat(String.valueOf(w));
+            float height = Float.parseFloat(String.valueOf(h));
+            int cappedHeightPercentage = getResources().getInteger(R.integer.heightCap);
+            float cappedHeight = ((float)cappedHeightPercentage / 100F) * height;
+
+            if (width > cappedHeight)
+            {
+                size = (int) cappedHeight;
+            } else {
+                size = w;
+            }
+
             setThicknesses();
-            rectOuter.set(outerThickness,outerThickness,w-outerThickness,w-outerThickness);
-            rectClock.set(clockThickness,clockThickness,w-clockThickness,w-clockThickness);
-            rectNumbers.set(numbersThickness,numbersThickness,w-numbersThickness,w-numbersThickness);
-            //rectMe.set(meThickness,meThickness,w-meThickness,w-meThickness);
-            //rectThem.set(themThickness,themThickness,w-themThickness,w-themThickness);
+//            rectOuter.set(outerThickness,outerThickness,w-outerThickness,w-outerThickness);
+//            rectClock.set(clockThickness,clockThickness,w-clockThickness,w-clockThickness);
+//            rectNumbers.set(numbersThickness,numbersThickness,w-numbersThickness,w-numbersThickness);
+            rectOuter.set(outerThickness,outerThickness,size-outerThickness,size-outerThickness);
+            rectClock.set(clockThickness,clockThickness,size-clockThickness,size-clockThickness);
+            rectNumbers.set(numbersThickness,numbersThickness,size-numbersThickness,size-numbersThickness);
 
             //now calculate the person RectFs
             for (int i = 1; i <= personDetails.size(); i++) {
                 RectF rect = rectPeople.get(i - 1);
                 float thickness = getThickness(i);
-                rect.set(thickness, thickness, w-thickness, w-thickness);
+                rect.set(thickness, thickness, size-thickness, size-thickness);
             }
 
         } else {
@@ -182,7 +198,6 @@ public class PieChart extends View {
     }
 
     private float getThickness(int i) {
-        //return ((i+1) * 0.5F * spacerThickness) + ((i - 1) * personThickness) + (0.5F * personThickness);
         return (i * spacerThickness) + ((i - 0.5F) * personThickness);
     }
 
@@ -219,6 +234,17 @@ public class PieChart extends View {
         if (canvasWidth > canvasHeight) {
             float shift = ((float)canvasWidth - (float)canvasHeight) / 2;
             canvas.translate(shift, 0F);
+        } else {
+            float width = Float.parseFloat(String.valueOf(canvasWidth));
+            float height = Float.parseFloat(String.valueOf(canvasHeight));
+            int cappedHeightPercentage = getResources().getInteger(R.integer.heightCap);
+            float cappedHeight = ((float)cappedHeightPercentage / 100F) * height;
+
+            if (width > cappedHeight)
+            {
+                float shift = (width - cappedHeight) / 2;
+                canvas.translate(shift, 0F);
+            }
         }
 
         //rotate the whole canvas depending on the time
@@ -308,7 +334,7 @@ public class PieChart extends View {
         paint.setStyle(Paint.Style.STROKE);
         path.reset();
         for (int x = 0; x < 360; x += 15) {
-            path.addArc(rectClock,x-0.5F, 1);
+            path.addArc(rectClock, x-0.5F, 1);
         }
         canvas.drawPath(path, paint);
 

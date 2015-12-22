@@ -15,11 +15,12 @@
     <com.ngreenan.mytimechecker.SquareLinearLayout
         android:id="@+id/squareLayout"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/triangle"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="00dp"
         android:background="#E3F2FD" />
+
 
     <!--<LinearLayout-->
         <!--android:layout_width="fill_parent"-->

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:text="@string/about1"
+            style="@style/aboutHeaderTextView" />
+
+        <!--<TextView-->
+            <!--android:text="@string/about2"-->
+            <!--style="@style/aboutTextView" />-->
+
+        <TextView
+            android:text="@string/about3"
+            style="@style/aboutTextView" />
+
+        <TextView
+            android:text="@string/about4"
+            style="@style/urlTextStyle"
+            android:onClick="clickURL" />
+
+        <TextView
+            android:text="@string/about5"
+            style="@style/aboutTextView" />
+
+        <TextView android:text="@string/about6"
+            style="@style/urlTextStyle"
+            android:onClick="clickURL"/>
+
+        <TextView
+            android:text="@string/about7"
+            style="@style/aboutTextView" />
+
+        <TextView android:text="@string/about8"
+            style="@style/urlTextStyle"
+            android:onClick="clickURL"/>
+
+    </LinearLayout>
+</ScrollView>

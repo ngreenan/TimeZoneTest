@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -53,6 +52,8 @@ public class PersonActivity extends AppCompatActivity {
     TextView regionTextView;
     TextView activeTextView;
     RadioGroup activeRadioGroup;
+    TextView notifyTextView;
+    RadioGroup notifyRadioGroup;
     Button deleteButton;
 
     private List<Continent> continents;
@@ -120,14 +121,20 @@ public class PersonActivity extends AppCompatActivity {
         //if it's you, you can't use active/deactive, can't delete self
         activeRadioGroup = (RadioGroup) findViewById(R.id.activeRadioGroup);
         activeTextView = (TextView) findViewById(R.id.activeTextView);
+        notifyRadioGroup = (RadioGroup) findViewById(R.id.notifyRadioGroup);
+        notifyTextView = (TextView) findViewById(R.id.notifyTextView);
         deleteButton = (Button) findViewById(R.id.deleteButton);
         if (personDetail.isMe()) {
             activeRadioGroup.setVisibility(View.GONE);
             activeTextView.setVisibility(View.GONE);
+            notifyRadioGroup.setVisibility(View.GONE);
+            notifyTextView.setVisibility(View.GONE);
             deleteButton.setVisibility(View.GONE);
         } else {
             activeRadioGroup.setVisibility(View.VISIBLE);
             activeTextView.setVisibility(View.VISIBLE);
+            notifyRadioGroup.setVisibility(View.VISIBLE);
+            notifyTextView.setVisibility(View.VISIBLE);
             deleteButton.setVisibility(View.VISIBLE);
         }
 
@@ -471,18 +478,23 @@ public class PersonActivity extends AppCompatActivity {
         timePickerDialog.show();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.person_menu, menu);
-        return true;
-    }
+    //autosaving as we go, so we don't need a dedicated save button!
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.person_menu, menu);
+//        return true;
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.save:
                 save();
+                return true;
+            case android.R.id.home:
+                finish();
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -526,6 +538,7 @@ public class PersonActivity extends AppCompatActivity {
     public void onBackPressed() {
         datasource.close();
         super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     public void onRadioClicked(View view) {

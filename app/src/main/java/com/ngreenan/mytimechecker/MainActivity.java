@@ -1,5 +1,6 @@
 package com.ngreenan.mytimechecker;
 
+import android.app.DialogFragment;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -9,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -18,58 +20,37 @@ import android.view.View;
 import android.os.Handler;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.ngreenan.mytimechecker.db.DBDataSource;
+import com.ngreenan.mytimechecker.model.NotificationStatus;
 import com.ngreenan.mytimechecker.model.PersonDetail;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AboutDialogFragment.AboutDialogListener {
 
     private float rotation = 0F;
     private PieChart pieChart;
+    private SquareLinearLayout squareLinearLayout;
+    private AboutDialogFragment dialog;
     private float totalSeconds = (24F * 60F * 60F);
 
     public static final int NOTIFICATIONID = 1;
 
     //constants for XML preferences
-    public static final String MYSTARTHOUR = "pref_myStartHour";
-    public static final String MYSTARTMIN = "pref_myStartMin";
-    public static final String MYENDHOUR = "pref_myEndHour";
-    public static final String MYENDMIN = "pref_myEndMin";
-    public static final String THEIRSTARTHOUR = "pref_theirStartHour";
-    public static final String THEIRSTARTMIN = "pref_theirStartMin";
-    public static final String THEIRENDHOUR = "pref_theirEndHour";
-    public static final String THEIRENDMIN = "pref_theirEndMin";
-    //public static final String MYOFFSET = "pref_myOffset";
-    public static final String THEIROFFSET = "pref_theirOffset";
-    public static final String SUPPRESSNOTIFICATION = "pref_suppressNotification";
     private SharedPreferences settings;
-
-    //int values representing our start and end times
-    private int myStartHour;
-    private int myStartMin;
-    private int myEndHour;
-    private int myEndMin;
-    private int theirStartHour;
-    private int theirStartMin;
-    private int theirEndHour;
-    private int theirEndMin;
-
-    private int myOffset;
-    private int theirOffset;
-
-    private boolean suppressNotification = false;
-    private boolean isCrossOver = false;
 
     //database
     DBDataSource datasource;
     private List<PersonDetail> personDetails;
     boolean loadingData = false;
     boolean reloadData = false;
+    boolean timerStarted = false;
 
     ListView detailsListView;
 
@@ -78,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //load preferences from XML
-        loadXMLPreferences();
+        //loadXMLPreferences();
 
         //set the layout file to associate with MainActivity
         setContentView(R.layout.activity_main);
@@ -94,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         loadDataFromDatabase();
 
         //get a reference to our SquareLinearLayout, create a PieChart and add it!
-        SquareLinearLayout squareLinearLayout = (SquareLinearLayout) findViewById(R.id.squareLayout);
+        squareLinearLayout = (SquareLinearLayout) findViewById(R.id.squareLayout);
         pieChart = new PieChart(this);
 
         //remove all views - if we have any
@@ -106,8 +87,12 @@ public class MainActivity extends AppCompatActivity {
         //add our new view
         squareLinearLayout.addView(pieChart);
 
-        //kick off the "timer" to update the rotation of the clock every half second
+        //remove the runnable first, then add again
+        //this means we won't get multiple timers running
+        //but we'll always get one kicking off when we move back to MainActivity
+        timerHandler.removeCallbacks(timerRunnable);
         timerHandler.postDelayed(timerRunnable, 0);
+        timerStarted = true;
     }
 
     @Override
@@ -156,6 +141,11 @@ public class MainActivity extends AppCompatActivity {
                     loadingData = false;
                     reloadData = true;
 
+                    //start up the timer again
+                    timerHandler.removeCallbacks(timerRunnable);
+                    timerHandler.postDelayed(timerRunnable, 0);
+                    timerStarted = true;
+
                     //dismiss the ProgressDialog now that we're done
                     dialog.dismiss();
                 }
@@ -174,6 +164,11 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run() {
 
+            if (loadingData) {
+                //we're initializing our data - don't bother with any of this timer stuff yet!
+                return;
+            }
+
             //do we need to reload our data?
             if (reloadData) {
                 loadAndPopulateData();
@@ -187,54 +182,135 @@ public class MainActivity extends AppCompatActivity {
 
             rotation = ((0 - seconds) / totalSeconds) * 360;
 
-            displayTimes(c);
-
             pieChart.setRotation(rotation);
 
-            //do we need to send out a notification?
-            checkCrossOver(c);
-
-            if (isCrossOver) {
-                //we're in a crossover period - have we already seen a notification?
-                if (!suppressNotification) {
-                    //show a notification
-                    displayNotification();
-                }
-            } else {
-                //reset - if a notification is due display it from now on
-                suppressNotification = false;
-                setXMLPreference(SUPPRESSNOTIFICATION, suppressNotification);
-            }
+//            //do we need to send out a notification?
+//            checkCrossOver(c);
+//
+//            if (isCrossOver) {
+//                //we're in a crossover period - have we already seen a notification?
+//                if (!suppressNotification) {
+//                    //show a notification
+//                    displayNotification();
+//                }
+//            } else {
+//                //reset - if a notification is due display it from now on
+//                suppressNotification = false;
+//                setXMLPreference(SUPPRESSNOTIFICATION, suppressNotification);
+//            }
 
             ((BaseAdapter) detailsListView.getAdapter()).notifyDataSetChanged();
 
-            //set the time til the next run - in this case 500ms or half a second
-            timerHandler.postDelayed(this, 500);
+            checkForNotifications();
+
+            //set the time til the next run - in this case 1000ms or a second
+            timerHandler.removeCallbacks(timerRunnable);
+            timerHandler.removeCallbacks(timerRunnable);
+            timerHandler.removeCallbacks(timerRunnable);
+            timerHandler.removeCallbacks(timerRunnable);
+            timerHandler.removeCallbacks(timerRunnable);
+            timerHandler.removeCallbacks(timerRunnable);
+            timerHandler.removeCallbacks(timerRunnable);
+            timerHandler.postDelayed(this, 1000);
         }
     };
 
-//    private void displayNotification() {
-//        //TODO: replace this bit with a notification instead of this toast
-//        Toast.makeText(MainActivity.this, "Now entering cross over period!!!", Toast.LENGTH_LONG).show();
-//
-//        //suppress future notifications for this crossover period
-//        suppressNotification = true;
-//    }
+    private void checkForNotifications() {
 
-    private void displayNotification(){
+        //step 0 - load the data and check that we actually have some
+        //on the very initial startup, we won't!
+        List<PersonDetail> details = datasource.getMyPersonDetails();
+        if (details.size() == 0) {
+            return;
+        }
+
+        //step 1 - get the start and end time in millis for me
+        PersonDetail me = details.get(0);
+
+        if (currentlyInPeriod(me)) {
+            //we're in our period - is anyone else?
+            //loop round all the PersonDetails where
+            //a) we're active
+            //b) we're displaying notifications
+            //c) we have a city
+            List<PersonDetail> notificationPersons = datasource.getNotificationPersonDetails();
+            ArrayList<String> array = new ArrayList<>();
+            int colorID = 0;
+
+            for (PersonDetail person : notificationPersons) {
+
+                NotificationStatus notificationStatus = datasource.getNotificationStatusById(person.getPersonID());
+
+                //are they in an active period?
+                if (currentlyInPeriod(person)) {
+                    //are they due a notification?
+                    if (notificationStatus.getNotificationStatus() == 0) {
+                        //yes - display one, mark it as done
+                        array.add(person.getPersonName());
+
+                        colorID = getResources().getIdentifier("color" + person.getColorID(), "color", getPackageName());
+
+                        notificationStatus.setNotificationStatus(1);
+                        datasource.insertUpdateNotificationStatus(notificationStatus);
+                    } else {
+                        //no - they've already had one for this period
+                        //do nothing
+                    }
+                } else {
+                    //not in notification period - do we need to reset notificationStatus?
+                    if (notificationStatus.getNotificationStatus() == 1) {
+                        //yes - reset it
+                        notificationStatus.setNotificationStatus(0);
+                        datasource.insertUpdateNotificationStatus(notificationStatus);
+                    } else {
+                        //no - already marked as due for next period
+                    }
+                }
+            }
+
+            if (array.size() > 0) {
+                //we have some people to notify about!
+                String message = "";
+
+                switch (array.size()) {
+                    case 1:
+                        message = array.get(0) + " is now contactable!";
+                        break;
+                    case 2:
+                        message = array.get(0) + " and " + array.get(1) + " are now contactable!";
+                        break;
+                    default:
+                        for (int i = 0; i < array.size() - 1; i++) {
+                            message += array.get(i) + ", ";
+                        }
+                        message = message.substring(0, message.length() - 2);
+                        message += " and " + array.get(array.size() -1) + " are now contactable";
+                        break;
+                }
+
+                displayPersonNotification(message, colorID);
+            }
+        } else {
+            //we're not in our period - reset notificationStatus table
+            datasource.resetNotificationStatus();
+        }
+    }
+
+    private void displayPersonNotification(String message, int color){
 
         //build the notification itself
         Notification.Builder mBuilder =
                 new Notification.Builder(this)
-                .setSmallIcon(R.drawable.ic_stat_notification)
-                .setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.mipmap.ic_launcher))
-                .setContentTitle("My Time Checker")
-                .setContentText("Your friend is now contactable!")
-                .setPriority(Notification.PRIORITY_DEFAULT)
-                .setAutoCancel(true);
+                        .setSmallIcon(R.drawable.ic_stat_notification)
+                        .setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.mipmap.ic_launcher))
+                        .setContentTitle("My Time Checker")
+                        .setContentText(message)
+                        .setPriority(Notification.PRIORITY_DEFAULT)
+                        .setAutoCancel(true);
 
         //build the intent
         Intent resultIntent = new Intent(this, MainActivity.class);
+        resultIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
         //the stack builder object will contain an artificial back stack for the started activity
         //this ensures that navigating backwards works properly
@@ -254,10 +330,38 @@ public class MainActivity extends AppCompatActivity {
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         mNotificationManager.notify(NOTIFICATIONID, mBuilder.build());
+    }
 
-        suppressNotification = true;
-        setXMLPreference(SUPPRESSNOTIFICATION, suppressNotification);
-        //Toast.makeText(MainActivity.this, "suppressNotification set to true", Toast.LENGTH_LONG).show();
+    private boolean currentlyInPeriod(PersonDetail person) {
+        TimeZone myTimeZone = TimeZone.getTimeZone(person.getTimeZoneName());
+
+        Calendar myCalendar = Calendar.getInstance(myTimeZone);
+
+        //start
+        myCalendar.set(Calendar.HOUR_OF_DAY, person.getStartHour());
+        myCalendar.set(Calendar.MINUTE, person.getStartMin());
+        myCalendar.set(Calendar.SECOND, 0);
+        myCalendar.set(Calendar.MILLISECOND, 0);
+
+        long myStartMillis = myCalendar.getTimeInMillis();
+
+        //end
+        myCalendar.set(Calendar.HOUR_OF_DAY, person.getEndHour());
+        myCalendar.set(Calendar.MINUTE, person.getEndMin());
+
+        long myEndMillis = myCalendar.getTimeInMillis();
+
+        if (myStartMillis > myEndMillis) {
+            //move end to the following day
+            myEndMillis += (24 * 60 * 60 * 1000);
+        }
+
+        if (myStartMillis <= Calendar.getInstance().getTimeInMillis()
+                && myEndMillis >= Calendar.getInstance().getTimeInMillis()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private void loadXMLPreferences() {
@@ -265,21 +369,7 @@ public class MainActivity extends AppCompatActivity {
         //initialise our SharedPreferences object
         settings = getPreferences(MODE_PRIVATE);
 
-        myStartHour = settings.getInt(MYSTARTHOUR, 8);
-        myStartMin = settings.getInt(MYSTARTMIN, 0);
-        myEndHour = settings.getInt(MYENDHOUR, 22);
-        myEndMin = settings.getInt(MYENDMIN, 0);
-        theirStartHour = settings.getInt(THEIRSTARTHOUR, 8);
-        theirStartMin = settings.getInt(THEIRSTARTMIN, 0);
-        theirEndHour = settings.getInt(THEIRENDHOUR, 22);
-        theirEndMin = settings.getInt(THEIRENDMIN, 0);
-
-        //myOffset = settings.getInt(MYOFFSET,0);
-        myOffset = 0;
-        theirOffset = settings.getInt(THEIROFFSET, 0);
-
-        suppressNotification = settings.getBoolean(SUPPRESSNOTIFICATION, false);
-        //Toast.makeText(MainActivity.this, "suppressNotification set to " + String.valueOf(suppressNotification), Toast.LENGTH_LONG).show();
+        //suppressNotification = settings.getBoolean(SUPPRESSNOTIFICATION, false);
     }
 
     private void setTimes() {
@@ -288,52 +378,6 @@ public class MainActivity extends AppCompatActivity {
         detailsListView.setAdapter(myArrayAdapter);
 
         pieChart.setPersonDetails(personDetails);
-
-        //displayTimes(Calendar.getInstance());
-    }
-
-    private void displayTimes(Calendar c) {
-//        TextView textView;
-//
-//        int myHour = (c.get(Calendar.HOUR_OF_DAY) + myOffset) % 24;
-//        int theirHour = (c.get(Calendar.HOUR_OF_DAY) + theirOffset) % 24;
-//
-//        if (myHour < 0) {
-//            myHour += 24;
-//        }
-//
-//        if (theirHour < 0) {
-//            theirHour += 24;
-//        }
-//
-//        //display my current time
-//        textView = (TextView) findViewById(R.id.myActualTime);
-//        textView.setText(String.format("%02d", myHour) + ":" + String.format("%02d", c.get(Calendar.MINUTE)));
-//
-//        //display their current time
-//        textView = (TextView) findViewById(R.id.theirActualTime);
-//        textView.setText(String.format("%02d", theirHour) + ":" + String.format("%02d", c.get(Calendar.MINUTE)));
-    }
-
-    private String deriveTimeZone(int offset) {
-        if (offset == 0) {
-            return "0";
-        } else if (offset > 0) {
-            return "+" + String.valueOf(offset);
-        } else {
-            return String.valueOf(offset);
-        }
-    }
-
-    public void rotateCanvas(View view) {
-        if (rotation == 360F) {
-            rotation = 10F;
-        }
-        else {
-            rotation += 10F;
-        }
-
-        pieChart.setRotation(rotation);
     }
 
     private void setXMLPreference(String key, int value) {
@@ -348,94 +392,12 @@ public class MainActivity extends AppCompatActivity {
         editor.commit();
     }
 
-    public void changeOffset(View view) {
-        //which button did we press?
-        switch (view.getId()) {
-//            case R.id.myPlus:
-//                myOffset++;
-//                setXMLPreference(MYOFFSET, myOffset);
-//                break;
-//            case R.id.myMinus:
-//                myOffset--;
-//                setXMLPreference(MYOFFSET, myOffset);
-//                break;
-//            case R.id.theirPlus:
-//                theirOffset++;
-//                setXMLPreference(THEIROFFSET, theirOffset);
-//                break;
-//            case R.id.theirMinus:
-//                theirOffset--;
-//                setXMLPreference(THEIROFFSET, theirOffset);
-//                break;
-        }
-
-        //do we need to disable anything?
-        Button button;
-
-        //myPlus
-        //button = (Button) findViewById(R.id.myPlus);
-        //button.setEnabled(myOffset < 14);
-
-        //myMinus
-        //button = (Button) findViewById(R.id.myMinus);
-        //button.setEnabled(myOffset > -12);
-
-        //theirPlus
-//        button = (Button) findViewById(R.id.theirPlus);
-//        button.setEnabled(theirOffset < 14);
-
-        //theirMinus
-//        button = (Button) findViewById(R.id.theirMinus);
-//        button.setEnabled(theirOffset > -12);
-
-        setTimes();
-    }
-
-    private void checkCrossOver(Calendar c) {
-        //we need to know if the current time is after both start times and before both end times
-
-        //get the current minutes
-        int timeNow = (c.get(Calendar.HOUR_OF_DAY) * 60)
-                + c.get(Calendar.MINUTE);
-
-        //get my start/end and their start/end in minutes, allowing for time differences
-        int myStart = (myStartHour - myOffset) * 60 + myStartMin;
-        int myEnd = (myEndHour - myOffset) * 60 + myEndMin;
-        int theirStart = (theirStartHour - theirOffset) * 60 + theirStartMin;
-        int theirEnd = (theirEndHour - theirOffset) * 60 + theirEndMin;
-
-        //Toast.makeText(MainActivity.this, myStart + "," + myEnd + "," + theirStart + "," + theirEnd + "," + timeNow, Toast.LENGTH_LONG).show();
-
-        int minutes = 24 * 60;
-
-        //if start times go into previous day, add a day's worth of minutes to allow for this
-        //otherwise the comparison won't work properly
-        if (myStart < 0) {
-            myStart += minutes;
-            myEnd += minutes;
-        }
-
-        if (theirStart < 0) {
-            theirStart += minutes;
-            theirEnd += minutes;
-        }
-
-        //now check if we're in a cross over period
-        //return true if we are, false if we're not
-        if (myStart <= timeNow
-                && theirStart <= timeNow % minutes
-                && myEnd >= timeNow
-                && theirEnd >= timeNow) {
-            isCrossOver = true;
-        } else {
-            isCrossOver = false;
-        }
-    }
 
     public void viewDetail(View view) {
         //this will open a new view - not going to pass anything over, just a simple "load new view" intent
         Intent detailIntent = new Intent(this, DetailActivity.class);
         startActivity(detailIntent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -450,8 +412,31 @@ public class MainActivity extends AppCompatActivity {
             case R.id.setup:
                 viewDetail(null);
                 return true;
+            case R.id.about:
+                showAbout();
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void showAbout() {
+        dialog = new AboutDialogFragment();
+        dialog.show(getFragmentManager(),"blah");
+    }
+
+    @Override
+    //this is what we'll do when we click on OK on the AboutDialogFragment
+    //uses the interface we declared to pass the responsibility to handle the click events over
+    //to the parent activity
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        dialog.dismiss();
+    }
+
+    public void clickURL(View view) {
+        TextView textView = (TextView) view;
+        String urlToLaunch = textView.getText().toString();
+        Uri webPage = Uri.parse(urlToLaunch);
+        Intent webContent = new Intent(Intent.ACTION_VIEW, webPage);
+        startActivity(webContent);
     }
 }

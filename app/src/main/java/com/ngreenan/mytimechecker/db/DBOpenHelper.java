@@ -146,6 +146,18 @@ public class DBOpenHelper extends SQLiteOpenHelper {
             COLUMN_ME
     };
 
+    public static final String TABLE_NOTIFICATIONSTATUS = "notificationStatus";
+    public static final String COLUMN_NOTIFICATIONSTATUS = "notificationStatus";
+
+    private static final String TABLE_NOTIFICATIONSTATUS_CREATE = "CREATE TABLE " + TABLE_NOTIFICATIONSTATUS + " ("
+            + COLUMN_PERSONID + " INTEGER PRIMARY KEY, "
+            + COLUMN_NOTIFICATIONSTATUS + " TEXT)";
+
+    public static final String[] TABLE_NOTIFICATIONSTATUS_COLUMNS = {
+            COLUMN_PERSONID,
+            COLUMN_NOTIFICATIONSTATUS
+    };
+
     //views
     public static final String VIEW_PERSONDETAILS = "personDetails";
     private static final String VIEW_PERSONDETAILS_CREATE =
@@ -228,6 +240,8 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         Log.i(LOGTAG, "Created cities table");
         db.execSQL(TABLE_PERSONS_CREATE);
         Log.i(LOGTAG, "Created persons table");
+        db.execSQL(TABLE_NOTIFICATIONSTATUS_CREATE);
+        Log.i(LOGTAG, "Created notificationStatus table");
 
         //create views
         db.execSQL(VIEW_PERSONDETAILS_CREATE);
@@ -251,6 +265,10 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         Log.i(LOGTAG, "Dropped cities table");
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_PERSONS);
         Log.i(LOGTAG, "Dropped persons table");
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NOTIFICATIONSTATUS);
+        Log.i(LOGTAG, "Dropped notificationStatus table");
+        db.execSQL("DROP VIEW IF EXISTS " + VIEW_PERSONDETAILS);
+        Log.i(LOGTAG, "Dropped personDetails view");
 
         onCreate(db);
         Log.i(LOGTAG, "Database has been upgraded from " + oldVersion + " to " + newVersion);

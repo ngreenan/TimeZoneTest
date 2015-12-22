@@ -32,7 +32,6 @@ public class DetailActivity extends AppCompatActivity {
     ListView theirDetailsListView;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,19 +55,13 @@ public class DetailActivity extends AppCompatActivity {
         super.onResume();
     }
 
-//    @Override
-//    protected void onRestart() {
-//        loadData();
-//        super.onRestart();
-//    }
-
     private void loadData() {
         //get my details and put into ListView
         myDetails = datasource.getMyPersonDetails();
         myDetailsListView = (ListView) findViewById(R.id.myDetailsListView);
         ArrayAdapter<PersonDetail> myArrayAdapter = new PersonArrayAdapter(this, R.layout.person_list_item, myDetails);
         myDetailsListView.setAdapter(myArrayAdapter);
-        
+
         //get my friend persons and put into ListView
         myFriendDetails = datasource.getMyFriendPersonDetails();
         theirDetailsListView = (ListView) findViewById(R.id.theirDetailsListView);
@@ -84,8 +77,8 @@ public class DetailActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(view.getContext(), PersonActivity.class);
                 intent.putExtra("personDetail", myDetails.get(position));
-                //startActivityForResult(intent,0);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
 
@@ -109,6 +102,7 @@ public class DetailActivity extends AppCompatActivity {
                     intent.putExtra("personDetail", myFriendDetails.get(position));
                     //startActivityForResult(intent, 0);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 } catch (Exception e) {
                     Toast.makeText(view.getContext(), "whoa", Toast.LENGTH_LONG).show();
                 }
@@ -145,15 +139,6 @@ public class DetailActivity extends AppCompatActivity {
         ((BaseAdapter) theirDetailsListView.getAdapter()).notifyDataSetChanged();
     }
 
-    private class SetActiveTask extends AsyncTask<PersonDetail, Integer, Long> {
-
-        @Override
-        protected Long doInBackground(PersonDetail... detail) {
-            datasource.setActive(detail[0].getPersonID(), detail[0].isActive());
-            return null;
-        }
-    }
-
     public void viewMain(View view) {
         datasource.close();
         finish();
@@ -163,6 +148,7 @@ public class DetailActivity extends AppCompatActivity {
     public void onBackPressed() {
         datasource.close();
         super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -176,6 +162,10 @@ public class DetailActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.add:
                 addNew();
+                return true;
+            case android.R.id.home:
+                finish();
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -202,7 +192,16 @@ public class DetailActivity extends AppCompatActivity {
         //start the activity
         Intent intent = new Intent(this, PersonActivity.class);
         intent.putExtra("personDetail", personDetail);
-        //startActivityForResult(intent,0);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+    }
+
+    private class SetActiveTask extends AsyncTask<PersonDetail, Integer, Long> {
+
+        @Override
+        protected Long doInBackground(PersonDetail... detail) {
+            datasource.setActive(detail[0].getPersonID(), detail[0].isActive());
+            return null;
+        }
     }
 }

@@ -11,6 +11,7 @@ import com.ngreenan.mytimechecker.MainActivity;
 import com.ngreenan.mytimechecker.model.City;
 import com.ngreenan.mytimechecker.model.Continent;
 import com.ngreenan.mytimechecker.model.Country;
+import com.ngreenan.mytimechecker.model.NotificationStatus;
 import com.ngreenan.mytimechecker.model.Person;
 import com.ngreenan.mytimechecker.model.PersonDetail;
 import com.ngreenan.mytimechecker.model.Region;
@@ -73,7 +74,12 @@ public class DBDataSource {
 
         Log.i(LOGTAG, "Returned " + cursor.getCount() + " continents");
 
-        return getContinentList(cursor);
+        List<Continent> continents = getContinentList(cursor);
+
+        cursor.close();
+
+        return continents;
+
     }
 
     private List<Continent> getContinentList(Cursor cursor) {
@@ -111,6 +117,9 @@ public class DBDataSource {
 
         Log.i(LOGTAG, "Returned " + cursor.getCount() + " countries");
         List<Country> countries = getCountryList(cursor);
+
+        cursor.close();
+
         return countries;
     }
 
@@ -156,6 +165,9 @@ public class DBDataSource {
 
         Log.i(LOGTAG, "Returned " + cursor.getCount() + " regions");
         List<Region> regions = getRegionList(cursor);
+
+        cursor.close();
+
         return regions;
     }
 
@@ -193,6 +205,9 @@ public class DBDataSource {
 
         Log.i(LOGTAG, "Returned " + cursor.getCount() + " timezones");
         List<TimeZone> timeZones = getTimeZoneList(cursor);
+
+        cursor.close();
+
         return timeZones;
     }
 
@@ -234,6 +249,9 @@ public class DBDataSource {
 
         Log.i(LOGTAG, "Returned " + cursor.getCount() + " cities");
         List<City> cities = getCityList(cursor);
+
+        cursor.close();
+
         return cities;
     }
 
@@ -287,6 +305,9 @@ public class DBDataSource {
 
         Log.i(LOGTAG, "Returned " + cursor.getCount() + " persons");
         List<Person> persons = getPersonList(cursor);
+
+        cursor.close();
+
         return persons;
     }
 
@@ -297,6 +318,9 @@ public class DBDataSource {
 
         Log.i(LOGTAG, "Returned " + cursor.getCount() + " persons");
         List<Person> persons = getPersonList(cursor);
+
+        cursor.close();
+
         return persons;
     }
 
@@ -307,6 +331,9 @@ public class DBDataSource {
 
         Log.i(LOGTAG, "Returned " + cursor.getCount() + " persons");
         List<Person> persons = getPersonList(cursor);
+
+        cursor.close();
+
         return persons;
     }
 
@@ -317,6 +344,9 @@ public class DBDataSource {
 
         Log.i(LOGTAG, "Returned " + cursor.getCount() + " persons");
         List<Person> persons = getPersonList(cursor);
+
+        cursor.close();
+
         return persons;
     }
 
@@ -370,8 +400,12 @@ public class DBDataSource {
         Cursor cursor = database.query(DBOpenHelper.VIEW_PERSONDETAILS, DBOpenHelper. VIEW_PERSONDETAILS_COLUMNS,
                 null, null, null, null, null);
 
+        Log.i(LOGTAG, "Called getAllPersonDetails");
         Log.i(LOGTAG, "Returned " + cursor.getCount() + " personDetails");
         List<PersonDetail> personDetails = getPersonDetailsList(cursor);
+
+        cursor.close();
+
         return personDetails;
     }
 
@@ -380,8 +414,12 @@ public class DBDataSource {
         Cursor cursor = database.query(DBOpenHelper.VIEW_PERSONDETAILS, DBOpenHelper.VIEW_PERSONDETAILS_COLUMNS,
                 DBOpenHelper.COLUMN_ME + " = 1", null, null, null, null);
 
+        Log.i(LOGTAG, "Called getMyPersonDetails");
         Log.i(LOGTAG, "Returned " + cursor.getCount() + " personDetails");
         List<PersonDetail> personDetails = getPersonDetailsList(cursor);
+
+        cursor.close();
+
         return personDetails;
     }
 
@@ -390,8 +428,12 @@ public class DBDataSource {
         Cursor cursor = database.query(DBOpenHelper.VIEW_PERSONDETAILS, DBOpenHelper.VIEW_PERSONDETAILS_COLUMNS,
                 DBOpenHelper.COLUMN_ME + " = 0", null, null, null, null);
 
+        Log.i(LOGTAG, "Called getMyFriendPersonDetails");
         Log.i(LOGTAG, "Returned " + cursor.getCount() + " personDetails");
         List<PersonDetail> personDetails = getPersonDetailsList(cursor);
+
+        cursor.close();
+
         return personDetails;
     }
 
@@ -593,6 +635,8 @@ public class DBDataSource {
             city.setTimeZoneID(cursor.getLong(cursor.getColumnIndex(DBOpenHelper.COLUMN_TIMEZONEID)));
         }
 
+        cursor.close();
+
         return city;
     }
 
@@ -615,6 +659,8 @@ public class DBDataSource {
             country.setFlagPath(cursor.getString(cursor.getColumnIndex(DBOpenHelper.COLUMN_FLAGPATH)));
         }
 
+        cursor.close();
+
         return country;
     }
 
@@ -636,6 +682,9 @@ public class DBDataSource {
 
         Log.i(LOGTAG, "Returned " + cursor.getCount() + " countries");
         List<Country> countries = getCountryList(cursor);
+
+        cursor.close();
+
         return countries;
     }
 
@@ -644,6 +693,9 @@ public class DBDataSource {
 
         Log.i(LOGTAG, "Returned " + cursor.getCount() + " regions");
         List<Region> regions = getRegionList(cursor);
+
+        cursor.close();
+
         return regions;
     }
 
@@ -652,6 +704,9 @@ public class DBDataSource {
 
         Log.i(LOGTAG, "Returned " + cursor.getCount() + " cities");
         List<City> cities = getCityList(cursor);
+
+        cursor.close();
+
         return cities;
     }
 
@@ -660,6 +715,9 @@ public class DBDataSource {
 
         Log.i(LOGTAG, "Returned " + cursor.getCount() + " cities");
         List<City> cities = getCityList(cursor);
+
+        cursor.close();
+
         return cities;
     }
 
@@ -697,8 +755,12 @@ public class DBDataSource {
         Cursor cursor = database.query(DBOpenHelper.VIEW_PERSONDETAILS, DBOpenHelper. VIEW_PERSONDETAILS_COLUMNS,
                 DBOpenHelper.COLUMN_PERSONID + " = " + personID, null, null, null, null);
 
+        Log.i(LOGTAG, "Called getPersonDetailsById");
         Log.i(LOGTAG, "Returned " + cursor.getCount() + " personDetails");
         List<PersonDetail> personDetails = getPersonDetailsList(cursor);
+
+        cursor.close();
+
         return personDetails.get(0);
     }
 
@@ -712,8 +774,78 @@ public class DBDataSource {
         Cursor cursor = database.query(DBOpenHelper.VIEW_PERSONDETAILS, DBOpenHelper.VIEW_PERSONDETAILS_COLUMNS,
                 DBOpenHelper.COLUMN_ACTIVE + " = 1", null, null, null, null);
 
+        Log.i(LOGTAG, "Called getActivePersonDetails");
         Log.i(LOGTAG, "Returned " + cursor.getCount() + " personDetails");
         List<PersonDetail> personDetails = getPersonDetailsList(cursor);
+
+        cursor.close();
+
         return personDetails;
+    }
+
+    public List<PersonDetail> getNotificationPersonDetails() {
+        //returns all rows from Persons table where Active = 1, DisplayNotification = 1 and CityID <> 0 and Me <> 1
+        Cursor cursor = database.query(DBOpenHelper.VIEW_PERSONDETAILS, DBOpenHelper.VIEW_PERSONDETAILS_COLUMNS,
+                DBOpenHelper.COLUMN_ACTIVE + " = 1 AND "
+                        + DBOpenHelper.COLUMN_DISPLAYNOTIFICATIONS + " = 1 AND "
+                        + DBOpenHelper.COLUMN_CITYID + " <> 0 AND "
+                        + DBOpenHelper.COLUMN_ME + " <> 1", null, null, null, null);
+
+        Log.i(LOGTAG, "Called getNotificationPersonDetails");
+        Log.i(LOGTAG, "Returned " + cursor.getCount() + " personDetails");
+        List<PersonDetail> personDetails = getPersonDetailsList(cursor);
+
+        cursor.close();
+
+        return personDetails;
+    }
+
+    //notificationStatus
+    //timezone
+    public void create(NotificationStatus notificationStatus){
+        ContentValues values = new ContentValues();
+        values.put(DBOpenHelper.COLUMN_PERSONID, notificationStatus.getPersonID());
+        values.put(DBOpenHelper.COLUMN_NOTIFICATIONSTATUS, notificationStatus.getNotificationStatus());
+        database.insert(DBOpenHelper.TABLE_NOTIFICATIONSTATUS, null, values);
+    }
+
+    public NotificationStatus getNotificationStatusById(long personID) {
+        Cursor cursor = database.query(DBOpenHelper.TABLE_NOTIFICATIONSTATUS, DBOpenHelper.TABLE_NOTIFICATIONSTATUS_COLUMNS,
+                DBOpenHelper.COLUMN_PERSONID + " = " + personID, null, null, null, null);
+
+        NotificationStatus notificationStatus = new NotificationStatus();
+
+        if (cursor.moveToFirst() && cursor.getCount() != 0) {
+            //have a record, load it
+            notificationStatus.setPersonID(personID);
+            notificationStatus.setNotificationStatus(cursor.getInt(cursor.getColumnIndex(DBOpenHelper.COLUMN_NOTIFICATIONSTATUS)));
+        } else {
+            //don't have a record, set it up with false value (if it doesn't exist, how can it be true?!)
+            notificationStatus.setPersonID(personID);
+            notificationStatus.setNotificationStatus(0);
+        }
+
+        cursor.close();
+
+        return notificationStatus;
+    }
+
+    public void insertUpdateNotificationStatus(NotificationStatus notificationStatus) {
+        //try and update
+        ContentValues values = new ContentValues();
+        values.put(DBOpenHelper.COLUMN_NOTIFICATIONSTATUS, notificationStatus.getNotificationStatus());
+
+        int rows = database.update(DBOpenHelper.TABLE_NOTIFICATIONSTATUS, values, DBOpenHelper.COLUMN_PERSONID + " = " + String.valueOf(notificationStatus.getPersonID()), null);
+        if (rows == 0) {
+            //no rows were updated, ergo it doesn't exist
+            //insert instead!
+            create(notificationStatus);
+        }
+    }
+
+    public void resetNotificationStatus() {
+        ContentValues values = new ContentValues();
+        values.put(DBOpenHelper.COLUMN_NOTIFICATIONSTATUS, 0);
+        database.update(DBOpenHelper.TABLE_NOTIFICATIONSTATUS, values, null, null);
     }
 }
